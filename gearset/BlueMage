@@ -1,0 +1,75 @@
+# BlueMage GearSet
+
+# base
+## read 
+/micon 青魔道士の証 item
+/gearset change 26
+/bluespellbook preset 1
+/hotbar copy 巴術士 1 青魔道士 1
+/hotbar copy 巴術士 2 青魔道士 2
+/hotbar copy 巴術士 3 青魔道士 3
+/hotbar copy 巴術士 4 青魔道士 4
+/hotbar copy 巴術士 5 青魔道士 5
+/hotbar copy 巴術士 6 青魔道士 6
+
+## write 
+/hotbar copy 青魔道士 1 巴術士 1
+/hotbar copy 青魔道士 2 巴術士 2
+/hotbar copy 青魔道士 3 巴術士 3
+/hotbar copy 青魔道士 4 巴術士 4
+/hotbar copy 青魔道士 5 巴術士 5
+/hotbar copy 青魔道士 6 巴術士 6
+
+# tank
+## read
+/bluespellbook preset 2
+/hotbar copy 斧術士 1 青魔道士 1
+/hotbar copy 斧術士 2 青魔道士 2
+/hotbar copy 斧術士 3 青魔道士 3
+/hotbar copy 斧術士 4 青魔道士 4
+/hotbar copy 斧術士 5 青魔道士 5
+/hotbar copy 斧術士 6 青魔道士 6
+
+## write
+/hotbar copy 青魔道士 1 斧術士 1
+/hotbar copy 青魔道士 2 斧術士 2
+/hotbar copy 青魔道士 3 斧術士 3
+/hotbar copy 青魔道士 4 斧術士 4
+/hotbar copy 青魔道士 5 斧術士 5
+/hotbar copy 青魔道士 6 斧術士 6
+
+# healer
+## read
+/bluespellbook preset 3
+/hotbar copy 幻術士 1 青魔道士 1
+/hotbar copy 幻術士 2 青魔道士 2
+/hotbar copy 幻術士 3 青魔道士 3
+/hotbar copy 幻術士 4 青魔道士 4
+/hotbar copy 幻術士 5 青魔道士 5
+/hotbar copy 幻術士 6 青魔道士 6
+
+## write
+/hotbar copy 青魔道士 1 幻術士 1
+/hotbar copy 青魔道士 2 幻術士 2
+/hotbar copy 青魔道士 3 幻術士 3
+/hotbar copy 青魔道士 4 幻術士 4
+/hotbar copy 青魔道士 5 幻術士 5
+/hotbar copy 青魔道士 6 幻術士 6
+
+# dps
+## read
+/bluespellbook preset 4
+/hotbar copy 弓術士 1 青魔道士 1
+/hotbar copy 弓術士 2 青魔道士 2
+/hotbar copy 弓術士 3 青魔道士 3
+/hotbar copy 弓術士 4 青魔道士 4
+/hotbar copy 弓術士 5 青魔道士 5
+/hotbar copy 弓術士 6 青魔道士 6
+
+## write
+/hotbar copy 青魔道士 1 弓術士 1
+/hotbar copy 青魔道士 2 弓術士 2
+/hotbar copy 青魔道士 3 弓術士 3
+/hotbar copy 青魔道士 4 弓術士 4
+/hotbar copy 青魔道士 5 弓術士 5
+/hotbar copy 青魔道士 6 弓術士 6

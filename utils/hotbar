@@ -1,0 +1,23 @@
+
+# delete hotbar
+/hotbar remove 1 all
+/hotbar remove 2 all
+/hotbar remove 3 all
+/hotbar remove 4 all
+/hotbar remove 5 all
+/hotbar remove 6 all
+
+
+# delete crosshotbar
+/chotbar remove 1 all
+/chotbar remove 2 all
+/chotbar remove 3 all
+/chotbar remove 4 all
+/chotbar remove 5 all
+/chotbar remove 6 all
+/chotbar remove 7 all
+/chotbar remove 8 all
+
+
+# change current crosshotbar
+/chotbar change 1

@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="utf-8"?>
+<timeline>
+  <name>パンデモニウム零式：辺獄編2層</name>
+  <rev>v1.1</rev>
+  <description>
+    万魔殿パンデモニウム零式：辺獄編2層のタイムラインです。
+    https://blog.sheeva.me/
+  </description>
+  <author>sheeva,RINGS</author>
+  <license>CC BY-SA</license>
+  <zone>Asphodelos: The Second Circle (Savage)</zone>
+  <locale>JA</locale>
+  <start>0039::戦闘開始！</start>
+
+  <default target-element="Activity" target-attr="notice-o" value="-9" />
+
+  <!-- ブレス or ウィング判定トリガー begin -->
+  <t sync="^14:(6811|6812|6813|6817)" notice="頭の背面えー。" >
+    <v-notice
+      text="ブレス：頭の背面が安全"
+      icon="StackBack"
+      duration="9" />
+  </t>
+
+  <t sync="^14:(6814|6815|6816|6818)" notice="頭の正面えー。" >
+    <v-notice
+      text="ウィング：頭の前面が安全"
+      icon="StackFront"
+      duration="9" />
+  </t>
+  <!-- ブレス or ウィング判定トリガー end -->
+
+  <!-- 多重刻印 対象者通知 begin -->
+  <t sync="^1A:[id8]:[mex] gains the effect of 激流の刻印" notice="はなれる。" >
+    <v-notice
+      text="激流の刻印 ➜ 離れる"
+      icon="TargetAOE01"
+      duration="23" />
+  </t>
+
+  <t sync="^1A:[id8]:[nex] gains the effect of 激流の刻印" >
+    <v-notice
+      text="➜ 激流の刻印 対象"
+      job-icon="true"
+      duration="23" />
+  </t>
+
+  <t sync="^1A:[id8]:[mex] gains the effect of 重圧の刻印" notice="頭割り。" >
+    <v-notice
+      text="重圧の刻印 ➜ 頭割り"
+      icon="Stack"
+      duration="23" />
+  </t>
+  <!-- 多重刻印 対象者通知 end -->
+
+  <!-- チャネリングフロウ 矢印マーカー通知 begin -->
+  <t no="1" sync="^1A:[id8]:[mex] gains the effect of 激動の刻印：前 from  for 13.00 Seconds." notice="矢印は上。" >
+    <v-notice
+      order="-1"
+      text="上（北向き）"
+      icon="Arrow1.png"
+      duration="14" />
+  </t>
+
+  <t no="1" sync="^1A:[id8]:[mex] gains the effect of 激動の刻印：後 from  for 13.00 Seconds." notice="矢印は下。" >
+    <v-notice
+      order="-1"
+      text="下（南向き）"
+      icon="Arrow5.png"
+      duration="14" />
+  </t>
+
+  <t no="1" sync="^1A:[id8]:[mex] gains the effect of 激動の刻印：右 from  for 13.00 Seconds." notice="矢印は右。" >
+    <v-notice
+      order="-1"
+      text="右（東向き）"
+      icon="Arrow3.png"
+      duration="14" />
+  </t>
+
+  <t no="1" sync="^1A:[id8]:[mex] gains the effect of 激動の刻印：左 from  for 13.00 Seconds." notice="矢印は左。" >
+    <v-notice
+      order="-1"
+      text="左（西向き）"
+      icon="Arrow7.png"
+      duration="14" />
+  </t>
+
+  <t no="11" sync="^1A:[id8]:[mex] gains the effect of 激動の刻印：前 from  for 28.00 Seconds." notice="/wait 3, 矢印は上。" >
+    <v-notice
+      order="-1"
+      text="上（北向き）"
+      icon="Arrow1.png"
+      duration="28" />
+  </t>
+
+  <t no="11" sync="^1A:[id8]:[mex] gains the effect of 激動の刻印：後 from  for 28.00 Seconds." notice="/wait 3, 矢印は下。" >
+    <v-notice
+      order="-1"
+      text="下（南向き）"
+      icon="Arrow5.png"
+      duration="28" />
+  </t>
+
+  <t no="11" sync="^1A:[id8]:[mex] gains the effect of 激動の刻印：右 from  for 28.00 Seconds." notice="/wait 3, 矢印は右。" >
+    <v-notice
+      order="-1"
+      text="右（東向き）"
+      icon="Arrow3.png"
+      duration="28" />
+  </t>
+
+  <t no="11" sync="^1A:[id8]:[mex] gains the effect of 激動の刻印：左 from  for 28.00 Seconds." notice="/wait 3, 矢印は左。" >
+    <v-notice
+      order="-1"
+      text="左（西向き）"
+      icon="Arrow7.png"
+      duration="28" />
+  </t>
+  <!-- チャネリングフロウ 矢印マーカー通知 end -->
+
+  <!-- チャネリングフロウ2回目 追加の通知 begin -->
+  <t no="10" sync="^1A:[id8]:[mex] gains the effect of 激動の刻印：(前|後|右|左) from  for 13.00 Seconds." notice="/wait 11, 次は、散開。" >
+    <expressions>
+      <pre name="second_flow" value="true" />
+    </expressions>
+    <v-notice
+      order="0"
+      text="矢印の処理➜AoE散開"
+      icon="TargetAOE01.png"
+      duration="28" />
+  </t>
+
+  <t no="10" sync="^1A:[id8]:[mex] gains the effect of 激動の刻印：(前|後|右|左) from  for 28.00 Seconds." notice="最初は散開。" >
+    <expressions>
+      <pre name="second_flow" value="true" />
+    </expressions>
+    <v-notice
+      order="-2"
+      text="AoE散開➜矢印の処理"
+      icon="TargetAOE01.png"
+      duration="28" />
+  </t>
+  <!-- チャネリングフロウ2回目 追加の通知 begin -->
+
+  <!-- チャネリングフロウ3回目 追加の通知 begin -->
+  @if (Model.Player.InRole("TANK")) {
+  <t no="10" sync="^1A:[id8]:[mex] gains the effect of 激動の刻印：(前|後|右|左) from  for 13.00 Seconds." notice="/wait 11, 次は、先頭で頭割り。" >
+    <expressions>
+      <pre name="third_flow" value="true" />
+    </expressions>
+    <v-notice
+      order="0"
+      text="矢印処理➜頭割り先頭"
+      icon="Stack.png"
+      duration="28" />
+  </t>
+  } else {
+  <t no="10" sync="^1A:[id8]:[mex] gains the effect of 激動の刻印：(前|後|右|左) from  for 13.00 Seconds." notice="/wait 11, 次は、頭割り。" >
+    <expressions>
+      <pre name="third_flow" value="true" />
+    </expressions>
+    <v-notice
+      order="0"
+      text="矢印処理➜頭割り"
+      icon="Stack.png"
+      duration="28" />
+  </t>
+  }
+
+  @if (Model.Player.InRole("TANK")) {
+  <t no="10" sync="^1A:[id8]:[mex] gains the effect of 激動の刻印：(前|後|右|左) from  for 28.00 Seconds." notice="線を取って離れる。" >
+    <expressions>
+      <pre name="third_flow" value="true" />
+    </expressions>
+    <v-notice
+      order="-2"
+      text="線取り➜矢印処理"
+      icon="Distance.png"
+      duration="28" />
+  </t>
+  } else {
+  <t no="10" sync="^1A:[id8]:[mex] gains the effect of 激動の刻印：(前|後|右|左) from  for 28.00 Seconds." notice="最初は頭割り。" >
+    <expressions>
+      <pre name="third_flow" value="true" />
+    </expressions>
+    <v-notice
+      order="-2"
+      text="頭割り➜矢印処理"
+      icon="Stack.png"
+      duration="28" />
+  </t>
+  }
+  <!-- チャネリングフロウ3回目 追加の通知 begin -->
+
+  <!-- カンペオスハルマ 頭上マーカ識別用トリガ begin -->
+  <!-- 戦闘不能者がいた場合など、８人揃っていない場合には正常にマーカー番号の識別ができない可能性があります -->
+  <t no="1" name="InsertDiceMarker" sync="^1B:[id8]:[pc]:0000:[id4]:(?&lt;mark_code&gt;[0-9a-fA-F]{4}):">
+    <expressions>
+      <pre name="is_dicemarker" value="true" />
+      <table>
+      {
+          "method":"Insert",
+          "table":"DiceTable",
+          "cols" : [
+            {
+              "name" : "marker",
+              "val" : "${mark_code}",
+              "key" : "true"
+            },
+            {
+              "name":"target",
+              "val":"${_pc}"
+            },
+          ]
+      }
+      </table>
+    </expressions>
+  </t>
+
+  <t no="2" text="線あり1番" sync="ヒッポカムポスは「カンペオスハルマ」の構え。" notice="線あり、いちばん。" >
+    <expressions>
+      <pre name="is_dicemarker" value="true" />
+      <pre name="TABLE['DiceTable'][0]['target']" value="@Model.Player.Name" />
+    </expressions>
+    <v-notice
+      text="線あり１番：\n➜ ボス対角の内側"
+      duration="16"
+      icon="Attention.png"
+      duration-visible="false" />
+  </t>
+
+  <t no="3" text="線あり2番" sync="ヒッポカムポスは「カンペオスハルマ」の構え。" notice="線あり、にばん。" >
+    <expressions>
+      <pre name="is_dicemarker" value="true" />
+      <pre name="TABLE['DiceTable'][1]['target']" value="@Model.Player.Name" />
+    </expressions>
+    <v-notice
+      text="線あり２番：\n➜ ボス足元の内側"
+      duration="16"
+      icon="Attention.png"
+      duration-visible="false" />
+  </t>
+
+  <t no="4" text="線あり3番" sync="ヒッポカムポスは「カンペオスハルマ」の構え。" notice="線あり、さんばん。" >
+    <expressions>
+      <pre name="is_dicemarker" value="true" />
+      <pre name="TABLE['DiceTable'][2]['target']" value="@Model.Player.Name" />
+    </expressions>
+    <v-notice
+      text="線あり３番：\n➜ ボス対角の外側"
+      duration="16"
+      icon="Attention.png"
+      duration-visible="false" />
+  </t>
+
+  <t no="5" text="線あり4番" sync="ヒッポカムポスは「カンペオスハルマ」の構え。" notice="線あり、よんばん。" >
+    <expressions>
+      <pre name="is_dicemarker" value="true" />
+      <pre name="TABLE['DiceTable'][3]['target']" value="@Model.Player.Name" />
+    </expressions>
+    <v-notice
+      text="線あり４番：\n➜ ボス足元の外側"
+      duration="16"
+      icon="Attention.png"
+      duration-visible="false" />
+  </t>
+
+  <t no="6" text="線なし1番" sync="ヒッポカムポスは「カンペオスハルマ」の構え。" notice="線なし、いちばん。" >
+    <expressions>
+      <pre name="is_dicemarker" value="true" />
+      <pre name="TABLE['DiceTable'][4]['target']" value="@Model.Player.Name" />
+    </expressions>
+    <v-notice
+      text="線なし１番"
+      duration="16"
+      icon="TargetAOE01.png"
+      duration-visible="false" />
+  </t>
+
+  <t no="7" text="線なし2番" sync="ヒッポカムポスは「カンペオスハルマ」の構え。" notice="線なし、にばん。" >
+    <expressions>
+      <pre name="is_dicemarker" value="true" />
+      <pre name="TABLE['DiceTable'][5]['target']" value="@Model.Player.Name" />
+    </expressions>
+    <v-notice
+      text="線なし２番"
+      duration="16"
+      icon="TargetAOE01.png"
+      duration-visible="false" />
+  </t>
+
+  <t no="8" text="線なし3番" sync="ヒッポカムポスは「カンペオスハルマ」の構え。" notice="線なし、さんばん。" >
+    <expressions>
+      <pre name="is_dicemarker" value="true" />
+      <pre name="TABLE['DiceTable'][6]['target']" value="@Model.Player.Name" />
+    </expressions>
+    <v-notice
+      text="線なし３番"
+      duration="16"
+      icon="TargetAOE01.png"
+      duration-visible="false" />
+  </t>
+
+  <t no="9" text="線なし4番" sync="ヒッポカムポスは「カンペオスハルマ」の構え。" notice="線なし、よんばん。" >
+    <expressions>
+      <pre name="is_dicemarker" value="true" />
+      <pre name="TABLE['DiceTable'][7]['target']" value="@Model.Player.Name" />
+    </expressions>
+    <v-notice
+      text="線なし４番"
+      duration="16"
+      icon="TargetAOE01.png"
+      duration-visible="false" />
+  </t>
+  <!-- カンペオスハルマ 頭上マーカ識別用トリガ end -->
+
+  <!-- メインルーチン -->
+  <a time="000.0" >
+    <expressions>
+      <set name="is_dicemarker" value="false" />
+      <set name="second_flow" value="false" />
+      <set name="third_flow" value="false" />
+    </expressions>
+  </a>
+  <a time="017.0" text="マーキーディープ" sync="ヒッポカムポスの「マーキーディープ」" />
+  <a time="027.0" text="ダブルインパクト" sync="ヒッポカムポスの「ダブルインパクト」" notice="次は、タンク頭割り。" />
+  <a time="039.0" text="スウェッジデリージュ" sync="ヒッポカムポスの「スウェッジデリージュ」" notice="" />
+  <a time="049.0" sync="エリクトニオス:下水に、有害な魔力が満ちている……！？ 奴が水位を操っているらしい、下水の来ない場所へ退避するんだ！" />
+  <a time="054.0" text="ブレスorウイング" sync="ヒッポカムポスは「(ブレス|ウィング)＆カタラクティス」の構え。" notice="" />
+  <a time="062.0" text="ブレスorウイング発動" sync="ヒッポカムポスの「(ブレス|ウィング)＆カタラクティス」" />
+  <a time="082.0" text="距離減衰＋タンク先頭頭割り" sync="ヒッポカムポスの「コヒーレンス」" notice="次は、距離減衰と頭割り。" />
+  <a time="099.0" text="マーキーディープ" sync="ヒッポカムポスの「マーキーディープ」" />
+  <a time="106.0" text="霊水弾" sync="ヒッポカムポスの「霊水弾」" notice="次は、ノックバックと頭割り。" />
+  <a time="116.0" text="ショックウェーブ" sync="ヒッポカムポスの「ショックウェーブ」" />
+  <a time="135.0" text="多重刻印" sync="ヒッポカムポスの「多重刻印」" />
+  <a time="144.0" text="ブレスorウイング" sync="ヒッポカムポスは「(ブレス|ウィング)＆カタラクティス」の構え。" />
+  <a time="152.0" text="ブレスorウイング発動" sync="ヒッポカムポスの「(ブレス|ウィング)＆カタラクティス」" />
+  <a time="159.1" text="多重刻印：発動" />
+  <a time="172.0" text="チャネリングフロウ" sync="ヒッポカムポスの「チャネリングフロウ」" notice="次は、矢印。" />
+  <a time="186.1" text="スタン・強制移動" />
+  <a time="202.0" text="ダブルインパクト" sync="ヒッポカムポスの「ダブルインパクト」" notice="次は、タンク頭割り。" />
+  <a time="213.0" text="マーキーディープ" sync="ヒッポカムポスの「マーキーディープ」" />
+  <a time="229.0" text="スウェッジデリージュ" sync="ヒッポカムポスの「スウェッジデリージュ」" />
+  <a time="247.0" text="ショックウェーブ" sync="ヒッポカムポスの「ショックウェーブ」" notice="次は、ノックバック。" >
+    <expressions>
+      <set name="is_dicemarker" value="true" ttl="15" />
+    </expressions>
+  </a>
+  <a time="251.0" text="サイコロ付与" sync="ヒッポカムポスは「カンペオスハルマ」の構え。" notice="次は、サイコロ。" />
+  <a time="260.5" text="突進＋AoE(1)" />
+  <a time="262.3" text="突進＋AoE(2)" />
+  <a time="264.1" text="突進＋AoE(3)" />
+  <a time="265.9" text="突進＋AoE(4)" />
+  <a time="282.0" text="ダブルインパクト" sync="ヒッポカムポスの「ダブルインパクト」" notice="次は、タンク頭割り。" />
+  <a time="292.0" text="マーキーディープ" sync="ヒッポカムポスの「マーキーディープ」" >
+    <expressions>
+      <set name="second_flow" value="true" ttl="30" />
+    </expressions>
+  </a>
+  <a time="305.0" text="チャネリングオーバーフロウ" sync="ヒッポカムポスの「チャネリングオーバーフロウ」" notice="次は、矢印。" />
+  <a time="319.7" text="強制移動１回目＋AoE着弾" />
+  <a time="335.1" text="強制移動２回目＋AoE着弾" />
+  <a time="337.0" text="ブレスorウイング" sync="ヒッポカムポスは「(ブレス|ウィング)＆カタラクティス」の構え。" />
+  <a time="346.0" text="ブレスorウイング発動" sync="ヒッポカムポスの「(ブレス|ウィング)＆カタラクティス」" />
+  <a time="365.0" text="多重刻印" sync="ヒッポカムポスの「多重刻印」" />
+  <a time="371.8" text="ディソシエーション" />
+  <a time="372.0" sync="エリクトニオス:頭部が分離したぞ！　あいつ、あんなことも可能なのか……！ 周囲に、気を配るんだ！" notice="次は、外周を確認。" />
+  <a time="381.0" text="ブレスorウイング" sync="ヒッポカムポスは「(ブレス|ウィング)＆カタラクティス」の構え。" />
+  <a time="390.0" text="多重刻印：発動" />
+  <a time="403.4" text="ディソシエーション" notice="次は、外周を確認。" />
+  <a time="417.0" text="エラプション３回" sync="ヒッポカムポスの「スウェッジエラプション」" notice="次は、連続AoE。"/>
+  <a time="422.0" text="フラッド(AoE散開)" sync="ヒッポカムポスの「テインテッドフラッド」" notice="次は、散開。" />
+  <a enabled="false" time="429.1" text="AoE着弾" />
+  <a time="438.0" text="距離減衰＋タンク先頭頭割り" sync="ヒッポカムポスの「コヒーレンス」" notice="次は、距離減衰と頭割り。" />
+  <a time="454.0" text="ダブルインパクト" sync="ヒッポカムポスの「ダブルインパクト」" notice="次は、タンク頭割り。" />
+  <a time="462.0" text="マーキーディープ" sync="ヒッポカムポスの「マーキーディープ」" />
+  <a time="480.0" text="スウェッジデリージュ" sync="ヒッポカムポスの「スウェッジデリージュ」" >
+    <expressions>
+      <set name="third_flow" value="true" ttl="30" />
+    </expressions>
+  </a>
+  <a time="497.0" text="チャネリングオーバーフロウ" sync="ヒッポカムポスの「チャネリングオーバーフロウ」" notice="次は、矢印。" />
+  <a time="512.0" text="強制移動１回目" />
+  <a time="514.0" text="距離減衰＋タンク先頭頭割り" sync="ヒッポカムポスの「コヒーレンス」" />
+  <a time="527.1" text="強制移動２回目" />
+  <a time="539.7" text="ディソシエーション" notice="次は、外周を確認。"/>
+  <a time="553.0" text="エラプション３回" sync="ヒッポカムポスの「スウェッジエラプション」" notice="次は、連続AoE。" />
+  <a time="564.3" text="霊水弾" notice="次は、ノックバックと頭割り。" />
+  <a time="575.0" text="ショックウェーブ" sync="ヒッポカムポスの「ショックウェーブ」" />
+  <a time="588.7" text="ダブルインパクト" sync="ヒッポカムポスの「ダブルインパクト」" notice="次は、タンク頭割り。" />
+  <a time="601.3" text="マーキーディープ" sync="ヒッポカムポスの「マーキーディープ」" />
+  <a time="612.4" text="マーキーディープ" sync="ヒッポカムポスの「マーキーディープ」" />
+  <a time="627.6" text="時間切れ" sync="ヒッポカムポスの「スウェッジデリージュ」" />
+</timeline>

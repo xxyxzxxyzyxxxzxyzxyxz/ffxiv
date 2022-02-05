@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<timeline>
+  <name>パンデモニウム零式：辺獄編3層</name>
+  <rev>rev2</rev>
+  <description>
+    万魔殿パンデモニウム零式：辺獄編3層のタイムラインです。
+    https://blog.sheeva.me/
+  </description>
+  <author>sheeva</author>
+  <license>CC BY-SA</license>
+  <zone>Asphodelos: The Third Circle (Savage)</zone>
+  <locale>JA</locale>
+  <start>0039::戦闘開始！</start>
+
+  <default target-element="Activity" target-attr="notice-o" value="-9" />
+
+  <!-- 魔力錬成：劫火天焦判定トリガー begin -->
+  <t sync="^14:66BE:フェネクス starts using 魔力錬成：劫火天焦" notice="エフェクト出たら外周えー。" >
+    <v-notice
+      text="大：外周へ"
+      icon="Leave.png"
+      duration="9" />
+  </t>
+
+  <t sync="^14:66C0:フェネクス starts using 魔力錬成：劫火天焦" notice="爆発した場所えー。" >
+    <v-notice
+      text="小：爆発した場所へ"
+      icon="TargetAOE01.png"
+      duration="9" />
+  </t>
+  <!-- 魔力錬成：劫火天焦判定トリガー end -->
+
+  <!-- 右翼焼却・左翼焼却 判定トリガー begin -->
+  <t sync="^14:6702:フェネクス starts using 右翼焼却" notice="左えー。" >
+    <v-notice
+      text="左が安全"
+      icon="Arrow7.png"
+      duration="9" />
+  </t>
+
+  <t sync="^14:6703:フェネクス starts using 左翼焼却" notice="右えー。" >
+    <v-notice
+      text="右が安全"
+      icon="Arrow3.png"
+      duration="9" />
+  </t>
+  <!-- 右翼・左翼 判定トリガー end -->
+
+  <!-- 光の炎 サイコロマーカー判定 begin -->
+  <t no="1" sync="1B:[id8]:[pc]:0000:[id4]:(?&lt;marker&gt;[0-9a-fA-F]{4}):" sync-count="1" >
+    <expressions>
+      <set name="marker_origin" value="0x${marker}" />
+    </expressions>
+  </t>
+
+  <t no="2" name="サイコロ1" sync="1B:[id8]:[mex]:0000:[id4]:EVAL(VAR['marker_origin'], X4):">
+    <v-notice
+      text="１番：１へ"
+      duration="10" />
+  </t>
+
+  <t no="2" name="サイコロ2" sync="1B:[id8]:[mex]:0000:[id4]:EVAL(VAR['marker_origin']+1, X4):">
+    <v-notice
+      text="２番：２へ"
+      duration="10" />
+  </t>
+
+  <t no="2" name="サイコロ3" sync="1B:[id8]:[mex]:0000:[id4]:EVAL(VAR['marker_origin']+2, X4):">
+    <v-notice
+      text="３番：３へ"
+      duration="10" />
+  </t>
+
+  <t no="2" name="サイコロ4" sync="1B:[id8]:[mex]:0000:[id4]:EVAL(VAR['marker_origin']+3, X4):">
+    <v-notice
+      text="４番：４へ"
+      duration="10" />
+  </t>
+
+  <t no="2" name="サイコロ5" sync="1B:[id8]:[mex]:0000:[id4]:EVAL(VAR['marker_origin']+4, X4):">
+    <v-notice
+      text="５番：１へ"
+      duration="10" />
+  </t>
+
+  <t no="2" name="サイコロ6" sync="1B:[id8]:[mex]:0000:[id4]:EVAL(VAR['marker_origin']+5, X4):">
+    <v-notice
+      text="６番：２へ"
+      duration="10" />
+  </t>
+
+  <t no="2" name="サイコロ7" sync="1B:[id8]:[mex]:0000:[id4]:EVAL(VAR['marker_origin']+6, X4):">
+    <v-notice
+      text="７番：３へ"
+      duration="10" />
+  </t>
+
+  <t no="2" name="サイコロ8" sync="1B:[id8]:[mex]:0000:[id4]:EVAL(VAR['marker_origin']+7, X4):">
+    <v-notice
+      text="８番：４へ"
+      duration="10" />
+  </t>
+  <!-- 光の炎 サイコロマーカー判定 end -->
+
+  <!-- 外周からの突進 判定トリガー begin -->
+  <t sync="^14:66FB:フェネクス starts using 獄炎の焔 on フェネクス." notice="左右で散開。" >
+    <v-notice
+      text="突進：左右で散開"
+      icon="Leave.png"
+      duration="9" />
+  </t>
+
+  <t sync="^14:66FC:フェネクス starts using 獄炎の焔 on フェネクス." notice="中央で頭割り。" >
+    <v-notice
+      text="突進：中央ペア頭割り"
+      icon="DamageShare.png"
+      duration="9" />
+  </t>
+  <!-- 外周からの突進 判定トリガー end -->
+
+  <!-- 魔力錬成：炎闇劫火判定トリガー begin -->
+  <t sync="^14:66C6:フェネクス starts using 魔力錬成：炎闇劫火" notice="エフェクト出たら外周えー。" >
+    <v-notice
+      text="大：外周へ"
+      icon="Leave.png"
+      duration="9" />
+  </t>
+
+  <t sync="^14:66CA:フェネクス starts using 魔力錬成：炎闇劫火" notice="爆発した場所えー。" >
+    <v-notice
+      text="小：回転AoE"
+      icon="TargetAOE01.png"
+      duration="9" />
+  </t>
+  -->
+
+  <t sync="^15:[id8]:フェネクス:66C8:魔力錬成：炎闇劫火" notice="続けて、散開。" >
+    <v-notice
+      text="黒：散開"
+      icon="Leave.png"
+      duration="10" />
+  </t>
+
+  <t sync="^15:[id8]:フェネクス:66CC:魔力錬成：炎闇劫火" notice="続けて、頭割り。" >
+    <v-notice
+      text="黒：頭割り"
+      icon="DamageShare.png"
+      duration="10" />
+  </t>
+-->
+  <!-- 魔力錬成：炎闇劫火判定トリガー end -->
+
+  <!-- 魔力錬成：暗闇の劫火天焦 判定トリガー begin -->
+  <t sync="^14:66C2:フェネクス starts using 魔力錬成：暗闇の劫火天焦" notice="頭割り。" >
+    <v-notice
+      text="４：４頭割り"
+      icon="DamageShare.png"
+      duration="10" />
+  </t>
+
+  <t sync="^14:66C4:フェネクス starts using 魔力錬成：暗闇の劫火天焦" notice="散開。" >
+    <v-notice
+      text="散開"
+      icon="Leave.png"
+      duration="10" />
+  </t>
+  <!-- 魔力錬成：暗闇の劫火天焦 判定トリガー end -->
+
+  <!-- 死の運命 判定トリガー begin -->
+  <t sync="^1A:[id8]:[mex] gains the effect of 死の運命 from  for 25.00 Seconds. BuffID: 0ACA-01" notice="" >
+    <v-notice
+      text="死の運命：１"
+      icon="Attention.png"
+      duration="25" />
+  </t>
+
+  <t sync="^1A:[id8]:[mex] gains the effect of 死の運命 from  for 25.00 Seconds. BuffID: 0ACA-02" notice="" >
+    <v-notice
+      text="死の運命：２"
+      icon="Attention.png"
+      duration="25" />
+  </t>
+
+  <t sync="^1A:[id8]:[mex] gains the effect of 死の運命 from  for 25.00 Seconds. BuffID: 0ACA-04" notice="" >
+    <v-notice
+      text="死の運命：４"
+      icon="Attention.png"
+      duration="25" />
+  </t>
+  <!-- 死の運命 判定トリガー end -->
+
+  <!-- メインルーチン -->
+  <a time="000.0" />
+  <a time="013.0" text="灰燼の炎" sync="フェネクスの「灰燼の炎」" />
+  <a time="022.0" text="獄炎の炎撃" sync="フェネクスの「獄炎の炎撃」" notice="次は、タンク線取り。" />
+  <a time="032.9" text="魔力錬成：劫火天焦" sync="フェネクスの「魔力錬成：劫火天焦」" />
+  <a time="043.9" text="右翼or左翼" sync="フェネクスの「(右翼|左翼)焼却」" />
+  <a time="058.0" text="闇の炎" sync="フェネクスの「闇の炎」" />
+  <a time="068.0" text="光の炎８回" />
+  <a time="095.9" text="獄炎の炎撃" sync="フェネクスの「獄炎の炎撃」" notice="次は、タンク線取り。" />
+  <a time="104.0" text="灰燼の炎" sync="フェネクスの「灰燼の炎」" />
+  <a time="114.2" text="十字走火" />
+  <a time="121.0" text="魔力錬成：劫火天焦" sync="フェネクスの「魔力錬成：劫火天焦」" />
+  <a time="131.0" text="熱噴射" sync="フェネクスの「熱噴射」" notice="次は、AoE重ねる。" />
+  <a time="140.0" text="右翼or左翼" sync="フェネクスの「(右翼|左翼)焼却」" />
+  <a time="149.0" text="獄炎の炎撃" sync="フェネクスの「獄炎の炎撃」" />
+  <a time="157.0" text="魔力錬成：劫火天焦" sync="フェネクスの「魔力錬成：劫火天焦」" />
+  <a time="171.0" text="獄炎の焔" sync="フェネクスの「獄炎の焔」" notice="次は、外周を確認。" />
+  <a time="172.8" text="ペア頭割りor散開" />
+  <a time="180.2" text="炎の雨" />
+  <a time="188.3" text="炎の雨" />
+  <a time="196.3" text="炎の雨" />
+  <a time="204.4" text="炎の雨" />
+  <a time="206.7" text="雑魚処理リミット" />
+  <a time="209.0" text="反魂の炎" sync="フェネクスの「反魂の炎」" notice="次は、全体攻撃。" sync-s="-30" />
+  <a time="212.5" text="炎の雨" />
+  <a time="220.5" text="炎の雨" />
+  <a time="226.0" text="連続強襲滑空１" sync="陽炎鳥の「連続強襲滑空」" notice="次は、突進一回目。受けたら移動する。" />
+  <a time="229.0" text="連続強襲滑空２" notice="" />
+  <a time="236.7" text="炎の雨" />
+  <a time="244.7" text="炎の雨" />
+  <a time="252.8" text="炎の雨" />
+  <a time="260.0" text="反魂の炎" sync="フェネクスの「反魂の炎」" notice="次は、全体攻撃。" sync-s="-30" />
+  <a time="282.0" text="黒き不死鳥" sync="フェネクスの「黒き不死鳥」" />
+  <a time="296.0" text="獄炎の炎撃" sync="フェネクスの「獄炎の炎撃」" notice="次は、タンク線取り。" />
+  <a time="307.0" text="群鳥飛翔" sync="フェネクスの「群鳥飛翔」" notice="次は、外周へ向ける。" />
+  <a time="321.0" text="群鳥AoE発動" sync="火霊鳥の「闇の瞳」" />
+  <a time="335.0" text="魔力錬成：予兆" sync="フェネクスの「魔力錬成：炎闇劫火」" notice="次は、エフェクトを確認。" />
+  <a time="337.0" text="炎闇劫火：予兆" />
+  <a time="347.8" text="散開or頭割り" />
+  <a time="366.0" text="霊泉の炎" sync="フェネクスの「霊泉の炎」" notice="次は、霊泉の炎。" />
+  <a time="374.0" text="近い順にAoE" sync="フェネクスの「陽炎の翼」" />
+  <a time="376.0" text="霊泉の波動：１" sync="霊泉の炎の「霊泉の波動」" />
+  <a time="381.0" text="霊泉の波動：２" />
+  <a time="381.0" text="強襲滑空：１" />
+  <a time="385.0" text="霊泉の波動：３" />
+  <a time="386.0" text="強襲滑空：２" />
+  <a time="390.0" text="霊泉の波動：４" />
+  <a time="391.0" text="強襲滑空：３" />
+  <a time="397.0" text="灰燼の炎" sync="フェネクスの「灰燼の炎」" notice="次は、全体攻撃2回。" />
+  <a time="404.0" text="灰燼の炎" />
+  <a time="415.0" text="獄炎の炎撃" sync="フェネクスの「獄炎の炎撃」" notice="次は、タンク線取り。" />
+  <a time="430.0" text="辺獄の炎嵐（竜巻出現）" sync="フェネクスの「辺獄の炎嵐」" notice="次は、全体攻撃。" />
+  <a time="436.0" text="辺獄の炎" sync="フェネクスの「辺獄の炎」" />
+  <a time="441.4" text="炎の雨" />
+  <a time="447.5" text="炎の雨" />
+  <a time="449.5" text="散開or頭割り" />
+  <a time="454.0" text="辺獄の炎" sync="フェネクスの「辺獄の炎」" />
+  <a time="472.0" text="辺獄の嵐" sync="フェネクスの「辺獄の嵐」" notice="次は、範囲を誘導。" />
+  <a time="478.0" text="辺獄の闇炎旋風" sync="フェネクスの「辺獄の闇炎旋風」" />
+  <a time="485.0" text="熱噴射(エラプ)" sync="フェネクスの「熱噴射」" notice="" />
+  <a time="495.0" text="魔力錬成：暗闇" sync="フェネクスの「魔力錬成：暗闇の劫火天焦」" />
+  <a time="497.0" text="闇旋風：ノックバック" sync="闇炎旋風の「闇旋風」" notice="次は、ノックバックとドーナツ範囲。" />
+  <a time="499.0" text="炎旋風：ドーナツ範囲" sync="闇炎旋風の「炎旋風」" />
+  <a time="509.0" text="灰燼の炎" sync="フェネクスの「灰燼の炎」" notice="次は、全体攻撃。" />
+  <a time="522.0" text="死の運命" sync="フェネクスの「死の運命」" notice="次は、デバフを確認。" />
+  <a time="528.0" text="群鳥飛翔" sync="フェネクスの「群鳥飛翔」" />
+  <a time="542.0" text="群鳥AoE発動１" sync="火霊鳥の「闇の瞳」" />
+  <a time="543.0" text="群鳥AoE発動２" />
+  <a time="544.0" text="群鳥AoE発動３" />
+  <a time="545.0" text="群鳥AoE発動４" />
+  <a time="554.0" text="生苦の炎" sync="フェネクスの「生苦の炎」" />
+  <a time="566.0" text="魔力錬成：予兆" sync="フェネクスの「魔力錬成：炎闇劫火」" notice="次は、エフェクトを確認。" />
+  <a time="569.0" text="炎闇劫火：予兆" />
+  <a time="586.0" text="獄炎の焔" sync="フェネクスの「獄炎の焔」" notice="次は、外周を確認。" />
+  <a time="587.8" text="ペア頭割りor散開" />
+  <a time="598.0" text="十字走火" />
+  <a time="606.0" text="魔力錬成：劫火天焦" sync="フェネクスの「魔力錬成：劫火天焦」" />
+  <a time="616.0" text="熱噴射" sync="フェネクスの「熱噴射」" notice="次は、AoE重ねる。"/>
+  <a time="625.0" text="右翼or左翼" sync="フェネクスの「(右翼|左翼)焼却」" />
+  <a time="635.0" text="灰燼の炎" sync="フェネクスの「灰燼の炎」" notice="次は、全体攻撃2回。" />
+  <a time="642.0" text="灰燼の炎" />
+  <a time="643.0" text="時間切れ詠唱開始" sync="フェネクスは「灰燼の豪炎」の構え。" />
+  <a time="654.0" text="時間切れ" />
+</timeline>

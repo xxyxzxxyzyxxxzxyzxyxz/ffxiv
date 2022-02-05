@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="utf-8"?>
+<timeline>
+  <name>万魔殿パンデモニウム零式：辺獄編1層</name>
+  <rev>rev1</rev>
+  <description>
+    万魔殿パンデモニウム零式：辺獄編1層のタイムラインです。
+    https://blog.sheeva.me/
+  </description>
+  <author>sheeva</author>
+  <license>CC BY-SA</license>
+  <zone>Asphodelos: The First Circle (Savage)</zone>
+  <locale>JA</locale>
+  <start>0039::戦闘開始！</start>
+
+  <default target-element="Activity" target-attr="notice-o" value="-9" />
+
+  <!-- 1回目 単体に付与される近呪/遠呪 の判定トリガー begin -->
+  <t name="自分に近呪の魔鎖" sync="^1A:[id8]:[mex] gains the effect of 近呪の魔鎖 from  for 13.00 Seconds. BuffID: 0AB6-00" notice="" >
+    <v-notice
+      order="-1"
+      text="自分に近呪"
+      duration="14"
+      icon="Stack.png" />
+  </t>
+
+  <!--
+  <t name="自分以外に近呪の魔鎖" sync="^1A:[id8]:[nex] gains the effect of 近呪の魔鎖 from  for 13.00 Seconds. BuffID: 0AB6-00" notice="" >
+    <v-notice
+      order="-1"
+      text="近呪対象"
+      duration="14"
+      job-icon="true" />
+  </t>
+  -->
+
+  <t name="自分に遠呪の魔鎖" sync="^1A:[id8]:[mex] gains the effect of 遠呪の魔鎖 from  for 13.00 Seconds. BuffID: 0AB7-00" notice="" >
+    <v-notice
+      order="-1"
+      text="自分に遠呪"
+      icon="Leave.png" />
+  </t>
+
+  <!--
+  <t name="自分以外に遠呪の魔鎖" sync="^1A:[id8]:[nex] gains the effect of 遠呪の魔鎖 from  for 13.00 Seconds. BuffID: 0AB7-00" notice="" >
+    <v-notice
+      order="-1"
+      text="遠呪対象"
+      duration="14"
+      job-icon="true" />
+  </t>
+  -->
+  <!-- 1回目 単体に付与される近呪/遠呪 の判定トリガー end -->
+
+  <!-- 2回目 全員に付与される近呪/遠呪 の判定トリガー begin -->
+  <t name="自分に近１" sync="^1A:[id8]:[mex] gains the effect of 近呪の魔鎖 from  for 3.00 Seconds. BuffID: 0B45-00" notice="" >
+    <v-notice
+      order="-1"
+      text="近１➜Ａマーカー"
+      duration="24"
+      icon="Stack.png" />
+  </t>
+
+  <t name="自分に近２" sync="^1A:[id8]:[mex] gains the effect of 近呪の魔鎖 from  for 8.00 Seconds. BuffID: 0B46-00" notice="" >
+    <v-notice
+      order="-1"
+      text="近２➜Ｂマーカー"
+      duration="24"
+      icon="Stack.png" />
+  </t>
+
+  <t name="自分に近３" sync="^1A:[id8]:[mex] gains the effect of 近呪の魔鎖 from  for 13.00 Seconds. BuffID: 0B47-00" notice="" >
+    <v-notice
+      order="-1"
+      text="近３➜Ｃマーカー"
+      duration="24"
+      icon="Stack.png" />
+  </t>
+
+  <t name="自分に近４" sync="^1A:[id8]:[mex] gains the effect of 近呪の魔鎖 from  for 18.00 Seconds. BuffID: 0B6B-00" notice="" >
+    <v-notice
+      order="-1"
+      text="近４➜Ｄマーカー"
+      duration="24"
+      icon="Stack.png" />
+  </t>
+
+  <t name="自分に遠１" sync="^1A:[id8]:[mex] gains the effect of 遠呪の魔鎖 from  for 3.00 Seconds. BuffID: 0B48-00" notice="" >
+    <v-notice
+      order="-1"
+      text="遠１➜１マーカー"
+      duration="24"
+      icon="Leave.png" />
+  </t>
+
+  <t name="自分に遠２" sync="^1A:[id8]:[mex] gains the effect of 遠呪の魔鎖 from  for 8.00 Seconds. BuffID: 0B49-00" notice="" >
+    <v-notice
+      order="-1"
+      text="遠２➜２マーカー"
+      duration="24"
+      icon="Leave.png" />
+  </t>
+
+  <t name="自分に遠３" sync="^1A:[id8]:[mex] gains the effect of 遠呪の魔鎖 from  for 13.00 Seconds. BuffID: 0B4A-00" notice="" >
+    <v-notice
+      order="-1"
+      text="遠３➜３マーカー"
+      duration="24"
+      icon="Leave.png" />
+  </t>
+
+  <t name="自分に遠４" sync="^1A:[id8]:[mex] gains the effect of 遠呪の魔鎖 from  for 18.00 Seconds. BuffID: 0B6C-00" notice="" >
+    <v-notice
+      order="-1"
+      text="遠４➜４マーカー"
+      duration="24"
+      icon="Leave.png" />
+  </t>
+  <!-- 2回目 全員に付与される近呪/遠呪 の判定トリガー end -->
+
+  <!-- 懲罰撃 判定トリガー begin -->
+  <t name="懲罰撃(左から右)" sync="^14:65F6:" notice="左から右えー。" >
+    <v-notice
+      order="-1"
+      text="左➜右"
+      duration="13"
+      icon="West.png" />
+  </t>
+
+  <t name="懲罰撃(右から左)" sync="^14:65F7:" notice="右から左えー。" >
+    <v-notice
+      order="-1"
+      text="右➜左"
+      duration="13"
+      icon="East.png" />
+  </t>
+
+  <t name="懲罰撃(外から中)" sync="^14:65F(8|9):" notice="外側から内側えー。" >
+    <v-notice
+      order="-1"
+      text="中➜外"
+      duration="13"
+      icon="AOEInside.png" />
+  </t>
+
+  <t name="懲罰撃(中から外)" sync="^14:65F(A|B):" notice="内側から外側えー。" >
+    <v-notice
+      order="-1"
+      text="中➜外"
+      duration="13"
+      icon="AOEOutside.png" />
+  </t>
+  <!-- 懲罰撃 判定トリガー end -->
+
+  <!-- 懲罰連撃 判定トリガー begin -->
+  <t name="懲罰連撃・聖" sync="^14:660E:" notice="続けて、頭割り。" >
+    <v-notice
+      order="-1"
+      text="MT吹き飛ばし\n➜頭割り"
+      duration="9"
+      icon="DamageShare.png" />
+  </t>
+
+  <t name="懲罰連撃・炎" sync="^14:660F:" notice="続けて、距離減衰。" >
+    <v-notice
+      order="-1"
+      text="MT吹き飛ばし\n➜距離減衰"
+      duration="9"
+      icon="Distance.png" />
+  </t>
+  <!-- 懲罰連撃 判定トリガー end -->
+
+  <!-- 氷火の侵食 判定トリガー begin -->
+  <t name="侵食執行(下)" sync="^14:661F:" notice="" >
+    <v-notice
+      order="-1"
+      text="下から発動"
+      duration="13"
+      duration-visible="false"
+      icon="Arrow5.png" />
+  </t>
+
+  <t name="侵食執行(上)" sync="^14:6620:" notice="" >
+    <v-notice
+      order="-1"
+      text="上から発動"
+      duration="13"
+      duration-visible="false"
+      icon="Arrow1.png" />
+  </t>
+
+  <t name="氷の侵食" sync="^1A:[id8]:[mex] gains the effect of 火の侵食" notice="" >
+    <v-notice
+      order="-1"
+      text="保持：火"
+      icon="Fire.png"
+      duration="24"
+      duration-visible="false"
+      sync-to-hide="^1E:[id8]:[mex] loses the effect of 火の侵食" />
+  </t>
+
+  <t name="氷の侵食" sync="^1A:[id8]:[mex] gains the effect of 氷の侵食" notice="" >
+    <v-notice
+      order="-1"
+      text="保持：氷"
+      icon="Ice.png"
+      duration="24"
+      duration-visible="false"
+      sync-to-hide="^1E:[id8]:[mex] loses the effect of 氷の侵食" />
+  </t>
+  <!-- 氷火の侵食 判定トリガー end -->
+
+  <!-- 光炎監獄 爆鎖判定トリガー begin -->
+  <!-- FIXME 白なのか緑なのか青なのかはお好みでどうぞ -->
+  <t name="爆鎖(炎)" sync="BuffID: 0893-14C$" notice="白に移動。" >
+    <v-notice
+      order="-2"
+      text="白(光)が安全"
+      duration="14"
+      icon="True.png" /> <!-- アイコンは色イメージで選択、深い意味はなし -->
+  </t>
+
+  <t name="爆鎖(光)" sync="BuffID: 0893-14D$" notice="赤に移動。" >
+    <v-notice
+      order="-2"
+      text="赤(炎)が安全"
+      duration="14"
+      icon="False.png" /> <!-- アイコンは色イメージで選択、深い意味はなし -->
+  </t>
+  <!-- 光炎監獄 爆鎖判定トリガー end -->
+
+  <!-- 光炎監獄中の懲罰撃 判定トリガー begin -->
+  <!-- FIXME サンプル不足につき不正確な可能性があります -->
+  <t name="懲罰撃(外左安置)" sync="^14:6DA6:" notice="左、外側。" >
+    <expressions>
+      <pre name="is_Shining_Cells" value="true" />
+    </expressions>
+    <v-notice
+      order="-1"
+      text="左の外側"
+      duration="14"
+      icon="West.png" />
+  </t>
+
+  <t name="懲罰撃(外右安置)" sync="^14:6DA7:" notice="右、外側。" >
+    <expressions>
+      <pre name="is_Shining_Cells" value="true" />
+    </expressions>
+    <v-notice
+      order="-1"
+      text="右の外側"
+      duration="14"
+      icon="East.png" />
+  </t>
+
+  <t name="懲罰撃(内右安置)" sync="^14:6DA8:" notice="右、内側。" >
+    <expressions>
+      <pre name="is_Shining_Cells" value="true" />
+    </expressions>
+    <v-notice
+      order="-1"
+      text="右の内側"
+      duration="14"
+      icon="East.png" />
+  </t>
+
+  <t name="懲罰撃(内左安置)" sync="^14:6DA9:" notice="左、内側。" >
+    <expressions>
+      <pre name="is_Shining_Cells" value="true" />
+    </expressions>
+    <v-notice
+      order="-1"
+      text="左の内側"
+      duration="14"
+      icon="East.png" />
+  </t>
+  <!-- 光炎監獄中の懲罰撃 判定トリガー end -->
+
+  <!-- 時限の魔鎖 判定トリガー begin -->
+  <t name="自分に時限の魔鎖" sync="^1A:[id8]:[mex] gains the effect of 時限の魔鎖 from  for 14.00 Seconds. BuffID: 0AB5-00" notice="" >
+    <v-notice
+      order="-1"
+      text="時限の魔鎖:自分"
+      duration="14"
+      job-icon="true" />
+  </t>
+
+  <t name="自分以外に時限の魔鎖" sync="^1A:[id8]:[nex] gains the effect of 時限の魔鎖 from  for 14.00 Seconds. BuffID: 0AB5-00" notice="" >
+    <v-notice
+      order="-1"
+      text="時限の魔鎖:対象"
+      duration="14"
+      job-icon="true" />
+  </t>
+  <!-- 時限の魔鎖 判定トリガー end -->
+
+  <a time="000.0" sync="エリクトニオス:守る、救う……俺が……俺が、やらないと……！ 俺が……貴様を倒す！！" >
+    <expressions>
+      <set name="is_Shining_Cells" value="false" />
+    </expressions>
+  </a>
+  <a time="014.0" text="痛撃" sync="エリクトニオスの「痛撃」" />
+  <a time="023.0" text="結呪の魔鎖" sync="エリクトニオスの「結呪の魔鎖」" />
+  <a time="032.0" text="魔鎖乱流" sync="エリクトニオスの「魔鎖乱流」" />
+  <a time="037.1" text="近呪/遠呪 対象確定" />
+  <a time="042.2" text="近呪/遠呪 発動" />
+  <a time="046.0" sync="エリクトニオス:俺の鎖から、逃れられると思うな！" />
+  <a time="058.0" text="懲罰撃１" sync="エリクトニオスの「懲罰撃」" />
+  <a time="061.0" text="懲罰撃２" />
+  <a time="067.0" sync="エリクトニオス:ウゥゥ……まずは、貴様からだ……！" />
+  <a time="073.0" text="懲罰連撃(MT)" sync="エリクトニオスの「懲罰連撃" notice="次は、タンク強攻撃。" />
+  <a time="076.1" text="距離減衰or頭割り" />
+  <a time="079.0" sync="エリクトニオス:もっと、もっと！　鎖をッ！！！" />
+  <a time="092.0" text="懲罰撃１" sync="エリクトニオスの「懲罰撃」" />
+  <a time="095.0" text="懲罰撃２" />
+  <a time="106.0" text="魔鎖乱流" sync="エリクトニオスの「魔鎖乱流」" />
+  <a time="116.0" sync="エリクトニオス:氷火による呪縛を発動させる……！" />
+  <a time="119.0" text="氷火の侵食" sync="エリクトニオスの「氷火の侵食」" />
+  <a time="124.0" sync="エリクトニオス:この呪縛を逃れることはできない……。 氷火の侵食を、その身で味わえ！！" />
+  <a time="136.7" text="火/氷１着弾" />
+  <a time="142.0" text="魔鎖乱流" sync="エリクトニオスの「魔鎖乱流」" />
+  <a time="147.3" text="火/氷２着弾" />
+  <a time="152.0" text="魔鎖乱流" sync="エリクトニオスの「魔鎖乱流」" />
+  <a time="158.3" text="火/氷３着弾" />
+  <a time="163.0" sync="エリクトニオス:この一撃で、貴様を……砕く！" />
+  <a time="169.0" text="懲罰連撃(MT)" sync="エリクトニオスの「懲罰連撃" notice="次は、タンク強攻撃。" />
+  <a time="173.1" text="距離減衰or頭割り" />
+  <a time="181.0" sync="エリクトニオス:これでも効かない、というなら……。 俺の、全身全霊を……込める……！" />
+  <a time="189.0" text="光炎監獄" sync="エリクトニオスの「光炎監獄」" >
+    <expressions>
+      <set name="is_Shining_Cells" value="true" ttl="90" />
+    </expressions>
+  </a>
+  <a time="192.0" sync="エリクトニオス:グウゥ……光炎監獄、展開……！ この鎖が、貴様の自由を阻む！" />
+  <a time="196.0" sync="エリクトニオス:光炎監獄、展開……維持……！ この連撃で……すべてを、打ち砕く！" />
+  <a time="197.3" text="鎖＋床 構え" />
+  <a time="209.0" text="鎖＋床 発動１" sync="エリクトニオスの「懲罰爆鎖」" />
+  <a time="212.0" text="鎖＋床 発動２" />
+  <a time="219.0" sync="エリクトニオス:まだだ……！ この鎖が、貴様を薙ぎ払う！" />
+  <a time="225.0" text="懲罰連撃(MT)" sync="エリクトニオスの「懲罰連撃」" notice="次は、タンク強攻撃。" />
+  <a time="229.5" text="距離減衰or頭割り"  />
+  <a time="232.0" text="鎖＋床 構え" />
+  <a time="244.0" text="鎖＋床 発動１" sync="エリクトニオスの「懲罰爆鎖」" />
+  <a time="247.0" text="鎖＋床 発動２" />
+  <a time="256.0" text="時限の魔鎖(付与)" sync="エリクトニオスの「時限の魔鎖」" />
+  <a time="266.0" text="痛撃" sync="エリクトニオスの「痛撃」" />
+  <a time="271.2" text="時限の魔鎖(発動)" />
+  <a time="272.0" sync="エリクトニオス:ウゥゥ……この鎖で払えないとは……！ だが俺は、仲間を、創造生物を……救わねばならないんだ！" />
+  <a time="279.0" text="監獄閉塞" sync="エリクトニオスの「監獄閉塞」" />
+  <a time="292.0" sync="エリクトニオス:一撃で駄目なら、何度でも……！ 結呪の四連魔鎖……これで貴様を滅する！！" />
+  <a time="295.0" text="結呪の四連魔鎖" sync="エリクトニオスの「結呪の四連魔鎖」" />
+  <a time="304.4" text="四連魔鎖 発動１" />
+  <a time="309.4" text="四連魔鎖 発動２" />
+  <a time="314.4" text="四連魔鎖 発動３" />
+  <a time="319.4" text="四連魔鎖 発動４" />
+  <a time="329.0" text="魔鎖乱流" sync="エリクトニオスの「魔鎖乱流」" />
+  <a time="343.0" text="氷火の侵食" sync="エリクトニオスの「氷火の侵食」" />
+  <a time="359.7" text="火/氷１着弾" />
+  <a time="370.7" text="火/氷２着弾" >
+    <v-notice
+      order="-1"
+      text="火/氷２着弾➜懲罰撃"
+      duration="14"
+      duration-visible="false"
+      icon="Attention.png" />
+  </a>
+  <a time="374.0" text="懲罰撃１" sync="エリクトニオスの「懲罰撃」" />
+  <a time="377.0" text="懲罰撃２" />
+  <a time="381.7" text="火/氷３着弾" />
+  <a time="390.0" text="魔鎖乱流" sync="エリクトニオスの「魔鎖乱流」" />
+  <a time="401.0" sync="エリクトニオス:俺が諦めたら、すべてが終わってしまう……！ 光炎監獄、再展開！！" />
+  <a time="409.0" text="光炎監獄" sync="エリクトニオスの「光炎監獄」" >
+    <expressions>
+      <set name="is_Shining_Cells" value="true" />
+    </expressions>
+  </a>
+  <a time="411.0" sync="エリクトニオス:この光炎監獄で、貴様のすべてを消し飛ばす！" />
+  <a time="419.0" text="結呪の魔鎖" sync="エリクトニオスの「結呪の魔鎖」" />
+  <a time="431.0" text="床爆発１" sync="エリクトニオスの「爆鎖」" />
+  <a time="433.3" text="近呪/遠呪 対象確定" />
+  <a time="438.5" text="近呪/遠呪 発動" />
+  <a time="439.0" text="床爆発２" sync="エリクトニオスの「爆鎖」" />
+  <a time="449.0" text="魔鎖乱流" sync="エリクトニオスの「魔鎖乱流」" />
+  <a time="460.0" text="時限の魔鎖(付与)" sync="エリクトニオスの「時限の魔鎖」" />
+  <a time="468.0" text="懲罰連撃(MT)" sync="エリクトニオスの「懲罰連撃" notice="次は、タンク強攻撃。" />
+  <a time="471.9" text="距離減衰or頭割り" />
+  <a time="475.1" text="時限の魔鎖(発動)" />
+  <a time="478.0" sync="エリクトニオス:フゥ……フゥ……俺の命にかえても……！ これ以上、貴様の好きにはさせない！" />
+  <a time="486.0" text="魔鎖乱流" sync="エリクトニオスの「魔鎖乱流」" />
+  <!-- 以降は不正確な可能性あり -->
+  <a time="495.0" text="鎖＋床 構え"  sync="エリクトニオスは「懲罰爆鎖」の構え。" />
+  <a time="506.0" text="鎖＋床 発動１" />
+  <a time="509.0" text="鎖＋床 発動２" />
+  <a time="512.0" text="鎖＋床 構え" sync="エリクトニオスは「懲罰爆鎖」の構え。" />
+  <a time="524.0" text="鎖＋床 発動１" />
+  <a time="527.0" text="鎖＋床 発動２" />
+  <a time="530.0" text="鎖＋床 構え" sync="エリクトニオスは「懲罰爆鎖」の構え。" />
+  <a time="542.0" text="鎖＋床 発動１" />
+  <a time="545.0" text="鎖＋床 発動２" />
+  <a time="553.0" text="魔鎖乱流" sync="エリクトニオスの「魔鎖乱流」" />
+  <a time="562.2" text="魔鎖乱流" />
+  <a time="571.4" text="魔鎖乱流" />
+  <a time="591.0" text="辺獄送り(時間切れ)" />
+</timeline>
