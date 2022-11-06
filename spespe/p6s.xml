@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <timeline>
   <name>パンデモ零式:煉獄2層</name>
-  <rev>TEST3</rev>
+  <rev>Rev1</rev>
   <description>
     202208311708:TEST01 カヘキシー２回目まで　動作未チェック
     202208311806:TEST02 タンクギミックはランダムなので調整
     202209010235:TEST3  サイコロカウントを追記　他追記
+    202209060354:TEST4　カヘキシー1回目を訂正。とり様ありがとうございます。
+    202209071940:Rev1 トリガーミスの修正
     AquaCatのブログをよろしくお願いします。(https://www.aquacat.work/)
   </description>
-  <author>Aqua Cat,RINGS</author>
+  <author>Aqua Cat,sheeva,RINGS</author>
   <license>CC BY-SA</license>
   <zone>Abyssos: The Sixth Circle (Savage)</zone>
   <locale>JA</locale>
@@ -75,12 +77,13 @@
   <a time="312" sync="ヘーゲモネー:その肉体に、厄災をもたらそう！" />
   <a time="312" text="カヘキシー1回目" sync="ヘーゲモネーは「カヘキシー」を唱えた。" notice="カヘキシー1回目" />
   <a time="316" text="カヘキシー" sync="ヘーゲモネーの「カヘキシー」" />
+
+
   <a time="326" text="双撃詠唱" sync="ヘーゲモネーは「甲軟双撃」の構え。" notice="双撃4連" />
   <a time="333" text="甲軟双撃1" />
   <a time="337" text="甲軟双撃2" />
   <a time="341" text="甲軟双撃3" />
   <a time="345" text="甲軟双撃4"  />
-
 
   <a time="348" text="デバフ注意" sync="ヘーゲモネーは「プテラ・イクソス」の構え。"  />
   <a time="355" text="プテラ・イクソス" sync="ヘーゲモネーの「プテラ・イクソス」" notice="プテライクソス" />
@@ -117,12 +120,12 @@
   <a time="530" text="エーテル・ポリオミノΣ" sync="ヘーゲモネーの「エーテル・ポリオミノΣ」" />
   <a time="543" text="プテラ・イクソス" sync="ヘーゲモネーの「プテラ・イクソス」" notice="プテライクソス" />
 
+
   <a time="552" text="【予告】安置が１つAoE設置" sync="ヘーゲモネーは「エーテル・ポリオミノ」を唱えた。" notice="安置が１つダークドーム" />
   <a time="556" text="エーテル・ポリオミノ" sync="ヘーゲモネーの「エーテル・ポリオミノ」" />
   <a time="560" text="AoE注意" sync="ヘーゲモネーは「ダークドーム」を唱えた。" notice="えーおーいー注意" />
   <a time="565" text="ダークドーム" sync="ヘーゲモネーの「ダークドーム」" />
   <a time="570" text="調査中" />
-
 
   <a time="607" text="シュネルギア" sync="ヘーゲモネーの「(キール・|)シュネルギア」」" />
   <a time="629" text="時間切れ開始" sync="ヘーゲモネー:煉獄は私が守る……！　貴様らは、去ねい！" />
@@ -151,18 +154,19 @@
 </t>
 
 <!--カヘキシー１回目-->
-<t sync="^1A:[id8]:[pc] gains the effect of _rsv_3321_-1_0_0_0_S74CFC3B0_E74CFC3B0 from  for 200 Seconds." notice="1回目" >
-  <v-notice text="1回目" duration="32" />
+<t sync="^1A:[id8]:[mex] gains the effect of _rsv_3321_-1_0_0_0_S74CFC3B0_E74CFC3B0 from  for 20.00 Seconds." notice="1回目ちかよる" >
+  <v-notice text="1回目近づく:4回目AoE" duration="32" />
 </t>
-<t sync="^1A:[id8]:[pc] gains the effect of _rsv_3321_-1_0_0_0_S74CFC3B0_E74CFC3B0 from  for 80 Seconds." notice="2回目" >
-  <v-notice text="2回目" duration="32" />
+<t sync="^1A:[id8]:[mex] gains the effect of _rsv_3321_-1_0_0_0_S74CFC3B0_E74CFC3B0 from  for 8.00 Seconds." notice="2回目ちかよる" >
+  <v-notice text="2回目近づく:1回目AoE" duration="32" />
 </t>
-<t sync="^1A:[id8]:[pc] gains the effect of _rsv_3321_-1_0_0_0_S74CFC3B0_E74CFC3B0 from  for 120 Seconds." notice="3回目" >
-  <v-notice text="3回目" duration="32" />
+<t sync="^1A:[id8]:[mex] gains the effect of _rsv_3321_-1_0_0_0_S74CFC3B0_E74CFC3B0 from  for 12.00 Seconds." notice="3回目ちかよる" >
+  <v-notice text="3回目近づく:2回目AoE" duration="32" />
 </t>
-<t sync="^1A:[id8]:[pc] gains the effect of _rsv_3321_-1_0_0_0_S74CFC3B0_E74CFC3B0 from  for 160 Seconds." notice="4回目" >
-  <v-notice text="4回目" duration="32" />
+<t sync="^1A:[id8]:[mex] gains the effect of _rsv_3321_-1_0_0_0_S74CFC3B0_E74CFC3B0 from  for 16.00 Seconds." notice="4回目ちかよる" >
+  <v-notice text="4回目近づく:3回目AoE" duration="32" />
 </t>
+
 
 <t sync="^1A:CF7:.*?:[mex]:" notice="爪を受ける" >
   <v-notice text="爪を受ける" duration="16" />
@@ -170,7 +174,6 @@
 <t sync="^1A:CF8:.*?:[mex]:" notice="蛇を受ける" >
   <v-notice text="蛇を受ける" duration="16" />
 </t>
-
 
 <!--マーカーセット。最初の頭割りを基準にし、他マーカーを逆算するよう試作。-->
 <t sync="^1B:[id8]:[pc]:0000:[id4]:(?&lt;marker&gt;[0-9a-fA-F]{4}):" sync-count="1" >

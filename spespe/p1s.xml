@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <timeline>
-  <name>万魔殿パンデモニウム零式：辺獄編1層</name>
+  <name>p1s</name>
   <rev>rev1</rev>
   <description>
     万魔殿パンデモニウム零式：辺獄編1層のタイムラインです。
@@ -137,7 +137,7 @@
   <t name="懲罰撃(外から中)" sync="^14:65F(8|9):" notice="外側から内側えー。" >
     <v-notice
       order="-1"
-      text="中➜外"
+      text="外➜中"
       duration="13"
       icon="AOEInside.png" />
   </t>
@@ -229,7 +229,7 @@
   <!-- 光炎監獄 爆鎖判定トリガー end -->
 
   <!-- 光炎監獄中の懲罰撃 判定トリガー begin -->
-  <!-- FIXME サンプル不足につき不正確な可能性があります -->
+  <!-- FIXME サンプル不足につき不正確な可能性があります 
   <t name="懲罰撃(外左安置)" sync="^14:6DA6:" notice="左、外側。" >
     <expressions>
       <pre name="is_Shining_Cells" value="true" />
@@ -271,8 +271,9 @@
       order="-1"
       text="左の内側"
       duration="14"
-      icon="East.png" />
+      icon="West.png" />
   </t>
+  -->
   <!-- 光炎監獄中の懲罰撃 判定トリガー end -->
 
   <!-- 時限の魔鎖 判定トリガー begin -->
@@ -354,6 +355,7 @@
   <a time="319.4" text="四連魔鎖 発動４" />
   <a time="329.0" text="魔鎖乱流" sync="エリクトニオスの「魔鎖乱流」" />
   <a time="343.0" text="氷火の侵食" sync="エリクトニオスの「氷火の侵食」" />
+  <a time="355.0" notice="そろそろ6分" />
   <a time="359.7" text="火/氷１着弾" />
   <a time="370.7" text="火/氷２着弾" >
     <v-notice

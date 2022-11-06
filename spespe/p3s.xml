@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <timeline>
-  <name>パンデモニウム零式：辺獄編3層</name>
+  <name>p3s</name>
   <rev>rev2</rev>
   <description>
     万魔殿パンデモニウム零式：辺獄編3層のタイムラインです。
@@ -53,52 +53,68 @@
     </expressions>
   </t>
 
-  <t no="2" name="サイコロ1" sync="1B:[id8]:[mex]:0000:[id4]:EVAL(VAR['marker_origin'], X4):">
+    <t no="2" name="サイコロ1" sync="1B:[id8]:[me]:0000:[id4]:EVAL(VAR['marker_origin'], X4):" notice="いちばん。" >
     <v-notice
       text="１番：１へ"
-      duration="10" />
+      icon="Dice1.png"
+      duration="10"
+      duration-visible="false"  />
   </t>
 
-  <t no="2" name="サイコロ2" sync="1B:[id8]:[mex]:0000:[id4]:EVAL(VAR['marker_origin']+1, X4):">
+  <t no="2" name="サイコロ2" sync="1B:[id8]:[me]:0000:[id4]:EVAL(VAR['marker_origin']+1, X4):" notice="にばん。">
     <v-notice
       text="２番：２へ"
-      duration="10" />
+      icon="Dice2.png"
+      duration="10"
+      duration-visible="false"  />
   </t>
 
-  <t no="2" name="サイコロ3" sync="1B:[id8]:[mex]:0000:[id4]:EVAL(VAR['marker_origin']+2, X4):">
+  <t no="2" name="サイコロ3" sync="1B:[id8]:[me]:0000:[id4]:EVAL(VAR['marker_origin']+2, X4):" notice="さんばん。" >
     <v-notice
       text="３番：３へ"
-      duration="10" />
+      icon="Dice3.png"
+      duration="10"
+      duration-visible="false"  />
   </t>
 
-  <t no="2" name="サイコロ4" sync="1B:[id8]:[mex]:0000:[id4]:EVAL(VAR['marker_origin']+3, X4):">
+  <t no="2" name="サイコロ4" sync="1B:[id8]:[me]:0000:[id4]:EVAL(VAR['marker_origin']+3, X4):" notice="よんばん。">
     <v-notice
       text="４番：４へ"
-      duration="10" />
+      icon="Dice4.png"
+      duration="10"
+      duration-visible="false"  />
   </t>
 
-  <t no="2" name="サイコロ5" sync="1B:[id8]:[mex]:0000:[id4]:EVAL(VAR['marker_origin']+4, X4):">
+  <t no="2" name="サイコロ5" sync="1B:[id8]:[me]:0000:[id4]:EVAL(VAR['marker_origin']+4, X4):" notice="ごばん。">
     <v-notice
       text="５番：１へ"
-      duration="10" />
+      icon="Dice5.png"
+      duration="10"
+      duration-visible="false"  />
   </t>
 
-  <t no="2" name="サイコロ6" sync="1B:[id8]:[mex]:0000:[id4]:EVAL(VAR['marker_origin']+5, X4):">
+  <t no="2" name="サイコロ6" sync="1B:[id8]:[me]:0000:[id4]:EVAL(VAR['marker_origin']+5, X4):" notice="ろくばん。">
     <v-notice
       text="６番：２へ"
-      duration="10" />
+      icon="Dice6.png"
+      duration="10"
+      duration-visible="false"  />
   </t>
 
-  <t no="2" name="サイコロ7" sync="1B:[id8]:[mex]:0000:[id4]:EVAL(VAR['marker_origin']+6, X4):">
+  <t no="2" name="サイコロ7" sync="1B:[id8]:[me]:0000:[id4]:EVAL(VAR['marker_origin']+6, X4):" notice="ななばん。">
     <v-notice
       text="７番：３へ"
-      duration="10" />
+      icon="Dice7.png"
+      duration="10"
+      duration-visible="false"  />
   </t>
 
-  <t no="2" name="サイコロ8" sync="1B:[id8]:[mex]:0000:[id4]:EVAL(VAR['marker_origin']+7, X4):">
+  <t no="2" name="サイコロ8" sync="1B:[id8]:[me]:0000:[id4]:EVAL(VAR['marker_origin']+7, X4):" notice="はちばん。">
     <v-notice
       text="８番：４へ"
-      duration="10" />
+      icon="Dice8.png"
+      duration="10"
+      duration-visible="false"  />
   </t>
   <!-- 光の炎 サイコロマーカー判定 end -->
 

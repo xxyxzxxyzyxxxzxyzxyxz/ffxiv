@@ -1,0 +1,2028 @@
+<?xml version="1.0" encoding="utf-8"?>
+<timeline>
+  <name>絶アレキサンダー討滅戦</name>
+  @{ var rev = "rev FINAL8.8"; }
+  <rev>@rev</rev>
+  <description>
+    anoyetta 専用の絶アレキタイムラインです。
+  </description>
+  <author>anoyetta</author>
+  <license>CC BY-SA</license>
+  <zone>887,The Epic Of Alexander (Ultimate)</zone>
+  <locale>JA</locale>
+  <start>0039::戦闘開始！</start>
+  <end>パーフェクト・アレキサンダーの「時の牢獄」$|パーフェクト・アレキサンダーを倒した。</end>
+  <entry>PHASE1 LIQUID</entry>
+
+  <default target-element="Activity" target-attr="notice-d" value="Main" />
+  <default target-element="Activity" target-attr="notice-o" value="-3" />
+  <default target-element="Activity" target-attr="sync-s" value="-5" />
+  <default target-element="Activity" target-attr="sync-e" value="4" />
+
+  @if (Model.Player.InJob("SCH")) {
+    <!--
+    <t
+      name="Marker 1"
+      sync="(「絶アレキサンダー討滅戦」の攻略を開始した。|0139:戦闘開始まで|/mark 0)"
+      exec="http://localhost:1337/preset/ULT_ALEX1/load" />
+
+      <t name="時間停止ジャスティスE" sync="/mark 1" exec="http://localhost:1337/preset/ULT_ALEX_JUSTICE_E/load" />
+      <t name="時間停止ジャスティスW" sync="/mark 2" exec="http://localhost:1337/preset/ULT_ALEX_JUSTICE_W/load" />
+      <t name="時空潜行プライムN" sync="/mark 3" exec="http://localhost:1337/preset/ULT_ALEX_PRIME_N/load" />
+      <t name="時空潜行プライムS" sync="/mark 4" exec="http://localhost:1337/preset/ULT_ALEX_PRIME_S/load" />
+      <t name="時空潜行プラNジャスE" sync="/mark 5" exec="http://localhost:1337/preset/ULT_ALEX_JUSTICE_JUMP_NE/load" />
+      <t name="時空潜行プラNジャスW" sync="/mark 6" exec="http://localhost:1337/preset/ULT_ALEX_JUSTICE_JUMP_NW/load" />
+      <t name="時空潜行プラSジャスE" sync="/mark 7" exec="http://localhost:1337/preset/ULT_ALEX_JUSTICE_JUMP_SE/load" />
+      <t name="時空潜行プラSジャスW" sync="/mark 8" exec="http://localhost:1337/preset/ULT_ALEX_JUSTICE_JUMP_SW/load" />
+    -->
+  }
+
+  @{ var origin = 0; }
+
+  <s name="PHASE1 LIQUID">
+    <a time="000" text="VS Alexander" />
+    <a time="000" text="@rev" />
+
+    <a time="000" name="clear">
+      <expressions>
+        <table>
+        {
+            "method":"Truncate", "table":"DiceTable1",
+            "cols" : []
+        }
+        </table>
+        <table>
+        {
+            "method":"Truncate", "table":"DiceTable2",
+            "cols" : []
+        }
+        </table>
+        <table>
+        {
+            "method":"Truncate", "table":"alpha",
+            "cols" : []
+        }
+        </table>
+        <table>
+        {
+            "method":"Truncate", "table":"beta",
+            "cols" : []
+        }
+        </table>
+      </expressions>
+    </a>
+
+    <t text="エンボラス" sync="Added new combatant エンボラス" notice="エンボラス">
+      <v-notice
+        duration="5"
+        duration-visible="false"
+        icon="Bomb.png"
+        order="-1" />
+    </t>
+
+    <t text="ヤークト" sync="Added new combatant ヤークトドール" notice="ヤークト">
+      <v-notice
+        duration="5"
+        duration-visible="false"
+        icon="Leave.png"
+        order="-1" />
+    </t>
+
+    <!-- 光性爆雷 -->
+    <!--
+    <t name="光性爆雷" text="光性爆雷" sync="[mex]に「光性爆雷」の効果。" notice="こうせい爆雷。">
+      <v-notice
+        duration="4"
+        job-icon="true" />
+    </t>
+    -->
+
+    <!-- 窒息 -->
+    <t name="窒息" text="窒息" sync="[pc]に「窒息」の効果。" notice="ちっそくー">
+      <v-notice
+        duration="10"
+        icon="Timer.png" />
+    </t>
+    
+    <a time="009" text="ホロスコープ・ヘリオス　準備" />
+    <a time="011" text="フルイドスイング" sync="リビングリキッドの「フルイドスイング」" notice="次、フルイド。" />
+    <a time="014" text="カスケード" sync="リビングリキッドは「カスケード」の構え。" notice="次、カスケード。" />
+    <a time="020" text="リキッドPOP" notice="次、リキッドポップ。" />
+
+    <a time="030" text="じゃんけん" notice-o="-1" notice="じゃんけん" />
+    <a time="033" text="竜巻ウェイブ" sync="リキッドレイジ starts using プロティアンウェイブ on リキッドレイジ." />
+    <a time="034" text="ヤークトPOP" />
+    <a time="035" text="ハンド・オブ・パーティング" sync="リキッドハンドの「ハンド・オブ・パーティング」" />
+    <a time="037" text="フルイドスイング" sync="リビングリキッドの「フルイドスイング」" notice="次、フルイド。" />
+    <a time="039" sync="リキッドハンドは「ハンド・オブ・ペイン」の構え。" />
+    <a time="039" text="汚染蒸気１" />
+    <a time="041" text="エンボラス" />
+    <a time="049" text="汚染蒸気２" />
+
+    @if (Model.Player.InJob("SCH")) {
+      <!--
+      <a time="050" name="陣" notice-o="-7" notice="陣">
+        <v-notice
+          text="陣"
+          duration="7"
+          icon="True.png" />
+      </a>
+      -->
+    }
+
+    <a time="056" text="フルイドスイング" sync="リビングリキッドの「フルイドスイング」" notice="次、フルイド。" />
+    <a time="059" text="汚染蒸気３" />
+    <a time="066" text="ウェイブ３回" sync="リビングリキッドは「プロティアンウェイブ」の構え。" notice="次、ウェイブ3回。" />
+    <a time="072" text="スルース" notice="次、スルース。" />
+
+    <a time="080" text="スプラッシュ６回" sync="リビングリキッドの「スプラッシュ」" notice="次、スプラッシュ6回。" />
+    <a time="085" sync="リキッドハンドは「ハンド・オブ・ペイン」の構え。" />
+    <a time="086" text="ドレナージ" sync="リキッドレイジの「ドレナージ」" notice="次、ドレナージ。" />
+    <a time="087" text="カスケード" sync="リビングリキッドは「カスケード」の構え。" notice="次、カスケード。" />
+    <a time="088" text="均等化" notice="均等化。" notice-o="0" />
+    <a time="092" text="窒息" notice="次、窒息。" notice-o="-3" />
+
+    <a time="095" text="リキッドジェイル" sync="リキッドレイジの「リキッドジェイル」" notice="次、ジェイル。" />
+
+    <a time="103" text="ウェイブ１波" sync="リビングリキッドは「プロティアンウェイブ」の構え。" notice="次、ウェイブ2回。" />
+    <a time="105" sync="リキッドハンドは「ハンド・オブ・ペイン」の構え。" />
+    <a time="109" text="スルース" notice="" />
+    <a time="110" text="ウェイブ２波" />
+
+    <a time="119" text="じゃんけん" notice-o="-1" notice="じゃんけん" />
+    <a time="121" text="エンボラス" />
+    <a time="124" text="ハンド・オブ・パーティング" sync="リキッドハンドの「ハンド・オブ・パーティング」" />
+    <a time="125" sync="リキッドハンドは「ハンド・オブ・ペイン」の構え。" />
+
+    <a time="127" text="スプラッシュ６回" notice="次、スプラッシュ6回。" />
+    <a time="134" text="フルイドスイング" sync="リビングリキッドの「フルイドスイング」" notice="次、フルイド。" />
+    <a time="136" text="カスケード" sync="リビングリキッドは「カスケード」の構え。" />
+
+    <a time="138.5" text="PHASE2へ" sync="クルーズチェイサー:コードネーム「ブラスティー」！ 階差閉宇宙ヲ、脅カス敵ヲ発見……撃滅スル！" sync-s="-20" notice="次、チェイサー" goto="PHASE2 CHASER" />
+  </s>
+
+  <s name="PHASE2 CHASER">
+    @* このフェーズの基点秒数 *@
+    @{ origin = 140; }
+
+    <a time="@(140 - origin)" name="phase1 origin" sync="クルーズチェイサー:コードネーム「ブラスティー」！ 階差閉宇宙ヲ、脅カス敵ヲ発見……撃滅スル！" />
+
+    <t no="1" name="InsertDiceMarker" sync="^1B:[id8]:[pc]:0000:[id4]:(?&lt;mark_code&gt;[0-9a-fA-F]{4}):">
+      <expressions>
+        <table>
+        {
+            "method":"Insert", "table":"DiceTable1",
+            "cols" : [
+              { "name":"marker", "val":"${mark_code}", "key":"true" },
+              { "name":"target", "val":"${_pc}" },
+            ]
+        }
+        </table>
+      </expressions>
+    </t>
+
+    <t no="2" sync="^1B:" sync-count="8" text="１[北] ソード" notice="ひとばん、北、ソード">
+      <expressions>
+        <pre name="TABLE['DiceTable1'][0]['target']" value="@Model.Player.Name" />
+        <set name="dice_group" value="1" />
+      </expressions>
+      <v-notice icon="Dice1.png" duration="30" duration-visible="false" order="-2" sync-to-hide="ブルートジャスティス:コードネーム「ブルートジャスティス」" />
+    </t>
+
+    <t no="3" sync="^1B:" sync-count="8" text="２[北] チャージ" notice="ふたばん、北、チャージ">
+      <expressions>
+        <pre name="TABLE['DiceTable1'][1]['target']" value="@Model.Player.Name" />
+        <set name="dice_group" value="1" />
+      </expressions>
+      <v-notice icon="Dice2.png" duration="30" duration-visible="false" order="-2" sync-to-hide="ブルートジャスティス:コードネーム「ブルートジャスティス」" />
+    </t>
+
+    <t no="4" sync="^1B:" sync-count="8" text="３[南] ソード" notice="さんばん、南、ソード">
+      <expressions>
+        <pre name="TABLE['DiceTable1'][2]['target']" value="@Model.Player.Name" />
+        <set name="dice_group" value="2" />
+      </expressions>
+      <v-notice icon="Dice3.png" duration="30" duration-visible="false" order="-2" sync-to-hide="ブルートジャスティス:コードネーム「ブルートジャスティス」" />
+    </t>
+
+    <t no="5" sync="^1B:" sync-count="8" text="４[南] チャージ" notice="よんばん、南、チャージ">
+      <expressions>
+        <pre name="TABLE['DiceTable1'][3]['target']" value="@Model.Player.Name" />
+        <set name="dice_group" value="2" />
+      </expressions>
+      <v-notice icon="Dice4.png" duration="30" duration-visible="false" order="-2" sync-to-hide="ブルートジャスティス:コードネーム「ブルートジャスティス」" />
+    </t>
+
+    <t no="6" sync="^1B:" sync-count="8" text="５[北] ソード" notice="ごーばん、北、ソード">
+      <expressions>
+        <pre name="TABLE['DiceTable1'][4]['target']" value="@Model.Player.Name" />
+        <set name="dice_group" value="3" />
+      </expressions>
+      <v-notice icon="Dice5.png" duration="30" duration-visible="false" order="-2" sync-to-hide="ブルートジャスティス:コードネーム「ブルートジャスティス」" />
+    </t>
+
+    <t no="7" sync="^1B:" sync-count="8" text="６[北] チャージ" notice="ろくばん、北、チャージ">
+      <expressions>
+        <pre name="TABLE['DiceTable1'][5]['target']" value="@Model.Player.Name" />
+        <set name="dice_group" value="3" />
+      </expressions>
+      <v-notice icon="Dice6.png" duration="30" duration-visible="false" order="-2" sync-to-hide="ブルートジャスティス:コードネーム「ブルートジャスティス」" />
+    </t>
+
+    <t no="8" sync="^1B:" sync-count="8" text="７[南] ソード" notice="ななばん、南、ソード">
+      <expressions>
+        <pre name="TABLE['DiceTable1'][6]['target']" value="@Model.Player.Name" />
+        <set name="dice_group" value="4" />
+      </expressions>
+      <v-notice icon="Dice7.png" duration="30" duration-visible="false" order="-2" sync-to-hide="ブルートジャスティス:コードネーム「ブルートジャスティス」" />
+    </t>
+
+    <t no="9" sync="^1B:" sync-count="8" text="８[南] チャージ" notice="はちばん、南、チャージ">
+      <expressions>
+        <pre name="TABLE['DiceTable1'][7]['target']" value="@Model.Player.Name" />
+        <set name="dice_group" value="4" />
+      </expressions>
+      <v-notice icon="Dice8.png" duration="30" duration-visible="false" order="-2" sync-to-hide="ブルートジャスティス:コードネーム「ブルートジャスティス」" />
+    </t>
+
+    <!-- ブラスター set1 -->
+    <a time="@(145 + (2.2 * 0) - origin)" text="ブラスター壱" sync="クルーズチェイサー:4830:ホークブラスター" sync-s="-5" sync-e="0" notice-o="0" notice="1" />
+    <a time="@(145 + (2.2 * 1) - origin)" text="ブラスター弐" notice-o="0" notice="2" />
+
+    <a time="@(145 + (2.2 * 2) - origin)" text="ブラスター参" notice-o="0" notice="3" />
+    <a time="@(145 + (2.2 * 2) - origin)" text="ソード＆チャージ" notice-o="0.1" notice="前えー">
+      <expressions>
+        <pre name="dice_group" value="1" />
+      </expressions>
+      <v-notice
+        text="１, ２前に出る"
+        icon="True.png"
+        duration="1.5"
+        duration-visible="false"
+        order="-1" />
+    </a>
+    <a time="@(145 + (2.2 * 2) - origin)" text="ソード＆チャージ" notice-o="0.1" notice="サイドで回避">
+      <expressions>
+        <pre name="dice_group" value="3" />
+      </expressions>
+      <v-notice
+        text="サイドで回避"
+        icon="True.png"
+        duration="1.5"
+        duration-visible="false"
+        order="-1" />
+    </a>
+
+    <a time="@(145 + (2.2 * 3) - origin)" text="ブラスター四" notice-o="0" notice="4" />
+    <a time="@(145 + (2.2 * 3) - origin)" text="ソード＆チャージ" notice-o="0.1" notice="前えー">
+      <expressions>
+        <pre name="dice_group" value="2" />
+      </expressions>
+      <v-notice
+        text="３, ４前に出る"
+        icon="True.png"
+        duration="1.5"
+        duration-visible="false"
+        order="-1" />
+    </a>
+    <a time="@(145 + (2.2 * 3) - origin)" text="ソード＆チャージ" notice-o="0.1" notice="サイドで回避">
+      <expressions>
+        <pre name="dice_group" value="4" />
+      </expressions>
+      <v-notice
+        text="サイドで回避"
+        icon="True.png"
+        duration="1.5"
+        duration-visible="false"
+        order="-1" />
+    </a>
+
+    <!-- ブラスター 中央 -->
+    <a time="@(145 + (2.2 * 4) - origin)" text="ブラスター五 (内)" sync="クルーズチェイサー:4830:ホークブラスター" sync-s="-1.8" sync-e="0" notice-o="0.5" notice="5, 停止！">
+      <v-notice
+        text="停止"
+        icon="DontAction.png"
+        duration="1.9"
+        duration-visible="false"
+        order="-1" />
+    </a>
+
+    <!-- ブラスター set2 -->
+    <a time="@(145 + (2.2 * 5) - origin)" text="ブラスター六" notice-o="0" notice="6" />
+
+    <a time="@(145 + (2.2 * 6) - origin)" text="ブラスター七" notice-o="0" notice="7" />
+    <a time="@(145 + (2.2 * 6) - origin)" text="ソード＆チャージ" notice-o="0.1" notice="前えー">
+      <expressions>
+        <pre name="dice_group" value="3" />
+      </expressions>
+      <v-notice
+        text="５, ６前に出る"
+        icon="True.png"
+        duration="1.5"
+        duration-visible="false"
+        order="-1" />
+    </a>
+    <a time="@(145 + (2.2 * 6) - origin)" text="ソード＆チャージ" notice-o="0.1" notice="サイドで回避">
+      <expressions>
+        <pre name="dice_group" value="1" />
+      </expressions>
+      <v-notice
+        text="サイドで回避"
+        icon="True.png"
+        duration="1.5"
+        duration-visible="false"
+        order="-1" />
+    </a>
+
+    <a time="@(145 + (2.2 * 7) - origin)" text="ブラスター八" notice-o="0" notice="8" />
+
+    <a time="@(145 + (2.2 * 8) - origin)" text="ブラスター九" notice-o="0" notice="9" />
+    <a time="@(145 + (2.2 * 8) - origin)" text="ソード＆チャージ" notice-o="0.1" notice="前えー">
+      <expressions>
+        <pre name="dice_group" value="4" />
+      </expressions>
+      <v-notice
+        text="７, ８前に出る"
+        icon="True.png"
+        duration="1.5"
+        duration-visible="false"
+        order="-1" />
+    </a>
+    <a time="@(145 + (2.2 * 8) - origin)" text="ソード＆チャージ" notice-o="0.1" notice="サイドで回避">
+      <expressions>
+        <pre name="dice_group" value="2" />
+      </expressions>
+      <v-notice
+        text="サイドで回避"
+        icon="True.png"
+        duration="1.5"
+        duration-visible="false"
+        order="-1" />
+    </a>
+
+    <!-- ブラスター 中央 -->
+    <a time="@(145 + (2.2 * 9) - origin)" text="ブラスター拾 (内)" notice-o="0" notice="10" />
+
+    <a time="@(164 - origin)" text="TO JUSTICE" sync="ブルートジャスティス:コードネーム「ブルートジャスティス」！ 想定外ノ時空改変者ヲ発見……鉄槌ヲ下ス！" sync-s="-20" goto="PHASE3 JUSTICE" />
+    <a time="@(999 - origin)" text="DUMMY" />
+  </s>
+
+  <s name="PHASE3 JUSTICE">
+    @* このフェーズの基点秒数 *@
+    @{ origin = 164; }
+
+    <t name="暗黒にアイス" sync="^1B:[id8]:[DRK]:0000:[id4]:" notice="ガンブレ、地雷。">
+      <expressions>
+        <pre name="for_ice" value="true" />
+        <set name="for_ice" value="false" />
+      </expressions>
+      <v-notice
+        text=" ➔ 地雷"
+        duration="4"
+        duration-visible="false"
+        icon="GNB.png" />
+    </t>
+
+    <t name="ガンブレにアイス" sync="^1B:[id8]:[GNB]:0000:[id4]:" notice="暗黒、地雷。">
+      <expressions>
+        <pre name="for_ice" value="true" />
+        <set name="for_ice" value="false" />
+      </expressions>
+      <v-notice
+        text=" ➔ 地雷"
+        duration="4"
+        duration-visible="false"
+        icon="DRK.png" />
+    </t>
+
+    <t name="シールド解除" text="シールド解除" sync="クルーズチェイサーの「無敵」が切れた。$" notice="シールド解除">
+      <v-notice
+        duration="3"
+        duration-visible="false"
+        icon="Explosion.png" />
+    </t>
+
+    <t name="雷耐性ダウン" text="雷ダウン" sync="[mex]に「雷属性耐性低下［強］」の効果。" notice="雷ダウン">
+      <expressions>
+        <set name="thunder_down" value="true" />
+      </expressions>
+      <v-notice
+        duration="31.5"
+        icon="Cross.png"
+        sync-to-hide="[mex] loses the effect of 雷属性耐性低下［強］ from" />
+    </t>
+
+    <t name="水属性圧縮" text="自分に水圧縮" sync="[mex]に「水属性圧縮」の効果。" notice="自分にみず">
+      <expressions>
+        <set name="water_bomb" value="true" />
+      </expressions>
+      <v-notice
+        duration="29.5"
+        icon="Water.png"
+        sync-to-hide="[mex] loses the effect of 水属性圧縮 from" />
+    </t>
+
+    <t name="雷属性圧縮" text="自分に雷圧縮" sync="[mex]に「雷属性圧縮」の効果。" notice="自分にかみなり">
+      <expressions>
+        <set name="thunder_bomb" value="true" />
+      </expressions>
+      <v-notice
+        duration="29.5"
+        icon="Lightning.png"
+        sync-to-hide="[mex] loses the effect of 雷属性圧縮 from" />
+    </t>
+
+    <t name="水属性圧縮" text="水圧縮" sync="[nex]に「水属性圧縮」の効果。">
+      <v-notice
+        duration="29.5"
+        job-icon="true"
+        sync-to-hide="[nex] loses the effect of 水属性圧縮 from" />
+    </t>
+
+    <t name="水ダウン解除" sync="[mex] loses the effect of 水属性耐性低下［強］">
+      <expressions>
+        <set name="water_down" value="false" />
+      </expressions>
+    </t>
+
+    <t name="雷ダウン解除" sync="[mex] loses the effect of 雷属性耐性低下［強］">
+      <expressions>
+        <set name="thunder_down" value="false" />
+      </expressions>
+    </t>
+
+    <t name="水圧縮解除" sync="[mex] loses the effect of 水属性圧縮">
+      <expressions>
+        <set name="water_bomb" value="false" />
+      </expressions>
+    </t>
+
+    <t name="雷圧縮解除" sync="[mex] loses the effect of 雷属性圧縮">
+      <expressions>
+        <set name="thunder_bomb" value="false" />
+      </expressions>
+    </t>
+
+    <!-- 仮判決1 -->
+    <t text="α１" sync="[mex]に「最後の仮判決α」の効果。$" notice="あるふぁー1">
+      <expressions>
+        <pre name="judge_done" value="false" />
+      </expressions>
+    </t>
+
+    <t text="β１" sync="[mex]に「最後の仮判決β」の効果。$" notice="べーたー1">
+      <expressions>
+        <pre name="judge_done" value="false" />
+      </expressions>
+    </t>
+
+    <t text="γ１" sync="[mex]に「最後の仮判決γ」の効果。$" notice="がんまー1">
+      <expressions>
+        <pre name="judge_done" value="false" />
+      </expressions>
+    </t>
+
+    <t text="δ１" sync="[mex]に「最後の仮判決δ」の効果。$" notice="でるたー1">
+      <expressions>
+        <pre name="judge_done" value="false" />
+      </expressions>
+    </t>
+    <!-- 仮判決1 end -->
+
+    <!-- 仮判決2 -->
+    <t text="α２" sync="[mex]に「最後の審判：仮判決α」の効果。$" notice="あるふぁー2">
+      <expressions>
+        <pre name="judge_done" value="false" />
+      </expressions>
+    </t>
+
+    <t text="β２" sync="[mex]に「最後の審判：仮判決β」の効果。$" notice="べーたー2">
+      <expressions>
+        <pre name="judge_done" value="false" />
+      </expressions>
+    </t>
+
+    <t text="γ２" sync="[mex]に「最後の審判：仮判決γ」の効果。$" notice="がんまー2">
+      <expressions>
+        <pre name="judge_done" value="false" />
+      </expressions>
+    </t>
+
+    <t text="δ２" sync="[mex]に「最後の審判：仮判決δ」の効果。$" notice="でるたー2">
+      <expressions>
+        <pre name="judge_done" value="false" />
+      </expressions>
+    </t>
+    <!-- 仮判決2 end -->
+
+    <!-- カウント -->
+    @if (Model.Player.InRole("DPS")) {
+      <t text="カウント➜ 竜" sync="^1B:[id8]:[DRG]:0000:[id4]:0041:">
+        <v-notice
+          order="-29"
+          duration="5"
+          icon="DRG.png" />
+      </t>
+
+      <t text="カウント➜ 侍" sync="^1B:[id8]:[SAM]:0000:[id4]:0041:">
+        <v-notice
+          order="-28"
+          duration="5"
+          icon="SAM.png" />
+      </t>
+
+      <t text="カウント➜ 詩" sync="^1B:[id8]:[BRD]:0000:[id4]:0041:">
+        <v-notice
+          order="-27"
+          duration="5"
+          icon="BRD.png" />
+      </t>
+
+      <t text="カウント➜ 召" sync="^1B:[id8]:[SMN]:0000:[id4]:0041:">
+        <v-notice
+          order="-26"
+          duration="5"
+          icon="SMN.png" />
+      </t>
+
+      <t name="カウント" sync="^1B:[id8]:[pc]:0000:[id4]:0041:" notice="カウント" />
+    }
+    <!-- カウント end -->
+
+    <a time="@(167 - origin)" name="phase3 start" sync-s="-10" sync-e="10" sync="ブルートジャスティス:コードネーム「ブルートジャスティス」！ 想定外ノ時空改変者ヲ発見……鉄槌ヲ下ス！" >
+      <expressions>
+        <set name="judgement1" value="X" />
+        <set name="judge_done" value="false" />
+        <set name="water_bomb" value="false" />
+        <set name="thunder_bomb" value="false" />
+        <set name="water_down" value="false" />
+        <set name="thunder_down" value="false" />
+      </expressions>
+    </a>
+
+    <a time="@(167 - origin)" text="ジャスティスキック" sync="ブルートジャスティスの「ジャスティスキック」" sync-s="-10" />
+    @if (Model.Player.InJob("SCH")) {
+      <!--
+      <a time="@(167 - origin)" name="学カンペ" notice="/wait 1,陣">
+        <v-notice text="陣" duration="4.5" duration-visible="false" icon="True.png" />
+      </a>
+      -->
+    }
+    <a time="@(179 - origin)" text="竜巻1" sync="クルーズチェイサーの「竜巻」" notice="次、竜巻。" />
+    <a time="@(182 - origin)" text="ジャッジメントナイサイ" sync="ブルートジャスティスの「ジャッジメントナイサイ」" notice-o="-1" notice="ナイサイ。" />
+    <a time="@(188 - origin)" text="システムリンク" sync="ブルートジャスティスの「システムリンク」" notice="次、システムリンク。" />
+    <a time="@(190 - origin)" text="チャクラム出現" sync="スチームチャクラムは「ビームチャクラム」の構え。" notice-o="-1" notice="次、チャクラム。" />
+    <a time="@(196 - origin)" text="照準" sync="クルーズチェイサーの「照準」" notice-o="-1" notice="照準" />
+    <a time="@(196 - origin)" text="チャクラム" icon="AOEHorizontal.png" sync="^15:[id8]:スチームチャクラム:4855:ビームチャクラム:[id8]:" />
+
+    <a time="@(203 - origin)" text="フォトン" sync="クルーズチェイサーの「フォトン」" icon="ForceHP1.png" notice="次、フォトン。" />
+    @if (Model.Player.InJob("SCH")) {
+      <!--
+      <a time="@(203 - origin)" name="学カンペ" notice="/wait 1,士気">
+        <v-notice text="士気" duration="4.5" duration-visible="false" icon="True.png" />
+      </a>
+      -->
+    }
+
+    <a time="@(214 - origin)" text="スピンクラッシャー" sync="クルーズチェイサーは「スピンクラッシャー」の構え。" notice="次、スピンクラッシャー。" />
+    <a time="@(214.5 - origin)" text="★受渡し１" icon="True.png" notice-o="0" notice="受渡し" />
+
+    <!-- 水・雷 1回目 -->
+    @if (Model.Player.InRole("TANK")) {
+      <a time="@(218 - origin)" text="水・雷着弾" icon="Explosion.png" notice-o="-2" notice="もうすぐ爆発。" />
+    }
+
+    @if (Model.Player.InRole("HEALER")) {
+      <a time="@(218 - origin)" text="水爆発" icon="D.png" notice-o="-2" notice="北東えー。">
+        <expressions>
+          <pre name="water_bomb" value="true" />
+        </expressions>
+        <v-notice
+          text="➜ 北東へ"
+          duration="10"
+          duration-visible="false"
+          icon="Arrow2.png"
+          order="-10" />
+      </a>
+    }
+
+    @if (Model.Player.InRole("DPS")) {
+      <a time="@(218 - origin)" text="水頭割り" icon="D.png" notice-o="-2" notice="北東えー。">
+        <expressions>
+          <pre name="thunder_bomb" value="false" />
+        </expressions>
+        <v-notice
+          text="➜ 北東へ"
+          duration="10"
+          duration-visible="false"
+          icon="Arrow2.png"
+          order="-10" />
+      </a>
+
+      <a time="@(218 - origin)" text="雷爆発" icon="A.png" notice-o="-2" notice="北西えー。">
+        <expressions>
+          <pre name="thunder_bomb" value="true" />
+        </expressions>
+        <v-notice
+          text="➜ 北西へ (雷爆発)"
+          duration="10"
+          duration-visible="false"
+          icon="A.png"
+          order="-10" />
+      </a>
+    }
+    <!-- 水・雷 1回目 end -->
+
+    <a time="@(224 - origin)" name="アイス検知フラグセット">
+      <expressions>
+        <set name="for_ice" value="true" />
+      </expressions>
+    </a>
+
+    <a time="@(225 - origin)" text="ミサイル全弾発射" sync="ブルートジャスティスの「ミサイル全弾発射」" notice="" />
+    <a time="@(229 - origin)" text="ステルス地雷散布" sync="ブルートジャスティスの「ステルス地雷散布」" notice="次、地雷。" />
+    <a time="@(230 - origin)" text="アースミサイル" icon="AOE.png" notice="" />
+    @if (Model.Player.InJob("SCH")) {
+      <!--
+      <a time="@(230 - origin)" name="学カンペ" notice="/wait 1,囁き、深謀、パクト">
+        <v-notice text="囁き, 深謀, パクト" duration="4.5" duration-visible="false" icon="True.png" />
+      </a>
+      -->
+    }
+    <a time="@(234 - origin)" text="カウント" sync="ブルートジャスティスの「カウント」" notice="次、カウント。" />
+    <a time="@(234 - origin)" text="アイスミサイル" icon="Ice.png" notice="" />
+    <a time="@(238.5 - origin)" text="★受渡し２" icon="True.png" notice-o="0" notice="受渡し" />
+
+    <!-- 水・雷 2回目 -->
+    @if (Model.Player.InRole("TANK")) {
+      <a time="@(248 - origin)" text="担当なし" icon="True.png" notice-o="-10" notice="中央えー。">
+        <expressions>
+          <pre name="thunder_bomb" value="false" />
+        </expressions>
+        <v-notice
+          text="➜ 中央へ"
+          duration="10"
+          duration-visible="false"
+          icon="Cross.png"
+          order="-10" />
+      </a>
+
+      <a time="@(248 - origin)" text="雷爆発" icon="A.png" notice-o="-10" notice="ヒーラー待ちー。">
+        <expressions>
+          <pre name="thunder_bomb" value="true" />
+        </expressions>
+        <v-notice
+          text="➜ ヒーラー待ち"
+          duration="10"
+          duration-visible="false"
+          icon="Circle.png"
+          order="-10" />
+      </a>
+    }
+
+    @if (Model.Player.InRole("HEALER")) {
+      <a time="@(248 - origin)" text="雷もらう" icon="A.png" notice-o="-10" notice="MTえー。">
+        <expressions>
+          <pre name="thunder_down" value="false" />
+        </expressions>
+        <v-notice
+          text="➜ MTへ (雷くらう)"
+          duration="10"
+          duration-visible="false"
+          icon="DRK.png"
+          order="-10" />
+      </a>
+
+      <a time="@(248 - origin)" text="水頭割り" icon="Circle.png" notice-o="-10" notice="南西えー。">
+        <expressions>
+          <pre name="thunder_down" value="true" />
+        </expressions>
+        <v-notice
+          text="➜ 南西へ (水頭割り)"
+          duration="10"
+          duration-visible="false"
+          icon="Arrow6.png"
+          order="-10" />
+      </a>
+    }
+
+    @if (Model.Player.InRole("DPS")) {
+      <a time="@(248 - origin)" text="水爆発" icon="B.png" notice-o="-10" notice="南西えー。">
+        <expressions>
+          <pre name="water_bomb" value="true" />
+        </expressions>
+        <v-notice
+          text="➜ 南西へ (水爆発)"
+          duration="10"
+          duration-visible="false"
+          icon="Arrow6.png"
+          order="-10" />
+      </a>
+
+      <a time="@(248 - origin)" text="水頭割り" icon="B.png" notice-o="-10" notice="南西えー。">
+        <expressions>
+          <pre name="water_bomb" value="false" />
+        </expressions>
+        <v-notice
+          text="➜ 南西へ (水頭割り)"
+          duration="10"
+          duration-visible="false"
+          icon="Arrow6.png"
+          order="-10" />
+      </a>
+    }
+    <!-- 水・雷 2回目 end -->
+
+    <a time="@(250 - origin)" text="最後の審判：開廷" sync="ブルートジャスティスの「最後の審判：開廷」" notice-o="-3" notice="次、開廷。" />
+
+    <a time="@(255 - origin)" text="リミッターカット" sync="クルーズチェイサーの「リミッターカット」" notice="" />
+    <a time="@(257 - origin)" text="大火炎放射" sync="ブルートジャスティスの「大火炎放射」" notice="次、火炎放射。" />
+    <a time="@(258 - origin)" text="●シールド" sync="Added new combatant プラズマシールド" notice-o="-1" notice="シールド！" />
+    @if (Model.Player.InJob("SCH")) {
+      <!--
+      <a time="@(257 - origin)" name="学カンペ" notice-o="0" notice="/wait 1,イルミ、セラフ">
+        <v-notice text="イルミ, セラフ" duration="4.5" duration-visible="false" icon="True.png" />
+      </a>
+      -->
+    }
+    <a time="@(269 - origin)" text="竜巻2" sync="クルーズチェイサーの「竜巻」" icon="Twister.png" notice-o="-8" notice="次、竜巻" />
+    <a time="@(269 - origin)" text="★受渡し３" icon="True.png" notice-o="-1" notice="受渡し" />
+
+    <!-- 水・雷 3回目 -->
+    @if (Model.Player.InJob("DRK")) {
+      <a time="@(278 - origin)" text="水爆発" icon="True.png" notice-o="-7" notice="南西えー。">
+        <v-notice
+          text="➜ 南西へ (水爆発)"
+          duration="7"
+          duration-visible="false"
+          icon="Arrow6.png"
+          order="-10" />
+      </a>
+    }
+
+    @if (Model.Player.InJob("GNB")) {
+      <a time="@(278 - origin)" text="担当なし" icon="True.png" notice-o="-7" notice="北東えー。">
+        <v-notice
+          text="➜ 北東へ"
+          duration="7"
+          duration-visible="false"
+          icon="Arrow2.png"
+          order="-10" />
+      </a>
+    }
+
+    @if (Model.Player.InRole("HEALER")) {
+      <a time="@(278 - origin)" text="雷爆発" icon="Arrow6.png" notice-o="-7" notice="ブラボーえー。">
+        <v-notice
+          text="➜ Bへ"
+          duration="7"
+          duration-visible="false"
+          icon="B.png"
+          order="-10" />
+      </a>
+    }
+
+    @if (Model.Player.InRole("DPS")) {
+      <a time="@(278 - origin)" text="水爆発" icon="Marker.png" notice-o="-7" notice="南西えー。">
+        <v-notice
+          text="➜ 南西へ (水爆発)"
+          duration="7"
+          duration-visible="false"
+          icon="Arrow6.png"
+          order="-10" />
+      </a>
+    }
+    <!-- 水・雷 3回目 end -->
+
+    <a time="@(279 - origin)" text="★受渡し４" icon="True.png" notice-o="0" notice="整列ー。" />
+    <a time="@(295 - origin)" text="プロペラウィンド" sync="クルーズチェイサーの「プロペラウィンド」" notice="次、プロペラ。">
+      <expressions>
+        <set name="judge_done" value="true" />
+      </expressions>
+    </a>
+
+    <a time="@(298 - origin)" text="最後の審判：結審" sync="ブルートジャスティスの「最後の審判：結審」" notice="" />
+
+    <a time="@(308 - origin)" text="フォトン" sync="クルーズチェイサーの「フォトン」" icon="ForceHP1.png" notice="次、タンクHP1。" />
+    @if (Model.Player.InJob("SCH")) {
+      <!--
+      <a time="@(308 - origin)" name="学カンペ" notice="/wait 1,囁き">
+        <v-notice text="囁き" duration="4.5" duration-visible="false" icon="True.png" />
+      </a>
+      -->
+    }
+    <a time="@(317 - origin)" text="Ｗロケパン" sync="ブルートジャスティスの「ダブルロケットパンチ」" notice="次、ロケパン。" />
+    <a time="@(319 - origin)" text="スーパージャンプ" sync="ブルートジャスティスは「スーパージャンプ」の構え。" notice-o="-3" notice="次、スーパージャンプ。" />
+    <a time="@(324 - origin)" text="スーパージャンプ着弾" sync="" notice="" />
+    <a time="@(326 - origin)" text="アポカリプティクレイ" sync="ブルートジャスティスの「アポカリプティクレイ」" notice="次、アポカリ。" />
+
+    <a time="@(337 - origin)" text="竜巻3-1" sync="クルーズチェイサーの「竜巻」" icon="Twister.png" notice="次、竜巻2回。" />
+    @if (Model.Player.InJob("SCH")) {
+      <!--
+      <a time="@(337 - origin)" name="学カンペ" notice="/wait 1,陣">
+        <v-notice text="陣" duration="4.5" duration-visible="false" icon="True.png" />
+      </a>
+      -->
+    }
+    <a time="@(345 - origin)" text="竜巻3-2" sync="クルーズチェイサーの「竜巻」" icon="Twister.png" notice="" />
+
+    <a time="@(352 - origin)" text="時間切れ詠唱" sync="ブルートジャスティスは「死刑判決」の構え。" notice="もうすぐ時間切れ。" />
+    <a time="@(361 - origin)" text="時間切れ" icon="Timeout.png" notice="" />
+
+    <a time="@(999 - origin)" text="DUMMY" />
+
+    <t name="TO PHASE4" sync="アレキサンダー・プライム:我はアレキサンダー……機械仕掛けの神なり……。 理想郷に到る道を導くため……我が審判を受けよ……。" goto="PHASE4 PRIME" />
+  </s>
+
+  <s name="PHASE4 PRIME">
+    @* このフェーズの基点秒数 *@
+    @{ origin = 352; }
+
+    <!-- 情報収集用トリガ -->
+    @if (Model.Player.InJob("SCH")) {
+      <t name="DumpPos1" sync="アレキサンダー・プライム starts using 時間停止">
+        <dump target="Position" />
+      </t>
+    }
+
+    <!-- 情報収集用トリガ end -->
+
+    <!-- 時間停止時の確定判決の識別トリガ begin -->
+    @if (Model.Player.InRole("TANK", "HEALER")) {
+      <t text="接近禁止\n➜ チェイサー側外周" sync="[mex] gains the effect of 確定判決：接近禁止命令" sync-count="1" notice="チェイサー側の外周">
+        <expressions>
+          <pre name="stop_time" value="true" />
+        </expressions>
+        <v-notice
+          order="-1"
+          icon="DontApproach.png"
+          duration="10"
+          duration-visible="false" />
+      </t>
+
+      <t text="接近強制\n➜ ジャス北" sync="[mex] gains the effect of 確定判決：接近強制命令" sync-count="1" notice="ジャスの北" >
+        <expressions>
+          <pre name="stop_time" value="true" />
+        </expressions>
+        <v-notice
+          order="-1"
+          icon="Approach.png"
+          duration="10"
+          duration-visible="false" />
+      </t>
+
+      <t text="加重罰\n➜ ジャス側外周" sync="[mex] gains the effect of 確定判決：加重罰" sync-count="1" notice="ジャス側の外周" >
+        <expressions>
+          <pre name="stop_time" value="true" />
+        </expressions>
+        <v-notice
+          order="-1"
+          icon="PunishmentHevy.png"
+          duration="10"
+          duration-visible="false" />
+      </t>
+
+      <t text="無罪\n➜ チェイサー北" sync="[nex] gains the effect of 確定判決：" sync-count="6" notice="チェイサーの北">
+        <expressions>
+          <pre name="stop_time" value="true" />
+        </expressions>
+        <v-notice
+          order="-1"
+          icon="Free.png"
+          duration="10"
+          duration-visible="false" />
+      </t>
+    } else {
+      <t text="接近禁止\n➜ ジャス側外周" sync="[mex] gains the effect of 確定判決：接近禁止命令" sync-count="1" notice="ジャス側の外周" >
+        <expressions>
+          <pre name="stop_time" value="true" />
+        </expressions>
+        <v-notice
+          order="-1"
+          icon="DontApproach.png"
+          duration="10"
+          duration-visible="false" />
+      </t>
+
+      <t text="接近強制\n➜ ジャス南" sync="[mex] gains the effect of 確定判決：接近強制命令" sync-count="1" notice="ジャスティスの南" >
+        <expressions>
+          <pre name="stop_time" value="true" />
+        </expressions>
+        <v-notice
+          order="-1"
+          icon="Approach.png"
+          duration="10"
+          duration-visible="false" />
+      </t>
+
+      <t text="加重罰\n➜ ジャス側外周" sync="[mex] gains the effect of 確定判決：加重罰" sync-count="1" notice="ジャス側の外周" >
+        <expressions>
+          <pre name="stop_time" value="true" />
+        </expressions>
+        <v-notice
+          order="-1"
+          icon="PunishmentHevy.png"
+          duration="10"
+          duration-visible="false" />
+      </t>
+
+      <t text="無罪\n➜ チェイサー南" sync="[nex] gains the effect of 確定判決：" sync-count="6" notice="チェイサーの南">
+        <expressions>
+          <pre name="stop_time" value="true" />
+        </expressions>
+        <v-notice
+          order="-1"
+          icon="Free.png"
+          duration="10"
+          duration-visible="false" />
+      </t>
+    }
+    <!-- 時間停止時の確定判決の識別トリガ end -->
+
+    <!-- スーパージャンプのときのデバフ識別 -->
+    @if (Model.Player.InRole("DPS")) {
+      <t text="接近禁止\n➜ ソード誘導" sync="[mex] gains the effect of 確定判決：接近禁止命令" sync-count="1" notice="接近禁止、このあとソード" >
+        <expressions>
+          <pre name="magokoro" value="true" />
+        </expressions>
+        <v-notice
+          order="-1"
+          icon="DontApproach.png"
+          duration="25"
+          duration-visible="false" />
+      </t>
+    } else {
+      <t text="接近禁止" sync="[mex] gains the effect of 確定判決：接近禁止命令" sync-count="1" notice="接近禁止" >
+        <expressions>
+          <pre name="magokoro" value="true" />
+        </expressions>
+        <v-notice
+          order="-1"
+          icon="DontApproach.png"
+          duration="25"
+          duration-visible="false" />
+      </t>
+    }
+
+    <t text="集団罰\n➜ 向かって左へ" sync="[mex] gains the effect of 確定判決：集団罰" sync-count="1" notice="集団罰、向かって左えー" >
+      <expressions>
+        <pre name="magokoro" value="true" />
+      </expressions>
+      <v-notice
+        order="-1"
+        icon="PunishmentGroup.png"
+        duration="25"
+        duration-visible="false" />
+    </t>
+    <!-- スーパージャンプのときのデバフ識別 end -->
+
+    <!-- カウント -->
+    @if (Model.Player.InRole("DPS")) {
+      <t text="カウント➜ 竜" sync="^1B:[id8]:[DRG]:0000:[id4]:0041:">
+        <v-notice
+          order="-29"
+          duration="5"
+          icon="DRG.png" />
+      </t>
+
+      <t text="カウント➜ 侍" sync="^1B:[id8]:[SAM]:0000:[id4]:0041:">
+        <v-notice
+          order="-28"
+          duration="5"
+          icon="SAM.png" />
+      </t>
+
+      <t text="カウント➜ 詩" sync="^1B:[id8]:[BRD]:0000:[id4]:0041:">
+        <v-notice
+          order="-27"
+          duration="5"
+          icon="BRD.png" />
+      </t>
+
+      <t text="カウント➜ 召" sync="^1B:[id8]:[SMN]:0000:[id4]:0041:">
+        <v-notice
+          order="-26"
+          duration="5"
+          icon="SMN.png" />
+      </t>
+
+      <t name="カウント" sync="^1B:[id8]:[pc]:0000:[id4]:0041:" notice="カウント" />
+    }
+    <!-- カウント end -->
+
+    <!-- マーカ置き換え -->
+    @if (Model.Player.InJob("SCH")) {
+      <!--
+      <t name="時間停止ジャスティスE" exec="http://localhost:1337/preset/ULT_ALEX_JUSTICE_E/load">
+        <p-sync interval="120">
+          <combatant name="ブルートジャスティス" X="23.62" Y="23.50" />
+        </p-sync>
+      </t>
+
+      <t name="時間停止ジャスティスW" exec="http://localhost:1337/preset/ULT_ALEX_JUSTICE_W/load">
+        <p-sync interval="120">
+          <combatant name="ブルートジャスティス" X="23.38" Y="23.50" />
+        </p-sync>
+      </t>
+
+      <t name="時空潜行プライムN" exec="http://localhost:1337/preset/ULT_ALEX_PRIME_N/load" notice="プライム北">
+        <p-sync interval="120">
+          <combatant name="アレキサンダー・プライム" X="23.50" Y="23.07" />
+        </p-sync>
+        <expressions>
+          <pre name="danzetsu" value="false" />
+          <set name="jump_prime" value="N" />
+        </expressions>
+      </t>
+
+      <t name="時空潜行プライムS" exec="http://localhost:1337/preset/ULT_ALEX_PRIME_S/load" notice="プライム南">
+        <p-sync interval="120">
+          <combatant name="アレキサンダー・プライム" X="23.50" Y="23.93" />
+        </p-sync>
+        <expressions>
+          <pre name="danzetsu" value="false" />
+          <set name="jump_prime" value="S" />
+        </expressions>
+      </t>
+
+      <t name="スパジャンジャスティスE">
+        <p-sync interval="120">
+          <combatant name="ブルートジャスティス" X="23.93" Y="23.50" />
+        </p-sync>
+        <expressions>
+          <pre name="danzetsu" value="false" />
+          <set name="jump_justice" value="E" />
+        </expressions>
+      </t>
+
+      <t name="スパジャンジャスティスW">
+        <p-sync interval="120">
+          <combatant name="ブルートジャスティス" X="23.07" Y="23.50" />
+        </p-sync>
+        <expressions>
+          <pre name="danzetsu" value="false" />
+          <set name="jump_justice" value="W" />
+        </expressions>
+      </t>
+      -->
+    }
+    <!-- マーカ置き換え end -->
+
+    <a time="@(352 - origin)" sync="アレキサンダー・プライム:我はアレキサンダー……機械仕掛けの神なり……。 理想郷に到る道を導くため……我が審判を受けよ……。">
+      <expressions>
+        <set name="stop_time" value="true" />
+        <set name="magokoro" value="false" />
+      </expressions>
+    </a>
+    <a time="@(356 - origin)" text="時間停止（詠唱）" sync="アレキサンダー・プライムは「時間停止」の構え。" />
+    <a time="@(365 - origin)" text="時間停止" sync="アレキサンダー・プライムの「時間停止」" />
+    <a time="@(368 - origin)" text="神判（罰着弾）" sync="アレキサンダー・プライムの「誓約の神判」" />
+    <a time="@(370 - origin)" text="ソード＋火炎放射1" sync="クルーズチェイサーの「アルファソード」" />
+    <a time="@(371 - origin)" text="ソード＋火炎放射2" />
+    <a time="@(372 - origin)" text="ソード＋火炎放射3" />
+    <a time="@(386 - origin)" text="神罰の熱線" sync="アレキサンダー・プライムの「神罰の熱線」" notice-o="-3" notice="熱線！">
+      <expressions>
+        <set name="stop_time" value="false" />
+      </expressions>
+    </a>
+    <a time="@(390 - origin)" text="聖なる炎1" sync="アレキサンダー・プライムの「聖なる炎」" notice="" />
+    <a time="@(392 - origin)" text="聖なる炎2" notice="" />
+    <a time="@(394 - origin)" text="聖なる炎3" />
+    <a time="@(403 - origin)" text="時空潜行のマーチ" sync="アレキサンダー・プライムの「時空潜行のマーチ」" notice-o="-1" notice="時空潜行" />
+    <a time="@(411 - origin)" name="DumpPos2">
+      <dump target="Position" />
+    </a>
+    <a time="@(417 - origin)" text="審判の結晶" sync="アレキサンダー・プライムの「審判の結晶」" notice="" />
+    <a time="@(423 - origin)" text="おうえん" sync="シャノアの「おうえん」" notice-o="-1" notice="まごころ。">
+      <expressions>
+        <set name="magokoro" value="true" />
+      </expressions>
+    </a>
+    <a time="@(435 - origin)" text="火炎放射1" sync="ブルートジャスティスの「大火炎放射」" notice-o="-3" notice="ジャスティスえー" />
+    <a time="@(437 - origin)" text="火炎放射2" />
+    <a time="@(439 - origin)" text="火炎放射3" />
+    <a time="@(446 - origin)" text="時空潜行" sync="アレキサンダー・プライムの「時空潜行」" />
+    <a time="@(452 - origin)" text="結晶破裂" sync="審判の結晶の「結晶破裂」" />
+
+    <!--
+    <a time="@(452 - origin)" name="マーカチェンジ1" exec="http://localhost:1337/preset/ULT_ALEX_JUSTICE_JUMP_NE/load">
+      <expressions>
+        <pre name="danzetsu" value="false" />
+        <pre name="jump_prime" value="N" />
+        <pre name="jump_justice" value="E" />
+      </expressions>
+    </a>
+    <a time="@(452 - origin)" name="マーカチェンジ2" exec="http://localhost:1337/preset/ULT_ALEX_JUSTICE_JUMP_NW/load">
+      <expressions>
+        <pre name="danzetsu" value="false" />
+        <pre name="jump_prime" value="N" />
+        <pre name="jump_justice" value="W" />
+      </expressions>
+    </a>
+    <a time="@(452 - origin)" name="マーカチェンジ3" exec="http://localhost:1337/preset/ULT_ALEX_JUSTICE_JUMP_SW/load">
+      <expressions>
+        <pre name="danzetsu" value="false" />
+        <pre name="jump_prime" value="S" />
+        <pre name="jump_justice" value="E" />
+      </expressions>
+    </a>
+    <a time="@(452 - origin)" name="マーカチェンジ4" exec="http://localhost:1337/preset/ULT_ALEX_JUSTICE_JUMP_SW/load">
+      <expressions>
+        <pre name="danzetsu" value="false" />
+        <pre name="jump_prime" value="S" />
+        <pre name="jump_justice" value="W" />
+      </expressions>
+    </a>
+    -->
+
+    <a time="@(454 - origin)" text="神判（罰着弾）" sync="アレキサンダー・プライムの「誓約の神判」" notice="" />
+    <a time="@(455 - origin)" text="十字の秘蹟" sync="アレキサンダー・プライムの「十字の秘蹟」" notice-o="-3" notice="次は左右に散開" />
+    <a time="@(459 - origin)" text="スーパージャンプ" sync="ブルートジャスティスは「スーパージャンプ」の構え。" notice-o="-3" notice="次はスパジャン" />
+    <a time="@(460 - origin)" text="ソード1" sync="クルーズチェイサーの「アルファソード」" />
+    <a time="@(461 - origin)" text="ソード2" />
+    <a time="@(462 - origin)" text="ソード3" />
+    <a time="@(464 - origin)" text="スーパージャンプ着弾" />
+    <a time="@(476 - origin)" text="神罰の熱線" sync="アレキサンダー・プライムの「神罰の熱線」" notice-o="-0.2" notice="ボーライド！">
+      <expressions>
+        <set name="danzetsu" value="true" />
+      </expressions>
+    </a>
+    @if (Model.Player.InJob("SCH")) {
+      <!--
+      <a time="@(476 - origin)" note="マーカ初期化" exec="http://localhost:1337/preset/ULT_ALEX1/load" />
+      -->
+    }
+    <a time="@(481 - origin)" text="聖なる炎1" sync="アレキサンダー・プライムの「聖なる炎」" notice="" />
+    <a time="@(483 - origin)" text="聖なる炎2" notice="" />
+    <a time="@(485 - origin)" text="聖なる炎3" />
+
+    <a time="@(490 - origin)" text="次元断絶のマーチへ" goto="PHASE4 PRIME DANZETSU" />
+  </s>
+
+  <s name="PHASE4 PRIME DANZETSU">
+    @* このフェーズの基点秒数 *@
+    @{ origin = 490; }
+
+    <t name="ソード1" sync="クルーズチェイサーの「アルファソード」" sync-count="1" notice="1番、ソード" />
+    <t name="ソード3" sync="クルーズチェイサーの「アルファソード」" sync-count="2" notice="3番、ソード" />
+    <t name="ソード5" sync="クルーズチェイサーの「アルファソード」" sync-count="3" notice="5番、ソード" />
+    <t name="ソード7" sync="クルーズチェイサーの「アルファソード」" sync-count="4" notice="7番、ソード" />
+
+    <t name="チャージ2" sync="クルーズチェイサー:4B4F:スーパーブラスティ・チャージ" sync-count="1" notice="2番、チャージ" />
+    <t name="チャージ4" sync="クルーズチェイサー:4B4F:スーパーブラスティ・チャージ" sync-count="2" notice="4番、チャージ" />
+    <t name="チャージ6" sync="クルーズチェイサー:4B4F:スーパーブラスティ・チャージ" sync-count="3" notice="6番、チャージ" />
+    <t name="チャージ8" sync="クルーズチェイサー:4B4F:スーパーブラスティ・チャージ" sync-count="4" notice="8番、チャージ" />
+
+    <!-- 次元断絶のマーチトリガ -->
+    <t name="断絶ジャスティスE" notice="ジャスティス北東。">
+      <p-sync interval="120">
+        <combatant name="ブルートジャスティス" X="23.80" Y="23.20" />
+      </p-sync>
+      <expressions>
+        <pre name="danzetsu" value="true" />
+      </expressions>
+    </t>
+
+    <t name="断絶ジャスティスW" notice="ジャスティス北西。">
+      <p-sync interval="120">
+        <combatant name="ブルートジャスティス" X="23.20" Y="23.20" />
+      </p-sync>
+      <expressions>
+        <pre name="danzetsu" value="true" />
+      </expressions>
+    </t>
+
+    <t no="1" name="InsertDiceMarker" sync="^1B:[id8]:[pc]:0000:[id4]:(?&lt;mark_code&gt;[0-9a-fA-F]{4}):">
+      <expressions>
+        <table>
+        {
+            "method":"Insert", "table":"DiceTable2",
+            "cols" : [
+              { "name":"marker", "val":"${mark_code}", "key":"true" },
+              { "name":"target", "val":"${_pc}" },
+            ]
+        }
+        </table>
+      </expressions>
+    </t>
+
+    <t no="2" sync="^1B:" sync-count="8" text="１番 ➜ 左上\n懺悔３回目" notice="ひとばん、左上ー">
+      <expressions>
+        <pre name="TABLE['DiceTable2'][0]['target']" value="@Model.Player.Name" />
+        <set name="dice_group" value="1" />
+      </expressions>
+      <v-notice icon="Dice1.png" duration="30" duration-visible="false" order="-2" sync-to-hide="アレキサンダー・プライムの「浄化の熱線" />
+    </t>
+
+    <t no="3" sync="^1B:" sync-count="8" text="２番 ➜ 右上\n懺悔３回目" notice="ふたばん、右上ー">
+      <expressions>
+        <pre name="TABLE['DiceTable2'][1]['target']" value="@Model.Player.Name" />
+        <set name="dice_group" value="1" />
+      </expressions>
+      <v-notice icon="Dice2.png" duration="30" duration-visible="false" order="-2" sync-to-hide="アレキサンダー・プライムの「浄化の熱線" />
+    </t>
+
+    <t no="4" sync="^1B:" sync-count="8" text="３番 ➜ チェイサーの逆側" notice="さんばん、チェイサーの逆側ー">
+      <expressions>
+        <pre name="TABLE['DiceTable2'][2]['target']" value="@Model.Player.Name" />
+        <set name="dice_group" value="2" />
+      </expressions>
+      <v-notice icon="Dice3.png" duration="30" duration-visible="false" order="-2" sync-to-hide="アレキサンダー・プライムの「浄化の熱線" />
+    </t>
+
+    <t no="5" sync="^1B:" sync-count="8" text="４番 ➜ ジャスの逆側" notice="よんばん、ジャスの逆側ー">
+      <expressions>
+        <pre name="TABLE['DiceTable2'][3]['target']" value="@Model.Player.Name" />
+        <set name="dice_group" value="2" />
+      </expressions>
+      <v-notice icon="Dice4.png" duration="30" duration-visible="false" order="-2" sync-to-hide="アレキサンダー・プライムの「浄化の熱線" />
+    </t>
+
+    <t no="6" sync="^1B:" sync-count="8" text="５番 ➜ 左上\n懺悔１回目" notice="ごーばん、左上ー">
+      <expressions>
+        <pre name="TABLE['DiceTable2'][4]['target']" value="@Model.Player.Name" />
+        <set name="dice_group" value="3" />
+      </expressions>
+      <v-notice icon="Dice5.png" duration="30" duration-visible="false" order="-2" sync-to-hide="アレキサンダー・プライムの「浄化の熱線" />
+    </t>
+
+    <t no="7" sync="^1B:" sync-count="8" text="６番 ➜ 右上\n懺悔１回目" notice="ろくばん、右上ー">
+      <expressions>
+        <pre name="TABLE['DiceTable2'][5]['target']" value="@Model.Player.Name" />
+        <set name="dice_group" value="3" />
+      </expressions>
+      <v-notice icon="Dice6.png" duration="30" duration-visible="false" order="-2" sync-to-hide="アレキサンダー・プライムの「浄化の熱線" />
+    </t>
+
+    <t no="8" sync="^1B:" sync-count="8" text="７番 ➜ 左上\n懺悔２回目" notice="ななばん、左上ー">
+      <expressions>
+        <pre name="TABLE['DiceTable2'][6]['target']" value="@Model.Player.Name" />
+        <set name="dice_group" value="4" />
+      </expressions>
+      <v-notice icon="Dice7.png" duration="30" duration-visible="false" order="-2" sync-to-hide="アレキサンダー・プライムの「浄化の熱線" />
+    </t>
+
+    <t no="9" sync="^1B:" sync-count="8" text="８番 ➜ 右上\n懺悔２回目" notice="はちばん、右上ー">
+      <expressions>
+        <pre name="TABLE['DiceTable2'][7]['target']" value="@Model.Player.Name" />
+        <set name="dice_group" value="4" />
+      </expressions>
+      <v-notice icon="Dice8.png" duration="30" duration-visible="false" order="-2" sync-to-hide="アレキサンダー・プライムの「浄化の熱線" />
+    </t>
+    <!-- 次元断絶のマーチトリガ end -->
+
+    <t sync="ブルートジャスティスの「スーパージャンプ」$" text="３,４ ➔ アムレン" notice="3,4アムレン">
+      <expressions>
+        <pre name="dice_group" value="2" />
+      </expressions>
+      <v-notice
+        icon="Check.png"
+        duration="3"
+        duration-visible="false"
+        order="-10" />
+    </t>
+
+    <t sync="ブルートジャスティスの「アポカリプティクレイ」$" text="５,６ ➔ アムレン" notice-o="1" notice="5,6アムレン">
+      <expressions>
+        <pre name="dice_group" value="3" />
+      </expressions>
+      <v-notice
+        icon="Check.png"
+        duration="3"
+        duration-visible="false"
+        order="-10" />
+    </t>
+
+    <t sync="アレキサンダー・プライムの「十字の秘蹟」$" text="７,８ ➔ アムレン" notice-o="2" notice="7,8アムレン、北えー">
+      <expressions>
+        <pre name="dice_group" value="4" />
+      </expressions>
+      <v-notice
+        icon="Check.png"
+        duration="3"
+        duration-visible="false"
+        order="-10" />
+    </t>
+
+    <a time="@(494 - origin)" text="次元断絶のマーチ" sync="アレキサンダー・プライムの「次元断絶のマーチ」" notice="" />
+    <a time="@(501 - origin)" name="DumpDanzetsu">
+      <dump target="Position" />
+    </a>
+    <a time="@(503 - origin)" text="リミッターカット" />
+    <a time="@(506 - origin)" text="システムリンク" />
+    <a time="@(506 - origin)" text="懺悔の間" />
+    <a time="@(515 - origin)" text="チャクラム突進" />
+    <a time="@(516 - origin)" text="アルファソード1" />
+    <a time="@(517 - origin)" text="スーパージャンプ着弾" />
+    <a time="@(519 - origin)" text="アポカリプティクレイ" />
+    <a time="@(520 - origin)" text="アルファソード2" />
+    <a time="@(520 - origin)" text="罪の意識1" />
+    <a time="@(522 - origin)" text="Sブラスティ・チャージ1" />
+    <a time="@(523 - origin)" text="十字の秘蹟" />
+    <a time="@(525 - origin)" text="罪の意識2" />
+    <a time="@(526 - origin)" text="Sブラスティ・チャージ2" />
+    <a time="@(532 - origin)" text="ミサイル全弾発射" />
+
+    <t name="GOTO TRYANGLE" sync="アレキサンダー・プライムは「浄化の熱線」の構え。" goto="PHASE5 TRYANGLE" notice="ミッショナリー" />
+  </s>
+
+  <s name="PHASE5 TRYANGLE">
+    @* このフェーズの基点秒数 *@
+    @{ origin = 530; }
+
+    <a time="@(535 - origin)" text="浄化の熱線" sync="アレキサンダー・プライムの「浄化の熱線」" />
+
+    <!-- カウント start -->
+    <t text="カウント➜ 召" sync="^1B:[id8]:[SMN]:0000:[id4]:">
+      <v-notice
+        order="-29"
+        duration="5"
+        icon="SMN.png" />
+    </t>
+
+    <t text="カウント➜ 詩" sync="^1B:[id8]:[BRD]:0000:[id4]:">
+      <v-notice
+        order="-28"
+        duration="5"
+        icon="BRD.png" />
+    </t>
+
+    <t text="カウント➜ 侍" sync="^1B:[id8]:[SAM]:0000:[id4]:">
+      <v-notice
+        order="-27"
+        duration="5"
+        icon="SAM.png" />
+    </t>
+
+    <t text="カウント➜ 竜" sync="^1B:[id8]:[DRG]:0000:[id4]:">
+      <v-notice
+        order="-26"
+        duration="5"
+        icon="DRG.png" />
+    </t>
+
+    <t name="自分にカウント" sync="^1B:[id8]:[mex]:0000:[id4]:" notice="自分にカウント" />
+    <t name="自分にカウントなし" sync="^1B:[id8]:[nex]:0000:[id4]:" sync-count="2" notice="カウントなし" />
+    <!-- カウント end -->
+
+    <a time="@(540 - origin)" text="カウント" />
+    <a time="@(548 - origin)" text="Mホーリー1 → ライト" sync="アレキサンダー・プライムの「メガホーリー」" notice="" />
+    <a time="@(555 - origin)" text="Mホーリー2" sync="アレキサンダー・プライムの「メガホーリー」" />
+    <a time="@(565 - origin)" text="アレキサンダー召喚" sync="アレキサンダー・プライムの「アレキサンダー召喚」" />
+    <a time="@(572 - origin)" text="ジャスティスストーム" sync="ブルートジャスティスの「ジャスティスストーム」" />
+    <a time="@(576 - origin)" text="Sウェーブ1" notice="" />
+    <a time="@(579 - origin)" text="Sウェーブ2" notice="" />
+    <a time="@(582 - origin)" text="Sウェーブ3" notice="" />
+    <a time="@(585 - origin)" text="Sウェーブ4" notice="" />
+    <a time="@(588 - origin)" text="Sウェーブ5" notice="" />
+    <a time="@(591 - origin)" text="Sウェーブ6" notice="" />
+    <a time="@(594 - origin)" text="Sウェーブ7 → STリプ" notice="リプ" />
+    <a time="@(597 - origin)" text="Sウェーブ8" notice="" />
+    <a time="@(600 - origin)" text="Sウェーブ9" notice="" />
+    <a time="@(603 - origin)" text="Sウェーブ10 → MTリプ" />
+    <a time="@(606 - origin)" text="Sウェーブ11" notice="" />
+    <a time="@(609 - origin)" text="Sウェーブ12" notice="" />
+    <a time="@(612 - origin)" text="Sウェーブ13" notice="" />
+    <a time="@(615 - origin)" text="Sウェーブ14" notice="" />
+    <a time="@(647 - origin)" text="聖なる審判" />
+
+    <t text="TO PHASE6" sync="パーフェクト・アレキサンダー:いまここに合神は果たされた……。 我はアレキサンダー……絶望に至る道に導かん……！" goto="PHASE6 THE PERFECT" />
+    <a time="@(999 - origin)" text="DUMMY" />
+  </s>
+
+  <s name="PHASE6 THE PERFECT">
+    <t text="静止命令！" sync="は「静止命令」の構え。$" notice="静止命令。">
+      <v-notice order="-1" duration="3.8" duration-visible="true" icon="DontAction.png" />
+    </t>
+
+    <t text="行動命令！" sync="は「行動命令」の構え。$" notice="行動命令。">
+      <v-notice order="-1" duration="3.8" duration-visible="true" icon="Avoid.png" />
+    </t>
+
+    <t text="接触保護\n➜ デルタへ" sync="^1A:[id8]:[mex] gains the effect of 確定判決：接触保護命令 from" notice="デルタえー。">
+      <v-notice order="0" duration="5" icon="D.png" />
+    </t>
+
+    <t text="逃亡監察\n➜ ブラボーへ" sync="^1A:[id8]:[mex] gains the effect of 確定判決：逃亡監察命令 from" notice="ブラボーえー。">
+      <v-notice order="0" duration="5" icon="B.png" />
+    </t>
+
+    <t text="逃亡禁止\n➜ ブラボー手前へ" sync="^1A:[id8]:[mex] gains the effect of 確定判決：逃亡禁止命令 from" notice="ブラボー手前えー。">
+      <v-notice order="0" duration="5" icon="B.png" />
+    </t>
+
+    <t text="接触禁止\n➜ ブラボー手前へ" sync="^1A:[id8]:[mex] gains the effect of 確定判決：接触禁止命令 from" notice="ブラボー手前えー。">
+      <v-notice order="0" duration="5" icon="B.png" />
+    </t>
+
+    <t text="散開！" sync="^14:488A:パーフェクト・アレキサンダー starts using 照準 on" notice="散開ー。">
+      <v-notice order="0" duration="5" icon="SpreadB.png" />
+    </t>
+
+    <t text="頭割り！" sync="^14:488B:パーフェクト・アレキサンダー starts using 照準 on" notice="頭割りー。">
+      <v-notice order="0" duration="5" icon="DamageShare.png" />
+    </t>
+
+    <t no="3" name="加重誅罰1" sync="パーフェクト・アレキサンダーは「加重誅罰」の構え。$" notice="ふたり受けー。">
+      <expressions>
+        <pre name="chubatsu" count="0" />
+        <set name="chubatsu" count="1" />
+      </expressions>
+      <v-notice
+        text="二人受け！"
+        icon="Stack.png"
+        duration="4"
+        duration-visible="false" />
+    </t>
+
+    <t no="2" name="加重誅罰2" sync="パーフェクト・アレキサンダーは「加重誅罰」の構え。$" notice="リビデ。">
+      <expressions>
+        <pre name="chubatsu" count="1" />
+        <set name="chubatsu" count="2" />
+      </expressions>
+      <v-notice
+        text="リビデ"
+        icon="DRK.png"
+        duration="4"
+        duration-visible="false" />
+    </t>
+
+    <t no="1" name="加重誅罰3" sync="パーフェクト・アレキサンダーは「加重誅罰」の構え。$" notice="ボーライド。">
+      <expressions>
+        <pre name="chubatsu" count="2" />
+        <set name="chubatsu" count="3" />
+      </expressions>
+      <v-notice
+        text="ボーライド"
+        icon="GNB.png"
+        duration="4"
+        duration-visible="false" />
+    </t>
+
+    <t name="誅罰" sync="パーフェクト・アレキサンダーは「誅罰」の構え。$" notice="スイッチー！">
+      <v-notice
+        text="スイッチ！"
+        icon="Switch.png"
+        duration="4"
+        duration-visible="false" />
+    </t>
+
+    <t name="連帯刑" sync="パーフェクト・アレキサンダーは「連帯刑」の構え。$" notice="れんたいけい">
+      <v-notice
+        text="連帯刑！"
+        icon="DamageShare.png"
+        duration="3"
+        duration-visible="false" />
+    </t>
+
+    <!-- 大審判の初期化とカウント begin -->
+    <!--
+    <t
+      name="聖なる大審判の本体の詠唱"
+      sync="^14:488E:">
+      <expressions>
+        <set name="shinpan_count" count="0" />
+        <set name="shinpan_first_pos" count="NOTHING" />
+      </expressions>
+    </t>
+
+    <t
+      name="聖なる大審判の予兆のダミー詠唱"
+      sync="^14:488F:">
+      <expressions>
+        <set name="shinpan_count" count="+1" />
+      </expressions>
+    </t>
+    -->
+    <!-- 大審判の初期化とカウント end -->
+
+    <!-- 大審判の予兆に対する単純通知 begin -->
+    <t name="聖なる大審判 予兆1" sync="^14:488E:" notice="/wait 7, 1、移動">
+      <v-notice
+        text="１：移動！"
+        icon="True.png"
+        delay="7"
+        duration="1.5"
+        duration-visible="false" />
+    </t>
+
+    <t name="聖なる大審判 予兆2" sync="^14:488E:" notice="/wait 9, 2、動くな">
+      <v-notice
+        text="２：動くな！"
+        icon="DontMove.png"
+        delay="9"
+        duration="1.5"
+        duration-visible="false" />
+    </t>
+
+    <t name="聖なる大審判 予兆3" sync="^14:488E:" notice="/wait 11, 3、移動">
+      <v-notice
+        text="３：移動！"
+        icon="True.png"
+        delay="11"
+        duration="1.5"
+        duration-visible="false" />
+    </t>
+
+    <t name="聖なる大審判 本番1" sync="^14:488E:" notice="/wait 14, 1に戻るー">
+      <v-notice
+        text="本１：戻る！"
+        icon="True.png"
+        delay="14"
+        duration="1.5"
+        duration-visible="false" />
+    </t>
+    <!-- 大審判の予兆に対する単純通知 end -->
+
+    <!-- 大審判 予兆1発目 3パターン begin -->
+    <!--
+    <t name="聖なる大審判 予兆1A" notice="1、南えー">
+      <p-sync interval="20">
+        <combatant name="パーフェクト・アレキサンダー" action="聖なる大審判" X="23.18" Y="23.34" tolerance="0" />
+        <combatant name="パーフェクト・アレキサンダー" action="聖なる大審判" X="23.50" Y="23.18" tolerance="0" />
+        <combatant name="パーフェクト・アレキサンダー" action="聖なる大審判" X="23.34" Y="23.34" tolerance="0" />
+        <combatant name="パーフェクト・アレキサンダー" action="聖なる大審判" X="23.82" Y="23.50" tolerance="0" />
+        <combatant name="パーフェクト・アレキサンダー" action="聖なる大審判" X="23.66" Y="23.82" tolerance="0" />
+        <combatant name="パーフェクト・アレキサンダー" action="聖なる大審判" X="23.18" Y="23.66" tolerance="0" />
+        <combatant name="パーフェクト・アレキサンダー" action="聖なる大審判" X="23.34" Y="23.82" tolerance="0" />
+        <combatant name="パーフェクト・アレキサンダー" action="聖なる大審判" X="23.50" Y="23.66" tolerance="0" />
+      </p-sync>
+      <expressions>
+        <pre name="shinpan_count" count="1" />
+        <set name="shinpan_first_pos" value="S" />
+      </expressions>
+      <v-notice
+        text="１：南へ"
+        icon="Arrow5.png"
+        duration="1.5"
+        duration-visible="false" />
+    </t>
+
+    <t name="聖なる大審判 予兆1B" notice="1、そのまま">
+      <p-sync interval="20">
+        <combatant name="パーフェクト・アレキサンダー" action="聖なる大審判" X="23.82" Y="23.18" tolerance="0" />
+        <combatant name="パーフェクト・アレキサンダー" action="聖なる大審判" X="23.18" Y="23.18" tolerance="0" />
+        <combatant name="パーフェクト・アレキサンダー" action="聖なる大審判" X="23.66" Y="23.34" tolerance="0" />
+        <combatant name="パーフェクト・アレキサンダー" action="聖なる大審判" X="23.34" Y="23.50" tolerance="0" />
+        <combatant name="パーフェクト・アレキサンダー" action="聖なる大審判" X="23.18" Y="23.82" tolerance="0" />
+        <combatant name="パーフェクト・アレキサンダー" action="聖なる大審判" X="23.50" Y="23.50" tolerance="0" />
+        <combatant name="パーフェクト・アレキサンダー" action="聖なる大審判" X="23.34" Y="23.66" tolerance="0" />
+        <combatant name="パーフェクト・アレキサンダー" action="聖なる大審判" X="23.66" Y="23.50" tolerance="0" />
+        <combatant name="パーフェクト・アレキサンダー" action="聖なる大審判" X="23.82" Y="23.82" tolerance="0" />
+      </p-sync>
+      <expressions>
+        <pre name="shinpan_count" count="1" />
+        <set name="shinpan_first_pos" value="C" />
+      </expressions>
+      <v-notice
+        text="１：そのまま"
+        icon="DontMove.png"
+        duration="1.5"
+        duration-visible="false" />
+    </t>
+
+    <t name="聖なる大審判 予兆1C" notice="1、北えー">
+      <p-sync interval="20">
+        <combatant name="パーフェクト・アレキサンダー" action="聖なる大審判" X="23.66" Y="23.18" tolerance="0" />
+        <combatant name="パーフェクト・アレキサンダー" action="聖なる大審判" X="23.34" Y="23.18" tolerance="0" />
+        <combatant name="パーフェクト・アレキサンダー" action="聖なる大審判" X="23.50" Y="23.34" tolerance="0" />
+        <combatant name="パーフェクト・アレキサンダー" action="聖なる大審判" X="23.82" Y="23.34" tolerance="0" />
+        <combatant name="パーフェクト・アレキサンダー" action="聖なる大審判" X="23.50" Y="23.82" tolerance="0" />
+        <combatant name="パーフェクト・アレキサンダー" action="聖なる大審判" X="23.18" Y="23.50" tolerance="0" />
+        <combatant name="パーフェクト・アレキサンダー" action="聖なる大審判" X="23.82" Y="23.66" tolerance="0" />
+        <combatant name="パーフェクト・アレキサンダー" action="聖なる大審判" X="23.66" Y="23.66" tolerance="0" />
+      </p-sync>
+      <expressions>
+        <pre name="shinpan_count" count="1" />
+        <set name="shinpan_first_pos" value="N" />
+      </expressions>
+      <v-notice
+        text="１：北へ"
+        icon="Arrow1.png"
+        duration="1.5"
+        duration-visible="false" />
+    </t>
+    -->
+    <!-- 大審判 予兆1発目 3パターン end -->
+
+    <!-- 大審判 予兆3発目 パターンA 南/北西 begin -->
+    <!--
+    <t name="聖なる大審判 予兆3A-1" notice="3、南えー">
+      <p-sync interval="20">
+        <combatant name="パーフェクト・アレキサンダー" action="聖なる大審判" X="23.18" Y="23.34" tolerance="0" />
+        <combatant name="パーフェクト・アレキサンダー" action="聖なる大審判" X="23.50" Y="23.18" tolerance="0" />
+        <combatant name="パーフェクト・アレキサンダー" action="聖なる大審判" X="23.34" Y="23.34" tolerance="0" />
+        <combatant name="パーフェクト・アレキサンダー" action="聖なる大審判" X="23.82" Y="23.50" tolerance="0" />
+        <combatant name="パーフェクト・アレキサンダー" action="聖なる大審判" X="23.66" Y="23.82" tolerance="0" />
+        <combatant name="パーフェクト・アレキサンダー" action="聖なる大審判" X="23.18" Y="23.66" tolerance="0" />
+        <combatant name="パーフェクト・アレキサンダー" action="聖なる大審判" X="23.34" Y="23.82" tolerance="0" />
+        <combatant name="パーフェクト・アレキサンダー" action="聖なる大審判" X="23.50" Y="23.66" tolerance="0" />
+      </p-sync>
+      <expressions>
+        <pre name="shinpan_count" count="3" />
+        <pre name="shinpan_first_pos" value="C" />
+      </expressions>
+      <v-notice
+        text="３：南へ"
+        icon="Arrow5.png"
+        duration="1.5"
+        duration-visible="false" />
+    </t>
+
+    <t name="聖なる大審判 予兆3A-2" notice="3、北西えー">
+      <p-sync interval="20">
+        <combatant name="パーフェクト・アレキサンダー" action="聖なる大審判" X="23.18" Y="23.34" tolerance="0" />
+        <combatant name="パーフェクト・アレキサンダー" action="聖なる大審判" X="23.50" Y="23.18" tolerance="0" />
+        <combatant name="パーフェクト・アレキサンダー" action="聖なる大審判" X="23.34" Y="23.34" tolerance="0" />
+        <combatant name="パーフェクト・アレキサンダー" action="聖なる大審判" X="23.82" Y="23.50" tolerance="0" />
+        <combatant name="パーフェクト・アレキサンダー" action="聖なる大審判" X="23.66" Y="23.82" tolerance="0" />
+        <combatant name="パーフェクト・アレキサンダー" action="聖なる大審判" X="23.18" Y="23.66" tolerance="0" />
+        <combatant name="パーフェクト・アレキサンダー" action="聖なる大審判" X="23.34" Y="23.82" tolerance="0" />
+        <combatant name="パーフェクト・アレキサンダー" action="聖なる大審判" X="23.50" Y="23.66" tolerance="0" />
+      </p-sync>
+      <expressions>
+        <pre name="shinpan_count" count="3" />
+        <pre name="shinpan_first_pos" value="N" />
+      </expressions>
+      <v-notice
+        text="３：北西へ"
+        icon="Arrow8.png"
+        duration="1.5"
+        duration-visible="false" />
+    </t>
+    -->
+    <!-- 大審判 予兆3発目 パターンA 南/北西 end -->
+
+    <!-- 大審判 予兆3発目 パターンB 南西/北東 begin -->
+    <!--
+    <t name="聖なる大審判 予兆3B-1" notice="3、南西えー">
+      <p-sync interval="20">
+        <combatant name="パーフェクト・アレキサンダー" action="聖なる大審判" X="23.82" Y="23.18" tolerance="0" />
+        <combatant name="パーフェクト・アレキサンダー" action="聖なる大審判" X="23.18" Y="23.18" tolerance="0" />
+        <combatant name="パーフェクト・アレキサンダー" action="聖なる大審判" X="23.66" Y="23.34" tolerance="0" />
+        <combatant name="パーフェクト・アレキサンダー" action="聖なる大審判" X="23.34" Y="23.50" tolerance="0" />
+        <combatant name="パーフェクト・アレキサンダー" action="聖なる大審判" X="23.18" Y="23.82" tolerance="0" />
+        <combatant name="パーフェクト・アレキサンダー" action="聖なる大審判" X="23.50" Y="23.50" tolerance="0" />
+        <combatant name="パーフェクト・アレキサンダー" action="聖なる大審判" X="23.34" Y="23.66" tolerance="0" />
+        <combatant name="パーフェクト・アレキサンダー" action="聖なる大審判" X="23.66" Y="23.50" tolerance="0" />
+        <combatant name="パーフェクト・アレキサンダー" action="聖なる大審判" X="23.82" Y="23.82" tolerance="0" />
+      </p-sync>
+      <expressions>
+        <pre name="shinpan_count" count="3" />
+        <pre name="shinpan_first_pos" value="S" />
+      </expressions>
+      <v-notice
+        text="３：南西へ"
+        icon="Arrow6.png"
+        duration="1.5"
+        duration-visible="false" />
+    </t>
+
+    <t name="聖なる大審判 予兆3B-2" notice="3、北東えー">
+      <p-sync interval="20">
+        <combatant name="パーフェクト・アレキサンダー" action="聖なる大審判" X="23.82" Y="23.18" tolerance="0" />
+        <combatant name="パーフェクト・アレキサンダー" action="聖なる大審判" X="23.18" Y="23.18" tolerance="0" />
+        <combatant name="パーフェクト・アレキサンダー" action="聖なる大審判" X="23.66" Y="23.34" tolerance="0" />
+        <combatant name="パーフェクト・アレキサンダー" action="聖なる大審判" X="23.34" Y="23.50" tolerance="0" />
+        <combatant name="パーフェクト・アレキサンダー" action="聖なる大審判" X="23.18" Y="23.82" tolerance="0" />
+        <combatant name="パーフェクト・アレキサンダー" action="聖なる大審判" X="23.50" Y="23.50" tolerance="0" />
+        <combatant name="パーフェクト・アレキサンダー" action="聖なる大審判" X="23.34" Y="23.66" tolerance="0" />
+        <combatant name="パーフェクト・アレキサンダー" action="聖なる大審判" X="23.66" Y="23.50" tolerance="0" />
+        <combatant name="パーフェクト・アレキサンダー" action="聖なる大審判" X="23.82" Y="23.82" tolerance="0" />
+      </p-sync>
+      <expressions>
+        <pre name="shinpan_count" count="3" />
+        <pre name="shinpan_first_pos" value="N" />
+      </expressions>
+      <v-notice
+        text="３：北東へ"
+        icon="Arrow2.png"
+        duration="1.5"
+        duration-visible="false" />
+    </t>
+    -->
+    <!-- 大審判 予兆3発目 パターンB 南西/北東 end -->
+
+    <!-- 大審判 予兆3発目 パターンC 北/南東 begin -->
+    <!--
+    <t name="聖なる大審判 予兆3C-1" notice="3、南東えー">
+      <p-sync interval="20">
+        <combatant name="パーフェクト・アレキサンダー" action="聖なる大審判" X="23.66" Y="23.18" tolerance="0" />
+        <combatant name="パーフェクト・アレキサンダー" action="聖なる大審判" X="23.34" Y="23.18" tolerance="0" />
+        <combatant name="パーフェクト・アレキサンダー" action="聖なる大審判" X="23.50" Y="23.34" tolerance="0" />
+        <combatant name="パーフェクト・アレキサンダー" action="聖なる大審判" X="23.82" Y="23.34" tolerance="0" />
+        <combatant name="パーフェクト・アレキサンダー" action="聖なる大審判" X="23.50" Y="23.82" tolerance="0" />
+        <combatant name="パーフェクト・アレキサンダー" action="聖なる大審判" X="23.18" Y="23.50" tolerance="0" />
+        <combatant name="パーフェクト・アレキサンダー" action="聖なる大審判" X="23.82" Y="23.66" tolerance="0" />
+        <combatant name="パーフェクト・アレキサンダー" action="聖なる大審判" X="23.66" Y="23.66" tolerance="0" />
+      </p-sync>
+      <expressions>
+        <pre name="shinpan_count" count="3" />
+        <pre name="shinpan_first_pos" value="S" />
+      </expressions>
+      <v-notice
+        text="３：南東へ"
+        icon="Arrow4.png"
+        duration="1.5"
+        duration-visible="false" />
+    </t>
+
+    <t name="聖なる大審判 予兆3C-2" notice="3、北えー">
+      <p-sync interval="20">
+        <combatant name="パーフェクト・アレキサンダー" action="聖なる大審判" X="23.66" Y="23.18" tolerance="0" />
+        <combatant name="パーフェクト・アレキサンダー" action="聖なる大審判" X="23.34" Y="23.18" tolerance="0" />
+        <combatant name="パーフェクト・アレキサンダー" action="聖なる大審判" X="23.50" Y="23.34" tolerance="0" />
+        <combatant name="パーフェクト・アレキサンダー" action="聖なる大審判" X="23.82" Y="23.34" tolerance="0" />
+        <combatant name="パーフェクト・アレキサンダー" action="聖なる大審判" X="23.50" Y="23.82" tolerance="0" />
+        <combatant name="パーフェクト・アレキサンダー" action="聖なる大審判" X="23.18" Y="23.50" tolerance="0" />
+        <combatant name="パーフェクト・アレキサンダー" action="聖なる大審判" X="23.82" Y="23.66" tolerance="0" />
+        <combatant name="パーフェクト・アレキサンダー" action="聖なる大審判" X="23.66" Y="23.66" tolerance="0" />
+      </p-sync>
+      <expressions>
+        <pre name="shinpan_count" count="3" />
+        <pre name="shinpan_first_pos" value="C" />
+      </expressions>
+      <v-notice
+        text="３：北へ"
+        icon="Arrow1.png"
+        duration="1.5"
+        duration-visible="false" />
+    </t>
+    -->
+    <!-- 大審判 予兆3発目 パターンC 北/南東 end -->
+
+    <t name="goto Alpha" sync="^14:487B:パーフェクト・アレキサンダー starts using 未来観測α on" goto="MIRAI-Alpha" />
+    <t name="goto Beta" sync="^14:4B13:パーフェクト・アレキサンダー starts using 未来観測β on" goto="MIRAI-Beta" />
+
+    <a time="00:30" text="00:30" />
+    <a time="01:00" text="01:00" />
+    <a time="01:30" text="01:30" />
+    <a time="02:00" text="02:00" />
+    <a time="02:30" text="02:30" />
+    <a time="03:00" text="03:00" />
+    <a time="03:30" text="03:30" />
+    <a time="04:00" text="04:00" />
+    <a time="04:30" text="04:30" />
+    <a time="05:00" text="05:00" />
+    <a time="05:30" text="05:30" />
+    <a time="06:00" text="06:00" />
+    <a time="06:30" text="06:30" />
+    <a time="07:00" text="07:00" />
+
+    <a time="999" text="DUMMY" />
+  </s>
+
+  <s name="MIRAI-Alpha">
+    <a time="046" text="未来観測α終了" goto="PHASE6 THE PERFECT" />
+    <a time="999" text="DUMMY" />
+
+    <t text="1:行動命令から" sync=":パーフェクト・アレキサンダー:4B0D:" notice="最初は、動くー">
+      <v-notice
+        icon="Avoid.png"
+        order="-2"
+        duration="24"
+        duration-visible="false" />
+    </t>
+
+    <t text="1:静止命令から" sync=":パーフェクト・アレキサンダー:4B0E:" notice="最初は、止まるー">
+      <v-notice
+        icon="DontAction.png"
+        order="-2"
+        duration="24"
+        duration-visible="false" />
+    </t>
+
+    <t text="2:行動命令" sync=":パーフェクト・アレキサンダー:4899:" notice="次は、動くー">
+      <v-notice
+        icon="Avoid.png"
+        order="-1"
+        duration="19"
+        duration-visible="false" />
+    </t>
+
+    <t text="2:静止命令" sync=":パーフェクト・アレキサンダー:489A:" notice="次は、止まるー">
+      <v-notice
+        icon="DontAction.png"
+        order="-1"
+        duration="19"
+        duration-visible="false" />
+    </t>
+
+    <t name="InsertTableAlpha" sync="^03:([0-9a-fA-F]{8}):Added new combatant .  Job: (\w{3}) Level: 80 Max HP: 148000 Max MP: 10000 Pos:">
+      <expressions>
+        <table>
+        {
+          "method":"Insert", "table":"alpha",
+          "cols": [
+            { "name":"id", "val":"$1", "key":"true" },
+            { "name":"job", "val":"$2" }
+          ]
+        }
+        </table>
+      </expressions>
+    </t>
+
+    <t name="α：デバフ無し1" sync="^03:([0-9a-fA-F]{8}):Added new combatant .  Job: (\w{3}) Level: 80 Max HP: 148000 Max MP: 10000 Pos:" sync-count="8" notice="無罪、右側えー。">
+      <expressions>
+        <pre name="TABLE['alpha'][0]['job']" value="@Model.Player.Job" />
+      </expressions>
+      <v-notice
+        text="無罪：右"
+        icon="Free.png"
+        duration="30"
+        duration-visible="false" />
+    </t>
+
+    <t name="α：デバフ無し2" sync="^03:([0-9a-fA-F]{8}):Added new combatant .  Job: (\w{3}) Level: 80 Max HP: 148000 Max MP: 10000 Pos:" sync-count="8" notice="無罪、右側えー。">
+      <expressions>
+        <pre name="TABLE['alpha'][1]['job']" value="@Model.Player.Job" />
+      </expressions>
+      <v-notice
+        text="無罪：右"
+        icon="Free.png"
+        duration="30"
+        duration-visible="false" />
+    </t>
+
+    <t name="α：デバフ無し3" sync="^03:([0-9a-fA-F]{8}):Added new combatant .  Job: (\w{3}) Level: 80 Max HP: 148000 Max MP: 10000 Pos:" sync-count="8" notice="無罪、右側えー。">
+      <expressions>
+        <pre name="TABLE['alpha'][2]['job']" value="@Model.Player.Job" />
+      </expressions>
+      <v-notice
+        text="無罪：右"
+        icon="Free.png"
+        duration="30"
+        duration-visible="false" />
+    </t>
+
+    <t name="α：加重罰1" sync="^03:([0-9a-fA-F]{8}):Added new combatant .  Job: (\w{3}) Level: 80 Max HP: 148000 Max MP: 10000 Pos:" sync-count="8" notice="加重罰、左側えー。">
+      <expressions>
+        <pre name="TABLE['alpha'][3]['job']" value="@Model.Player.Job" />
+      </expressions>
+      <v-notice
+        text="加重：左"
+        icon="PunishmentHevy.png"
+        duration="30"
+        duration-visible="false" />
+    </t>
+
+    <t name="α：加重罰2" sync="^03:([0-9a-fA-F]{8}):Added new combatant .  Job: (\w{3}) Level: 80 Max HP: 148000 Max MP: 10000 Pos:" sync-count="8" notice="加重罰、左側えー。">
+      <expressions>
+        <pre name="TABLE['alpha'][4]['job']" value="@Model.Player.Job" />
+      </expressions>
+      <v-notice
+        text="加重：左"
+        icon="PunishmentHevy.png"
+        duration="30"
+        duration-visible="false" />
+    </t>
+
+    <t name="α：加重罰3" sync="^03:([0-9a-fA-F]{8}):Added new combatant .  Job: (\w{3}) Level: 80 Max HP: 148000 Max MP: 10000 Pos:" sync-count="8" notice="加重罰、左側えー。">
+      <expressions>
+        <pre name="TABLE['alpha'][5]['job']" value="@Model.Player.Job" />
+      </expressions>
+      <v-notice
+        text="加重：左"
+        icon="PunishmentHevy.png"
+        duration="30"
+        duration-visible="false" />
+    </t>
+
+    <t name="α：名誉罰" sync="^03:([0-9a-fA-F]{8}):Added new combatant .  Job: (\w{3}) Level: 80 Max HP: 148000 Max MP: 10000 Pos:" sync-count="8" notice="名誉罰、前えー。">
+      <expressions>
+        <pre name="TABLE['alpha'][6]['job']" value="@Model.Player.Job" />
+      </expressions>
+      <v-notice
+        text="名誉：アレキ前"
+        icon="PunishmentGlory.png"
+        duration="30"
+        duration-visible="false" />
+    </t>
+
+    <t name="α：集団罰" sync="^03:([0-9a-fA-F]{8}):Added new combatant .  Job: (\w{3}) Level: 80 Max HP: 148000 Max MP: 10000 Pos:" sync-count="8" notice="集団罰、右側えー。">
+      <expressions>
+        <pre name="TABLE['alpha'][7]['job']" value="@Model.Player.Job" />
+      </expressions>
+      <v-notice
+        text="集団：右"
+        icon="PunishmentGroup.png"
+        duration="30"
+        duration-visible="false" />
+    </t>
+  </s>
+
+  <s name="MIRAI-Beta">
+    <a time="061" text="未来観測β終了" goto="PHASE6 THE PERFECT" />
+    <a time="999" text="DUMMY" />
+
+    <t text="散開！" sync=":49AD:照準:" notice="散開ー。">
+      <v-notice order="-1" duration="10" icon="SpreadB.png" />
+    </t>
+
+    <t text="頭割り！" sync=":49AE:照準:" notice="頭割りー。">
+      <v-notice order="-1" duration="10" icon="DamageShare.png" />
+    </t>
+
+    <t name="InsertTableBeta" sync="^03:([0-9A-F]{8}):Added new combatant .  Job: (\w{3}) Level: 80 Max HP: 148000 Max MP: 10000 Pos:">
+      <expressions>
+        <table>
+        {
+          "method":"Insert", "table":"beta",
+          "cols" : [
+            { "name":"id", "val":"$1", "key":"true" },
+            { "name":"job", "val":"$2" }
+          ]
+        }
+        </table>
+      </expressions>
+    </t>
+
+    <t name="β：接触✕／接近✕" sync="^03:([0-9a-fA-F]{8}):Added new combatant .  Job: (\w{3}) Level: 80 Max HP: 148000 Max MP: 10000 Pos:" sync-count="8" notice="3時の北えー。">
+      <expressions>
+        <pre name="TABLE['beta'][0]['job']" value="@Model.Player.Job" />
+      </expressions>
+      <v-notice
+        text="接触✕／接近✕\n３時 ➜ 北\n頭割り ➔ 北"
+        icon="DontTouch.png"
+        duration="26"
+        duration-visible="false" />
+    </t>
+
+    <t name="β：逃亡✕／接近✕" sync="^03:([0-9a-fA-F]{8}):Added new combatant .  Job: (\w{3}) Level: 80 Max HP: 148000 Max MP: 10000 Pos:" sync-count="8" notice="3時の南えー。">
+      <expressions>
+        <pre name="TABLE['beta'][1]['job']" value="@Model.Player.Job" />
+      </expressions>
+      <v-notice
+        text="逃亡✕／接近✕\n３時 ➜ 南\n頭割り ➔ 南"
+        icon="DontEscape.png"
+        duration="26"
+        duration-visible="false" />
+    </t>
+
+    <t name="β：接触✕／接近強制" sync="^03:([0-9a-fA-F]{8}):Added new combatant .  Job: (\w{3}) Level: 80 Max HP: 148000 Max MP: 10000 Pos:" sync-count="8" notice="3時の北えー。">
+      <expressions>
+        <pre name="TABLE['beta'][2]['job']" value="@Model.Player.Job" />
+      </expressions>
+      <v-notice
+        text="接触✕／接近強制\n３時 ➜ 北\n頭割り ➔ 北"
+        icon="DontTouch.png"
+        duration="26"
+        duration-visible="false" />
+    </t>
+
+    <t name="β：逃亡✕／接近強制" sync="^03:([0-9a-fA-F]{8}):Added new combatant .  Job: (\w{3}) Level: 80 Max HP: 148000 Max MP: 10000 Pos:" sync-count="8" notice="3時の北えー。">
+      <expressions>
+        <pre name="TABLE['beta'][3]['job']" value="@Model.Player.Job" />
+      </expressions>
+      <v-notice
+        text="逃亡✕／接近強制\n３時 ➜ 北\n頭割り ➔ 南"
+        icon="DontEscape.png"
+        duration="26"
+        duration-visible="false" />
+    </t>
+
+    <t name="β：接触✕／集団罰" sync="^03:([0-9a-fA-F]{8}):Added new combatant .  Job: (\w{3}) Level: 80 Max HP: 148000 Max MP: 10000 Pos:" sync-count="8" notice="3時の北えー。">
+      <expressions>
+        <pre name="TABLE['beta'][4]['job']" value="@Model.Player.Job" />
+      </expressions>
+      <v-notice
+        text="接触✕／集団罰\n３時 ➜ 北\n頭割り ➔ 北"
+        icon="DontTouch.png"
+        duration="26"
+        duration-visible="false" />
+    </t>
+
+    <t name="β：逃亡✕" sync="^03:([0-9a-fA-F]{8}):Added new combatant .  Job: (\w{3}) Level: 80 Max HP: 148000 Max MP: 10000 Pos:" sync-count="8" notice="3時の西えー。">
+      <expressions>
+        <pre name="TABLE['beta'][5]['job']" value="@Model.Player.Job" />
+      </expressions>
+      <v-notice
+        text="逃亡✕\n３時 ➜ 西\n頭割り ➔ 南"
+        icon="DontEscape.png"
+        duration="26"
+        duration-visible="false" />
+    </t>
+
+    <t name="β：接触保護" sync="^03:([0-9a-fA-F]{8}):Added new combatant .  Job: (\w{3}) Level: 80 Max HP: 148000 Max MP: 10000 Pos:" sync-count="8" notice="北えー。">
+      <expressions>
+        <pre name="TABLE['beta'][6]['job']" value="@Model.Player.Job" />
+      </expressions>
+      <v-notice
+        text="接触保護 ➜ 北\n頭割り ➔ 北"
+        icon="Touch.png"
+        duration="26"
+        duration-visible="false" />
+    </t>
+
+    <t name="β：逃亡監察" sync="^03:([0-9a-fA-F]{8}):Added new combatant .  Job: (\w{3}) Level: 80 Max HP: 148000 Max MP: 10000 Pos:" sync-count="8" notice="3時の東えー。">
+      <expressions>
+        <pre name="TABLE['beta'][7]['job']" value="@Model.Player.Job" />
+      </expressions>
+      <v-notice
+        text="逃亡監察\n３時 ➜ 東\n頭割り ➔ 南"
+        icon="ObserveEscape.png"
+        duration="26"
+        duration-visible="false" />
+    </t>
+  </s>
+</timeline>

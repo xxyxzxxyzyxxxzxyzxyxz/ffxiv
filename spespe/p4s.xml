@@ -1,702 +1,470 @@
 <?xml version="1.0" encoding="utf-8"?>
 <timeline>
-  <name>パンデモニウム零式：辺獄編4層</name>
-  <rev>beta2</rev>
+  <name>パンデモ零式:辺獄4層</name>
+  <rev>Rev1.2</rev>
   <description>
-    万魔殿パンデモニウム零式：辺獄編4層のタイムラインです。
-    ※十分な動作確認ができていないバージョンであることにご留意ください。
-    https://blog.sheeva.me/
+    202201090122:TEST1 トリガーはサブルーチン後半に記載。
+    202201110147:各所から提供のトリガをリミックスして作成。TEST2ex take18
+    202201111717:終幕塔踏みカウンタを試作　TEST3
+    202201141129:Chilluさん提供のブラットレイクのトリガを取込。TEST4 take3(動作検証中)
+    202201202349:通知を調整。動作チェック! Rev1.0
+    202201150907:線と呪いギミックのトリガを調整。Rev1.1
+    202202160113:線と呪いギミックのトリガを調整。(強制リセットを追加)Rev1.2
+        SPECIAL THANKS!!:zett (https://twitter.com/zettnotfound)
+    AquaCatのブログをよろしくお願いします。(https://www.aquacat.work/)
   </description>
-  <author>sheeva</author>
+  <author>Aqua Cat,ぱぷ,あのさん,sheeva,Chillu,RINGS</author>
   <license>CC BY-SA</license>
   <zone>Asphodelos: The Fourth Circle (Savage)</zone>
   <locale>JA</locale>
-  <entry>ENTRY</entry>
   <start>0039::戦闘開始！</start>
+  <entry>ENTRY</entry>
 
-  <default target-element="Activity" target-attr="notice-o" value="-9" />
+  <default target-element="Activity" target-attr="notice-o" value="-4" />
 
-  <!-- 前半/後半の識別用エントリフェーズ -->
+  <!-- 前半/後半識別用のエントリ-->
   <s name="ENTRY">
-  <!-- 前半/後半識別 -->
-    <t sync="ヘスペロス:ク、カカカカカ……待っていたぞ……。 半神「ヘーミテオス」の力、その身で味わえ！！" sync-count="1" >
-      <load target="前半" truncate="true" />
+
+    <a time="20" text="前半後半の判別" icon="分岐.png" />
+
+    <t sync="ヘスペロス:ク、カカカカカ……待っていたぞ" >
+      <load target="前半" truncate="true"/>
     </t>
-    <t sync="ヘスペロスは「シアリングストリーム」の構え。" sync-count="1" >
-      <load target="PHASE1 後半開幕" truncate="true" />
+    <t sync="ヘスペロスは「シアリングストリーム」の構え。" >
+      <load target="後半" truncate="true"/>
     </t>
-    <a time="20" text="前半後半の判別" icon="Branch.png" />
   </s>
 
-  <s name="前半">
-    <!-- 1回目のブレッドレイク対象者による後続ギミック処理担当の判定 begin -->
-    @{
-      var MY_ROLE= Model.Player.InRole("DPS") ? "DPS" : "TH";
-      var OTHER_ROLE= Model.Player.InRole("DPS") ? "TH" : "DPS";
-    }
-    <t name="1回目ブラッドレイク対象判定" sync="^23:[id8]:[mex]:" sync-count="1" >
-      <expressions>
-        <pre name="is_first_bloodrake" value="true" />
-      </expressions>
-      <v-notice
-        order="-2"
-        text="線取り：@OTHER_ROLE"
-        icon="Attention.png"
-        duration="40" />
-    </t>
-
-    <t name="1回目ブラッドレイク非対象判定" sync="^23:[id8]:[nex]:" sync-count="4" >
-      <expressions>
-        <pre name="is_first_bloodrake" value="true" />
-      </expressions>
-      <v-notice
-        order="-2"
-        text="線取り：@MY_ROLE"
-        icon="Attention.png"
-        duration="40" />
-    </t>
-    <!-- 1回目のブレッドレイク対象者による後続ギミック処理担当の判定 end -->
-
-    <!-- ピナクス判定トリガー begin -->
-    <t sync="^14:69D4:ヘスペロス starts using ピナクスポイズン" notice="そのあと、散開" >
-      <v-notice
-        order="-1"
-        text="毒：散開\n➜毒マス踏まない"
-        icon="Leave.png"
-        duration="9" />
-    </t>
-
-    <t sync="^14:69D5:ヘスペロス starts using ピナクスラーヴァ" notice="そのあと、頭割り。" >
-      <v-notice
-        order="-1"
-        text="炎：頭割り\n➜炎マス踏まない"
-        icon="DamageShare.png"
-        duration="9" />
-    </t>
-
-    <t sync="^14:69D6:ヘスペロス starts using ピナクススプラッシュ" notice="次は、ノックバック" >
-      <v-notice
-        order="-1"
-        text="水：ノックバック\n➜水マス踏まない"
-        icon="KnockBack.png"
-        duration="9" />
-    </t>
-
-    <t sync="^14:69D7:ヘスペロス starts using ピナクスサンダー" notice="次は、離れる" >
-      <v-notice
-        order="-1"
-        text="雷：中央から離れる\n➜雷マス踏まない"
-        icon="Distance.png"
-        duration="9" />
-    </t>
-    <!-- ピナクス判定トリガー end -->
-
-    <!-- シフティングストライク判定トリガー begin -->
-    <!-- それぞれ 北:A、東:B、南:S、西:D のマーカー配置をしている前提 -->
-    @{
-      var ANTI_KNOCKBACK = Model.Player.InRole("HEALER","MagicDPS") ? "堅実魔" : "アムレン";
-    }
-    <t sync="^14:69FD:ヘスペロス starts using シフティングストライクN" notice="あるふぁーに移動して、@ANTI_KNOCKBACK。" >
-      <v-notice
-        order="-2"
-        text="Ａから吹き飛ばし"
-        icon="A.png"
-        duration="9" />
-    </t>
-
-    <t sync="^14:69FE:ヘスペロス starts using シフティングストライクS" notice="ちゃーりーに移動して、@ANTI_KNOCKBACK。" >
-      <v-notice
-        order="-2"
-        text="Ｃから吹き飛ばし"
-        icon="C.png"
-        duration="9" />
-    </t>
-
-    <t sync="^14:69FF:ヘスペロス starts using シフティングストライクE" notice="ぶらぼーに移動して、@ANTI_KNOCKBACK。" >
-      <v-notice
-        order="-2"
-        text="Ｂから吹き飛ばし"
-        icon="B.png"
-        duration="9" />
-    </t>
-
-    <t sync="^14:6A00:ヘスペロス starts using シフティングストライクW" notice="でるたーに移動して、@ANTI_KNOCKBACK。" >
-      <v-notice
-        order="-2"
-        text="Ｄから吹き飛ばし"
-        icon="D.png"
-        duration="9" />
-    </t>
-
-    <t sync="^14:6A02:ヘスペロス starts using シフティングストライクN" notice="あるふぁー横へ移動。" >
-      <v-notice
-        order="-2"
-        text="Ａから扇範囲"
-        icon="A.png"
-        duration="9" />
-    </t>
-
-    <t sync="^14:6A03:ヘスペロス starts using シフティングストライクS" notice="ちゃーりー横へ移動。" >
-      <v-notice
-        order="-2"
-        text="Ｃから扇範囲"
-        icon="C.png"
-        duration="9" />
-    </t>
-
-    <t sync="^14:6A04:ヘスペロス starts using シフティングストライクE" notice="ぶらぼー横に移動。" >
-      <v-notice
-        order="-2"
-        text="Ｂから扇範囲"
-        icon="B.png"
-        duration="9" />
-    </t>
-
-    <t sync="^14:6A05:ヘスペロス starts using シフティングストライクW" notice="でるたー横に移動。" >
-      <v-notice
-        order="-2"
-        text="Ｄから扇範囲"
-        icon="D.png"
-        duration="9" />
-    </t>
-    <!-- シフティングストライク判定トリガー end -->
-
-    <!-- ペリアクトイ安全地帯判定トリガー begin -->
-    <t sync="^14:69F5:ヘスペロス starts using ピナクスポイズン" notice="緑に移動" >
-      <v-notice
-        text="毒(緑)が安全"
-        duration="8" />
-    </t>
-
-    <t sync="^14:69F6:ヘスペロス starts using ピナクスラーヴァ" notice="赤に移動" >
-      <v-notice
-        text="炎(赤)が安全"
-        duration="8" />
-    </t>
-
-    <t sync="^14:69F7:ヘスペロス starts using ピナクススプラッシュ" notice="白に移動" >
-      <v-notice
-        text="水(白)が安全"
-        duration="8" />
-    </t>
-
-    <t sync="^14:69F8:ヘスペロス starts using ピナクスサンダー" notice="青に移動" >
-      <v-notice
-        text="雷(青)が安全"
-        duration="8" />
-    </t>
-    <!-- ペリアクトイ安全地帯判定トリガー end -->
-
-    <!-- エンチャンテッドペロネー・ラウンド 判定トリガー begin -->
-    @{
-      var NOTICE_DPS_TOWER_1 = Model.Player.InRole("DPS") ? "次は、床を踏む。" : "次は、線を取る。";
-      var NOTICE_TH_TOWER_1 = Model.Player.InRole("DPS") ? "次は、線を取る。" : "次は、床を踏む。";
-    }
-      <!-- ラウンド1回目:DPSが床踏み -->
-    <t sync="14:69DE:ヘスペロス starts using 爆発 on ヘスペロス" sync-count="4" notice="@NOTICE_DPS_TOWER_1" >
-      <expressions>
-        <pre name="is_first_round" value="true" />
-      </expressions>
-      <v-notice
-        order="-2"
-        text="DPS塔/TH線取り"
-        icon="FallingObject.png"
-        duration="10" />
-      <v-notice
-        order="-1"
-        text="THが線を取る"
-        icon="Attention.png"
-        duration="64" />
-    </t>
-
-    <!-- ラウンド1回目:THが床踏み -->
-    <t sync="14:69DF:ヘスペロス starts using 爆発 on ヘスペロス" sync-count="4" notice="@NOTICE_TH_TOWER_1" >
-      <expressions>
-        <pre name="is_first_round" value="true" />
-      </expressions>
-      <v-notice
-        order="-2"
-        text="TH塔/DPS線取り"
-        icon="FallingObject.png"
-        duration="10" />
-      <v-notice
-        order="-1"
-        text="DPSが線を取る"
-        icon="Attention.png"
-        duration="64" />
-    </t>
-    @{
-      var NOTICE_DPS_TOWER_2 = Model.Player.InRole("DPS") ? "次は、床を踏む。" : "";
-      var NOTICE_TH_TOWER_2 = Model.Player.InRole("DPS") ? "" : "次は、床を踏む。";
-    }
-    <!-- 2回目:DPSが床踏み担当 -->
-    <t sync="^14:69DE:ヘスペロス starts using 爆発 on ヘスペロス" sync-count="4,8" notice="@NOTICE_DPS_TOWER_2" >
-      <expressions>
-        <pre name="is_first_round" value="false" />
-      </expressions>
-      <v-notice
-        order="-1"
-        text="DPS塔/THデバフ受け"
-        icon="Virus.png"
-        duration="30" />
-    </t>
-
-    <!-- 2回目:THが床踏み担当 -->
-    <t sync="^14:69DF:ヘスペロス starts using 爆発 on ヘスペロス" sync-count="4,8" notice="@NOTICE_TH_TOWER_2" >
-      <expressions>
-        <pre name="is_first_round" value="false" />
-      </expressions>
-      <v-notice
-        order="-1"
-        text="TH塔/DPSデバフ受け"
-        icon="Virus.png"
-        duration="30" />
-    </t>
-    <!-- エンチャンテッドペロネー・ラウンド 判定トリガー end -->
-
-    <!-- 前半メインルーチン -->
-    <a time="000.0" sync="ヘスペロス:ク、カカカカカ……待っていたぞ……。 半神「ヘーミテオス」の力、その身で味わえ！！" >
-      <expressions>
-        <set name="is_first_bloodrake" value="true" ttl="30" />
-      </expressions>
-    </a>
-    <a time="015.0" text="デコレーション" sync="ヘスペロスの「デコレーション」" />
-    <a time="023.0" text="ブラッドレイク１" sync="ヘスペロスの「ブラッドレイク」" />
-    <a time="026.0" sync="ヘスペロス:ゆらめけ、クラミュス！" />
-    <a time="031.0" text="エーテルクラミュス" sync="ヘスペロスの「エーテルクラミュス」" />
-    <a time="039.0" text="ブラッドレイク２" sync="ヘスペロスの「ブラッドレイク」" />
-    <a time="048.0" text="ペルソナ(呪詛デバフ付与)" sync="ヘスペロスの「エンチャンテッドペロネー：ペルソナ」" />
-    <a time="064.0" text="線AoE＋呪詛発動" sync="ヘスペロスの「インヴァースクラミュス」" />
-    <a time="073.0" text="デコレーション" sync="ヘスペロスの「デコレーション」" />
-    <a time="083.0" text="タンク強攻撃１" sync="ヘスペロスの「エレガントイヴィセレーション」" notice="次は、タンク強攻撃2回。" />
-    <a time="086.0" text="タンク強攻撃２" />
-    <a time="093.0" sync="ヘスペロス:獄卒長たる我が権限を以てすれば、監獄すら蠢く……。" />
-    <a time="101.0" text="劇場創造" sync="ヘスペロスの「劇場創造」" />
-    <a time="108.0" sync="ヘスペロス:地形改変も、このとおりよ……！ 喰らえッ……！" />
-    <a time="114.0" text="ピナクス" sync="ヘスペロスの「ピナクス」" notice="次は、床を確認。"/>
-    <a time="124.5" text="ピナクス発動１" />
-    <a time="127.5" text="ピナクス発動２" />
-    <a time="129.0" sync="ヘスペロス:逃さぬ…！" />
-    <a time="137.5" text="ピナクス発動３" />
-    <a time="140.0" text="シフティングストライク" sync="ヘスペロスの「シフティングストライク" />
-    <a time="148.5" text="ピナクス発動４" />
-    <a time="157.0" text="タンク強攻撃１" sync="ヘスペロスの「エレガントイヴィセレーション」" notice="次は、タンク強攻撃2回。" />
-    <a time="160.0" text="タンク強攻撃２" />
-    <a time="169.0" text="ブラッドレイク(全体)" sync="ヘスペロスの「ブラッドレイク」" />
-    <a time="180.0" text="劇場創造" sync="ヘスペロスの「劇場創造」" />
-    <a time="187.0" sync="ヘスペロス:我が腐呪を、浴びよ" />
-    <a time="192.0" text="リベンジ(デバフ付与)" sync="ヘスペロスの「エンチャンテッドペロネー：リベンジ」" />
-    <a time="200.0" text="エレメンタル(デバフ付与)" sync="ヘスペロスの「エンチャンテッドペロネー：エレメンタル」" />
-    <a time="208.0" text="ブラッドレイク(全体)" sync="ヘスペロスの「ブラッドレイク」" />
-    <a time="211.0" sync="ヘスペロス:己がエーテルに食い殺されよ！" />
-    <a time="217.0" text="エクスプロージョン(玉取り)" sync="ヘスペロスの「エンチャンテッドペロネー：エクスプロージョン」" />
-    <a time="231.0" text="ペリアクトイ" sync="ヘスペロスの「ペリアクトイ」" />
-    <a time="243.0" text="ブラッドレイク(全体)" sync="ヘスペロスの「ブラッドレイク」" >
-      <expressions>
-        <set name="is_first_round" value="true" ttl="15" />
-      </expressions>
-    </a>
-    <a time="250.0" text="ラウンド(塔)" sync="ヘスペロスの「エンチャンテッドペロネー：ラウンド」" />
-    <a time="261.0" text="線AoE" sync="ヘスペロスの「インヴァースクラミュス」" />
-    <a time="263.0" sync="ヘスペロス:ゆらめけ、クラミュス！" />
-    <a time="268.0" text="エーテルクラミュス" sync="ヘスペロスの「エーテルクラミュス」" />
-    <a time="276.0" text="ブラッドレイク" sync="ヘスペロスの「ブラッドレイク」" />
-    <a time="284.0" text="ラウンド(塔)" sync="ヘスペロスの「エンチャンテッドペロネー：ラウンド」" />
-    <a time="298.0" text="ペルソナ(呪詛デバフ付与)" sync="ヘスペロスの「エンチャンテッドペロネー：ペルソナ」" />
-    <a time="314.0" text="線AoE＋呪詛発動" sync="ヘスペロスの「インヴァースクラミュス」" />
-    <a time="324.0" text="デコレーション" sync="ヘスペロスの「デコレーション」" />
-    <a time="333.0" text="タンク強攻撃１" sync="ヘスペロスの「エレガントイヴィセレーション」" notice="次は、タンク強攻撃2回。" />
-    <a time="336.0" text="タンク強攻撃２" />
-    <a time="351.0" text="劇場創造" sync="ヘスペロスの「劇場創造」" />
-    <a time="359.0" sync="ヘスペロス:改変した地形を 利用させてもらうッ！" />
-    <a time="364.0" text="ピナクス" sync="ヘスペロスの「ピナクス」" />
-    <a time="374.0" text="ピナクス発動１" />
-    <a time="377.0" text="ピナクス発動２" />
-    <a time="379.0" sync="ヘスペロス:逃さぬ…！" />
-    <a time="387.0" text="ピナクス発動３" />
-    <a time="390.0" text="シフティングストライク" sync="ヘスペロスの「シフティングストライク" />
-    <a time="398.0" text="ピナクス発動４" />
-    <a time="403.0" text="デコレーション" sync="ヘスペロスの「デコレーション」" />
-    <a time="413.0" text="デコレーション" />
-    <a time="422.0" text="デコレーション" />
-    <a time="432.0" text="時間切れ" />
-  </s>
-
-  <!-- 後半用グローバルトリガー begin -->
-  <!--近思の魔撃 / 遠見の魔撃 判定トリガー begin -->
-  @{
-    var TANK_NEAR_CALL = Model.Player.InRole("TANK") ? "足元えー。" : "離れるー。";
-    var TANK_FAR_CALL = Model.Player.InRole("TANK") ? "離れるー。" : "足元えー。";
-  }
-  <t sync="^14:6A26:" notice="@TANK_NEAR_CALL" >
-    <v-notice
-      text="近思:タンク近づく"
-      duration="6" />
-  </t>
-  <t sync="^14:6A27:" notice="@TANK_FAR_CALL" >
-    <v-notice
-      text="遠見:タンク離れる"
-      duration="6" />
-  </t>
-  <!--近思の魔撃 / 遠見の魔撃 判定トリガー end -->
-
-  <!-- 後半戦で最初に受けたシアリングストリームからボスのCombatant IDをキャプチャする -->
-  <t name="ボスIDキャプチャ" sync="^16:(?&lt;boss_id&gt;[0-9a-fA-F]{8}):ヘスペロス:6A2D:シアリングストリーム:" sync-count="1" >
+<s name="前半">
+  <!--初回に埋め込んでタンク強攻撃を取得-->
+  <t no="1" sync="^1B:[id8]:[pc]:0000:[id4]:(?&lt;marker&gt;[0-9a-fA-F]{4}):" sync-count="1" >
     <expressions>
-      <set name="boss_id" value="0x${boss_id}" />
+      <set name="marker_origin" value="0x${marker}" scope="CurrentZone" />
     </expressions>
   </t>
 
-  <t name="フラグ変数セット" sync="14:[id4]:ヘスペロス starts using 茨の悲劇：" >
+
+  <a time="001" sync="ヘスペロス:ク、カカカカカ……待っていたぞ……。 半神「ヘーミテオス」の力、その身で味わえ！！" />
+  <a time="016" text="(全体)デコレーション" sync="ヘスペロスの「デコレーション」" notice="デコレーション。" />
+  <a time="019" sync="ヘスペロス:お前のエーテルを吸収させてもらおう……。 その力、私が利用させてもらうぞ！！" />
+  <a time="019" text="【構】ブラッドレイク" sync="ヘスペロスは「ブラッドレイク」の構え。" notice="線が付くよ" >
+  <!--1回目のフラグを起動-->
     <expressions>
-      <set name="is_first_tether" value="true" />
+      <set name="first_blood" value="true" />
+    </expressions>
+  </a>
+  <a time="024" text="1回目ブラッドレイク" sync="ヘスペロスの「ブラッドレイク」" notice="1回目、線が取れない。" />
+  <a time="026" sync="ヘスペロス:ゆらめけ、クラミュス！" />
+  <!--何もしてこない？-->
+  <a time="031" text="エーテルクラミュス" sync="ヘスペロスの「エーテルクラミュス」" notice="エーテルクラミュス。" />
+  <a time="034" text="【構】ブラッドレイク" sync="ヘスペロスは「ブラッドレイク」の構え。" notice="線が付くよ" >
+  <!--2回目のフラグを起動-->
+    <expressions>
+      <set name="second_blood" value="true" />
+    </expressions>
+  </a>
+  <a time="039" text="2回目ブラッドレイク" sync="ヘスペロスの「ブラッドレイク」" notice="2回目、呪いが取れない。" />
+  <a time="042" sync="ヘスペロス:我が呪詛を込め、エーテルを「腐呪」へと変える……。 自分自身のエーテルで、朽ち果てるがいい！" />
+  <a time="048" text="ペルソナ" sync="ヘスペロスの「エンチャンテッドペロネー：ペルソナ」" notice="呪いがつくよ" />
+  <a time="057" text="インヴァース" sync="ヘスペロスは「インヴァースクラミュス」の構え。" notice="線が付くよ" />
+  <a time="064" text="インヴァース" sync="ヘスペロスの「インヴァースクラミュス」" notice="発動" />
+  <!--a time="064" text="呪詛発動" sync="ヘスペロスの「呪詛発動」" notice="呪詛発動。" /-->
+  <a time="073" text="(全体)デコレーション" sync="ヘスペロスの「デコレーション」" notice="全体攻撃" />
+  <a time="077" text="【構】タンク強攻撃" sync="ヘスペロスは「エレガントイヴィセレーション」の構え。" />
+  <a time="083" text="イヴィセレーション2" sync="ヘスペロスの「エレガントイヴィセレーション」" notice="タンク強攻撃" />
+  <a time="086" text="イヴィセレーション1"  />
+
+
+  <!--P2劇場前半-->
+  <a time="093" sync="ヘスペロス:獄卒長たる我が権限を以てすれば、監獄すら蠢く……。" />
+  <a time="101" text="劇場創造" sync="ヘスペロスの「劇場創造」" notice="劇場創造" />
+  <a time="108" sync="ヘスペロス:地形改変も、このとおりよ……！ 喰らえッ……！" />
+  <a time="114" text="ピナクス" sync="ヘスペロスの「ピナクス」" notice="床を確認" />
+  <a time="124" text="水or雷" sync="ヘスペロスの「ピナクス(スプラッシュ|サンダー)」" />
+  <a time="127" text="炎or毒" sync="ヘスペロスの「ピナクス(ラーヴァ|ポインズン)」" />
+  <a time="129" sync="ヘスペロス:逃さぬ…！" />
+  <a time="131" text="【構】シフトX" sync="ヘスペロスは「シフティングストライク(E|W|S|N)」の構え。" notice="詠唱確認" />
+  <a time="137" text="水or雷" sync="ヘスペロスの「ピナクスサンダー」" />
+  <a time="140" text="シフティングストライク" sync="ヘスペロスの「シフティングストライク(E|W|S|N)」"  />
+  <a time="148" text="炎or毒" sync="ヘスペロスの「ピナクスポイズン」" />
+  <a time="152" text="【構】タンク強攻撃" sync="ヘスペロスは「エレガントイヴィセレーション」の構え。" />
+  <a time="158" text="イヴィセレーション2" sync="ヘスペロスの「エレガントイヴィセレーション」" notice="タンク強攻撃" />
+  <a time="161" text="イヴィセレーション1" />
+
+  <!--P3劇場後半-->
+  <a time="164" text="【構】ブラッドレイク" sync="ヘスペロスは「ブラッドレイク」の構え。" notice="床を確認" />
+  <a time="169" text="ブラッドレイク" sync="ヘスペロスの「ブラッドレイク」" />
+  <a time="180" text="劇場創造" sync="ヘスペロスの「劇場創造」" notice="劇場創造" />
+  <a time="187" sync="ヘスペロス:我が腐呪を、浴びよ" />
+  <!--a time="188" text="エンチャ：リベンジ" sync="ヘスペロスは「エンチャンテッドペロネー：リベンジ」の構え。"  /-->
+  <a time="192" text="エンチャ：リベンジ" sync="ヘスペロスの「エンチャンテッドペロネー：リベンジ」" notice="デバフを確認、1個目" />
+  <a time="200" text="エンチャ：エレメンタル" sync="ヘスペロスの「エンチャンテッドペロネー：エレメンタル」" notice="デバフを確認、2個目" />
+  <a time="209" text="ブラッドレイク(全体)" sync="ヘスペロスの「ブラッドレイク」" notice="全体" />
+  <a time="212" sync="ヘスペロス:己がエーテルに食い殺されよ！" />
+  <a time="212" text="玉がPOP" sync="ヘスペロスは「エンチャンテッドペロネー：エクスプロージョン」の構え。" notice="玉がPOP" />
+  <a time="218" text="エンチャ：エクスプロージョン" sync="ヘスペロスの「エンチャンテッドペロネー：エクスプロージョン」" />
+  <a time="232" text="(床)ペリアクトイ" sync="ヘスペロスの「ペリアクトイ」" notice="ペリアクトイ" />
+  <a time="234" sync="ヘスペロス:……紛れ込んだネズミも、初めのうちは可愛いものだが、 いつまでもウロチョロされては、目障りだな。" >
+    <expressions>
+      <set name="first_blood" value="false" />
+      <set name="second_blood" value="false" />
+    </expressions>
+  </a>
+
+
+  <!--P4塔-->
+  <a time="244" text="ブラッドレイク" sync="ヘスペロスの「ブラッドレイク」" notice="ブラッドレイク" />
+  <a time="246" sync="ヘスペロスは「エンチャンテッドペロネー：ラウンド」の構え。" >
+    <expressions>
+      <set name="first_blood" value="true" />
+    </expressions>
+  </a>
+  <a time="251" text="エンチャ：ラウンド" sync="ヘスペロスの「エンチャンテッドペロネー：ラウンド」" notice="塔が出るよ" />
+    <!--1回目のフラグを起動-->
+  <a time="254" text="線" sync="ヘスペロスは「インヴァースクラミュス」の構え。" notice="線が付くよ" />
+  <a time="261" text="インヴァース" sync="ヘスペロスの「インヴァースクラミュス」" />
+  <a time="264" sync="ヘスペロス:ゆらめけ、クラミュス！" />
+  <a time="269" text="エーテルクラミュス" sync="ヘスペロスの「エーテルクラミュス」" />
+  <a time="277" text="ブラッドレイク" sync="ヘスペロスの「ブラッドレイク」" notice="ブラッドレイク" />
+  <a time="280" sync="ヘスペロスは「エンチャンテッドペロネー：ラウンド」の構え。" >
+  <expressions>
+    <set name="second_blood" value="true" />
+  </expressions>
+</a>
+  <a time="285" text="エンチャンテッドペロネー：ラウンド" sync="ヘスペロスの「エンチャンテッドペロネー：ラウンド」" notice="塔が出るよ" />
+    <!--2回目のブラッドレイク発動時、2回目のフラグを起動-->
+  <a time="299" text="エンチャ：ペルソナ" sync="ヘスペロスの「エンチャンテッドペロネー：ペルソナ」" notice="呪いが付くよ" />
+  <a time="308" text="線" sync="ヘスペロスは「インヴァースクラミュス」の構え。" notice="線が付くよ" />
+  <a time="315" text="インヴァース" sync="ヘスペロスの「インヴァースクラミュス」" />
+  <a time="324" text="(全体)デコレーション" sync="ヘスペロスの「デコレーション」" notice="全体攻撃" />
+  <a time="328" text="【構】タンク強攻撃" sync="ヘスペロスは「エレガントイヴィセレーション」の構え。" />
+  <a time="334" text="イヴィセレーション2" sync="ヘスペロスの「エレガントイヴィセレーション」" notice="タンク強攻撃" />
+  <a time="337" text="イヴィセレーション1"  />
+
+  <!--P5劇場最終-->
+  <a time="352" text="劇場創造" sync="ヘスペロスの「劇場創造」" notice="劇場創造" />
+  <a time="359" sync="ヘスペロス:改変した地形を 利用させてもらうッ！" />
+  <a time="365" text="ピナクス" sync="ヘスペロスの「ピナクス」" notice="床を確認" />
+  <a time="375" text="水or雷" sync="ヘスペロスの「ピナクス(スプラッシュ|サンダー)」"  />
+  <a time="378" text="炎or毒" sync="ヘスペロスの「ピナクス(ラーヴァ|ポインズン)」"  />
+  <a time="380" sync="ヘスペロス:逃さぬ…！" />
+  <a time="382" text="【構】シフトX" sync="ヘスペロスは「シフティングストライク(E|W|S|N)」の構え。" notice="詠唱確認" />
+  <a time="388" text="水or雷" sync="ヘスペロスの「ピナクス(スプラッシュ|サンダー)」" />
+  <a time="391" text="シフティングストライク" sync="ヘスペロスの「シフティングストライク(E|W|S|N)」"  />
+  <a time="399" text="炎or毒" sync="ヘスペロスの「ピナクス(ラーヴァ|ポインズン)」" />
+  <a time="405" text="デコレーション" sync="ヘスペロスの「デコレーション」" notice="全体攻撃" />
+  <a time="414" text="デコレーション" notice="全体攻撃" />
+  <a time="423" text="デコレーション" sync="ヘスペロスの「デコレーション」" notice="全体攻撃" />
+  <a time="430" text="調査中" />
+  <t text="強制移行" sync="ヘスペロスは「シアリングストリーム」の構え。" goto="後半" />
+
+  <!--以下前半用のトリガー類。-->
+  <!--ブラッドレイクのトリガ-->
+  <t sync="(^16:[id8]:ヘスペロス:69D8:ブラッドレイク:[id8]:[HEALER1]:|^15:[id8]:ヘスペロス:69DF:爆発:[id8]:[HEALER1]:)" notice="DPSが線を取る">
+    <v-notice
+      text="DPS:線を取る"
+      duration="42" />
+    <expressions><!--1回目フラグ起動時のみ稼働。稼働と同時にフラグを初期化。-->
+      <pre name="first_blood" value="true" />
+      <set name="first_blood" value="false" />
     </expressions>
   </t>
 
-  <!-- 後半用グローバルトリガー end -->
 
-  <!-- 茨の悲劇：序幕から第ニ幕まで -->
-  <s name="PHASE1 後半開幕">
-    <!-- 後半戦で最初に出現したTetherログからIDをキャプチャ（まだ使ってない） -->
-    <t no="1" name="線IDキャプチャ" sync="^23:[id8]:ヘスペロス:EVAL(VAR['boss_id'],X8):ヘスペロス:(?&lt;tether_code&gt;[0-9a-fA-F]{4}):" sync-count="1" >
-      <expressions>
-        <set name="tether_code" value="0x${tether_code}" scope="CurrentZone" />
-      </expressions>
-    </t>
+  <t sync="(^16:[id8]:ヘスペロス:69D8:ブラッドレイク:[id8]:[DPS1]:|^15:[id8]:ヘスペロス:69DF:爆発:[id8]:[DPS1]:)" notice="タンヒラが線を取る">
+    <v-notice
+      text="TH:線を取る"
+      duration="42" />
+    <expressions>
+      <pre name="first_blood" value="true" />
+      <set name="first_blood" value="false" />
+    </expressions>
+  </t>
 
-    <!-- 茨の悲劇：序幕 最初に南北か東西のどちらが安全かを判定するトリガー begin -->
-    <!-- Combatant IDがboss_id+36なら東西どちらかの茨が線で繋がれている -->
-    <t no="2" name="Act1-南北スタート" sync="^23:EVAL(VAR['boss_id']+36, X8):" sync-count="1" >
-      <expressions>
-        <pre name="is_first_tether" value="true" />
-        <set name="is_first_tether" value="false" />
-      </expressions>
+  <t sync="(^16:[id8]:ヘスペロス:69D8:ブラッドレイク:[id8]:[HEALER1]:|^15:[id8]:ヘスペロス:69DF:爆発:[id8]:[HEALER1]:)" notice="DPSが呪いを取る">
+    <v-notice
+      text="DPS:呪いを取る"
+      duration="42" />
+    <expressions>
+      <pre name="second_blood" value="true" />
+      <set name="second_blood" value="false" />
+    </expressions>
+  </t>
+
+  <t sync="(^16:[id8]:ヘスペロス:69D8:ブラッドレイク:[id8]:[DPS1]:|^15:[id8]:ヘスペロス:69DF:爆発:[id8]:[DPS1]:)" notice="タンヒラが呪いを取る">
+    <v-notice
+      text="TH:呪いを取る"
+      duration="42" />
+    <expressions>
+      <pre name="second_blood" value="true" />
+      <set name="second_blood" value="false" />
+    </expressions>
+  </t>
+
+
+  <!--床予兆のトリガ-->
+    <t sync="^14:69D4" notice="散開" >
       <v-notice
-        order="-2"
-        text="南北➜塔➜東西"
-        duration="18"
-        duration-visible="false" />
+        text="散開:毒床"
+        duration="5" />
     </t>
-
-    <!-- Combatant IDがboss_id+38なら南北どちらかの茨が線で繋がれている -->
-    <t no="2" name="Act1-東西スタート" sync="^23:EVAL(VAR['boss_id']+38, X8):" sync-count="1" >
-      <expressions>
-        <pre name="is_first_tether" value="true" />
-        <set name="is_first_tether" value="false" />
-      </expressions>
+    <t sync="^14:69D5" notice="頭割" >
       <v-notice
-        order="-2"
-        text="東西➜塔➜南北"
-        duration="18"
-        duration-visible="false" />
+        text="頭割:炎床"
+        duration="5" />
     </t>
-    <!-- 茨の悲劇：序幕 最初に南北か東西のどちらが安全かを判定するトリガー end -->
-
-    <!-- 茨の悲劇：第二幕 最初に南北付近か東西付近のどちらが安全かを判定するトリガー begin -->
-    <!-- Combatant IDが boss_id+35~38 の範囲なら南北どちらかのAoEと繋がった茨が線で繋がれている -->
-    <t name="Act2-東西スタート" sync="^23:EVAL(VAR['boss_id']+38, X8):" sync-count="2" notice="東西スタート。" >
-      <expressions>
-        <pre name="is_first_tether" value="true" />
-        <set name="is_first_tether" value="false" />
-        <set name="act2_safespot1" value="EW" />
-      </expressions>
+    <t sync="^14:69D6" notice="ノックバック" >
       <v-notice
-        order="-1"
-        text="最初は東西が安全"
-        duration="18"
-        duration-visible="false" />
+        text="ノックバック:水床"
+        duration="5" />
     </t>
-
-    <!-- Combatant IDが boss_id+31~34 の範囲なら東西どちらかのAoEと繋がった茨が線で繋がれている -->
-    <t name="Act2-南北スタート" sync="^23:EVAL(VAR['boss_id']+34, X8):ヘスペロス:" sync-count="2" notice="南北スタート。" >
-      <expressions>
-        <pre name="is_first_tether" value="true" />
-        <set name="is_first_tether" value="false" />
-        <set name="act2_safespot1" value="NS" />
-      </expressions>
+    <t sync="^14:69D7" notice="離れる" >
       <v-notice
-        order="-1"
-        text="最初は南北が安全"
-        duration="18"
-        duration-visible="false" />
-    </t>
-    <!-- 茨茨の悲劇：第二幕 最初に南北付近か東西付近のどちらが安全かを判定するトリガー end -->
-
-    <!-- 茨の悲劇：第二幕 頭上マーカー判定トリガー begin -->
-    <!-- 後半戦で最初に出現する頭上マーカー(赤)を marker_origin とする -->
-    <t no="1" sync="1B:[id8]:[pc]:0000:[id4]:(?&lt;marker&gt;[0-9a-fA-F]{4}):" sync-count="1" notice="" >
-      <expressions>
-        <set name="marker_origin" value="0x${marker}" scope="CurrentZone" />
-      </expressions>
+        text="離れる:雷床"
+        duration="5" />
     </t>
 
-    @if (Model.Player.InRole("DPS")) {
-    <t no="2" name="Act2-赤(D)_NS" sync="1B:[id8]:[mex]:0000:[id4]:EVAL(VAR['marker_origin'], X4):" notice="ファイガ。" >
-      <expressions>
-        <pre name="act2_safespot1" value="NS" />
-      </expressions>
-      <!-- FIXME DPS赤マーカー（最初の安置が南北）の通知内容 -->
-    </t>
-
-    <t no="2" name="Act2-赤(D)_EW" sync="1B:[id8]:[mex]:0000:[id4]:EVAL(VAR['marker_origin'], X4):" notice="ファイガ。" >
-      <expressions>
-        <pre name="act2_safespot1" value="EW" />
-      </expressions>
-      <!-- FIXME DPS赤マーカー（最初の安置が東西）の通知内容 -->
-    </t>
-    } else if (Model.Player.InRole("Healer")) {
-    <t no="2" name="Act2-赤(H)_NS" sync="1B:[id8]:[mex]:0000:[id4]:EVAL(VAR['marker_origin'], X4):" notice="ファイガ。" >
-      <expressions>
-        <pre name="act2_safespot1" value="NS" />
-      </expressions>
-      <!-- FIXME ヒーラー赤マーカー（最初の安置が南北）用の通知内容 -->
-    </t>
-
-    <t no="2" name="Act2-赤(H)_EW" sync="1B:[id8]:[mex]:0000:[id4]:EVAL(VAR['marker_origin'], X4):" notice="ファイガ。" >
-      <expressions>
-        <pre name="act2_safespot1" value="EW" />
-      </expressions>
-      <!-- FIXME ヒーラー赤マーカー（最初の安置が東西）用の通知内容 -->
-    </t>
-    } else if (Model.Player.InRole("TANK")) {
-    <t no="2" name="Act2-赤(T)_NS" sync="1B:[id8]:[mex]:0000:[id4]:EVAL(VAR['marker_origin'], X4):" notice="ファイガ。" >
-      <expressions>
-        <pre name="act2_safespot1" value="NS" />
-      </expressions>
-      <!-- FIXME タンク赤マーカー（最初の安置が南北）の通知内容 -->
-    </t>
-    <t no="2" name="Act2-赤(T)_EW" sync="1B:[id8]:[mex]:0000:[id4]:EVAL(VAR['marker_origin'], X4):" notice="ファイガ。" >
-      <expressions>
-        <pre name="act2_safespot1" value="EW" />
-      </expressions>
-      <!-- FIXME タンク赤マーカー（最初の安置が東西）の通知内容 -->
-    </t>
-    }
-    <t no="2" name="Act2-緑_NS" sync="1B:[id8]:[mex]:0000:[id4]:EVAL(VAR['marker_origin'] - 1, X4):" notice="エアロガ。" >
-      <expressions>
-        <pre name="act2_safespot1" value="NS" />
-      </expressions>
-      <!-- FIXME DPS緑マーカー（最初の安置が南北）の通知内容 -->
-    </t>
-
-    <t no="2" name="Act2-緑_EW" sync="1B:[id8]:[mex]:0000:[id4]:EVAL(VAR['marker_origin'] - 1, X4):" notice="エアロガ。" >
-      <expressions>
-        <pre name="act2_safespot1" value="EW" />
-      </expressions>
-      <!-- FIXME DPS緑マーカー（最初の安置が東西）の通知内容 -->
-    </t>
-
-    @if (Model.Player.InRole("TANK")) {
-    <t no="3" name="Act2-マーカーなし(T)_NS" sync="^1B:[id8]:[nex]:" sync-count="7" notice="次は、線を切る。" >
-      <expressions>
-        <pre name="act2_safespot1" value="NS" />
-      </expressions>
-      <!-- FIXME タンクでマーカーつかなかった時（最初の安置が南北）の通知内容 -->
-    </t>
-
-    <t no="3" name="Act2-マーカーなし(T)_EW" sync="^1B:[id8]:[nex]:" sync-count="7" notice="次は、線を切る。" >
-      <expressions>
-        <pre name="act2_safespot1" value="EW" />
-      </expressions>
-      <!-- FIXME タンクでマーカーつかなかった時（最初の安置が東西）の通知内容 -->
-    </t>
-
-    } else {
-    <t no="2" name="Act2-紫(H)_NS" sync="1B:[id8]:[mex]:0000:[id4]:EVAL(VAR['marker_origin'] - 2, X4):" notice="次は、線を切る。" >
-      <expressions>
-        <pre name="act2_safespot1" value="NS" />
-      </expressions>
-      <!-- FIXME ヒーラー紫マーカー（最初の安置が南北）用の通知内容 -->
-    </t>
-
-    <t no="2" name="Act2-紫(H)_EW" sync="1B:[id8]:[mex]:0000:[id4]:EVAL(VAR['marker_origin'] - 2, X4):" notice="次は、線を切る。" >
-      <expressions>
-        <pre name="act2_safespot1" value="EW" />
-      </expressions>
-      <!-- FIXME ヒーラー紫マーカー（最初の安置が東西）用の通知内容 -->
-    </t>
-    }
-    <!-- 茨の悲劇：第二幕 頭上マーカー判定トリガー end -->
-
-    @* このフェーズの基点となる秒数 11 *@
-    @{ var origin = 11; }
-    <a time="@(016.0 - origin)" text="シアリングストリーム" sync="ヘスペロスの「シアリングストリーム」" sync-s="-16" />
-    <a time="@(026.0 - origin)" sync="ヘスペロス:エーテルソーン展開！ 茨の悲劇が幕を開ける……喜べ、主演はお前たちだッ！！" />
-    <a time="@(031.0 - origin)" text="茨の悲劇：序幕" sync="ヘスペロスの「茨の悲劇：序幕」" />
-    <a time="@(041.0 - origin)" text="シアリングストリーム" sync="ヘスペロスの「シアリングストリーム」" />
-    <a time="@(055.0 - origin)" text="ソーンヘッジ" sync="ヘスペロスの「ソーンヘッジ」" />
-    <a time="@(058.0 - origin)" text="大AoE" sync="ヘスペロスの「ヘーミテオス・ファイジャ」" />
-    <a time="@(060.0 - origin)" text="塔踏み" sync="ヘスペロスの「ヘーミテオス・サンダガ」" />
-    <a time="@(064.0 - origin)" text="大AoE" />
-    <a time="@(070.0 - origin)" text="近思or遠見" sync="ヘスペロスの「(近思|遠見)の魔撃」" />
-    <a time="@(083.0 - origin)" text="茨の悲劇：第ニ幕" sync="ヘスペロスの「茨の悲劇：第ニ幕」" />
-    <a time="@(092.0 - origin)" text="半神の双撃" sync="ヘスペロスの「半神の双撃」" notice="次は、タンク強攻撃。" />
-    <a time="@(103.0 - origin)" text="ソーンヘッジ" sync="ヘスペロスの「ソーンヘッジ」" />
-    <a time="@(110.0 - origin)" text="紫TH：線切り" />
-    <a time="@(111.0 - origin)" text="ダークデザイン(エラプ)" sync="ヘスペロスの「ダークデザイン」" />
-    <a time="@(115.0 - origin)" text="大AoE+塔踏み+頭割り1" />
-    <a time="@(122.0 - origin)" text="大AoE+塔踏み+頭割り2" />
-    <a time="@(122.0 - origin)" sync="ヘスペロス:我が最大の一撃だ…！" />
-    <a time="@(124.0 - origin)" text="(エアロガ終)" sync="ヘスペロスの「ヘーミテオス・エアロガ」" />
-    <a time="@(130.0 - origin)" text="アルティメットインパルス" sync="ヘスペロスの「アルティメットインパルス」" notice="次は、全体攻撃。" goto="PHASE2 後半中盤" />
-  </s>
-
-  <!-- 茨の悲劇：第三幕から第四幕まで -->
-  <s name="PHASE2 後半中盤">
-    <!-- 茨の悲劇：第三幕 判定トリガー begin -->
-    <!-- 先に西側の茨に線が繋がれた -->
-    <t name="Act3-東から誘導" sync="^23:EVAL(VAR['boss_id'] + 38, X8):ヘスペロス:[id8]:ヘスペロス:" sync-count="1" >
-      <expressions>
-        <pre name="is_first_tether" value="true" />
-        <set name="is_first_tether" value="false" />
-      </expressions>
+    <t sync="^14:69FD" notice="上:マント" >
       <v-notice
-        order="-2"
-        text="１回目：東に誘導\n➜２回目：西に誘導"
-        duration="18"
-        duration-visible="false" />
+        text="上:北からマント"
+        duration="5" />
     </t>
-
-    <!-- 先に東側の茨に線が繋がれた -->
-    <t name="Act3-西から誘導" sync="^23:EVAL(VAR['boss_id'] + 34, X8):ヘスペロス:[id8]:ヘスペロス:" sync-count="1" >
-      <expressions>
-        <pre name="is_first_tether" value="true" />
-        <set name="is_first_tether" value="false" />
-      </expressions>
+    <t sync="^14:69FE" notice="下:マント" >
       <v-notice
-        order="-2"
-        text="１回目：西に誘導\n➜２回目：東に誘導"
-        duration="18"
-        duration-visible="false" />
+        text="下:南からマント"
+        duration="5" />
     </t>
-    <!-- 茨の悲劇：第三幕 判定トリガー end -->
-
-    <!-- 茨の悲劇：第四幕 判定トリガー begin -->
-    <t name="Act4-紫" sync="1B:[id8]:[mex]:0000:[id4]:EVAL(VAR['marker_origin'] - 2, X4):" notice="" >
-      <!-- FIXME 第四幕 紫マーカー用の通知内容 -->
+    <t sync="^14:69FF" notice="右:マント" >
       <v-notice
-        order="-5"
-        text="自分は紫"
-        duration="9" />
+        text="右:東からマント"
+        duration="5" />
     </t>
-
-    <t name="Act4-青" sync="1B:[id8]:[mex]:0000:[id4]:EVAL(VAR['marker_origin'] - 3, X4):" notice="" >
-      <!-- FIXME 第四幕 青マーカー用の通知内容 -->
+    <t sync="^14:6A00" notice="左:マント" >
       <v-notice
-        order="-5"
-        text="自分は青"
-        duration="21" />
+        text="左:西からマント"
+        duration="5" />
     </t>
-
-    <t name="Act4-紫(北or北東)" sync="^23:EVAL(VAR['boss_id'] + 38, X8):ヘスペロス:[id8]:[mex]:" sync-count="1" >
+    <t sync="^14:6A02" notice="上:剣" >
       <v-notice
-        order="-4"
-        text="➜１南西で線を切る"
-        duration="21" />
+        text="上:北から剣"
+        duration="5" />
     </t>
-
-    <t name="Act4-紫(東or南東)" sync="^23:EVAL(VAR['boss_id'] + 37, X8):ヘスペロス:[id8]:[mex]:" sync-count="1" >
+    <t sync="^14:6A03" notice="下:剣" >
       <v-notice
-        order="-3"
-        text="➜２北西で線を切る"
-        duration="26" />
+        text="下:南から剣"
+        duration="5" />
     </t>
-
-    <t name="Act4-紫(南or南西)" sync="^23:EVAL(VAR['boss_id'] + 36, X8):ヘスペロス:[id8]:[mex]:" sync-count="1" >
+    <t sync="^14:6A04" notice="右:剣" >
       <v-notice
-        order="-2"
-        text="➜３北東で線を切る"
-        duration="31" />
+        text="右:東から剣"
+        duration="5" />
     </t>
-
-    <t name="Act4-紫(西or北西)" sync="^23:EVAL(VAR['boss_id'] + 35, X8):ヘスペロス:[id8]:[mex]:" sync-count="1" >
+    <t sync="^14:6A05" notice="左:剣" >
       <v-notice
-        order="-1"
-        text="➜４南東で線を切る"
-        duration="36" />
+        text="左:西から剣"
+        duration="5" />
     </t>
-    <!-- 茨の悲劇：第四幕 判定トリガー end -->
 
-    @* このフェーズの基点となる秒数 130 *@
-    @{ origin = 130; }
-    <a time="@(143.0 - origin)" text="茨の悲劇：第三幕" sync="ヘスペロスの「茨の悲劇：第三幕」" notice="次は、キックと範囲を誘導。" />
-    <a time="@(147.0 - origin)" text="(線の順序を確認)" />
-    <a time="@(155.0 - origin)" text="ソーンヘッジ" sync="ヘスペロスの「ソーンヘッジ」" />
-    <a time="@(158.0 - origin)" sync="ヘスペロス:吹き飛べッ！" />
-    <a time="@(164.0 - origin)" text="キック１" sync="ヘスペロスの「コトルヌスキック」" />
-    <a time="@(168.0 - origin)" text="扇範囲誘導１" sync="ヘスペロスの「コトルヌスクエイク」" />
-    <a time="@(168.0 - origin)" text="塔踏み１"  />
-    <a time="@(170.0 - origin)" text="ノックバック" notice="次は、ノックバック。@ANTI_KNOCKBACK。" />
-    <a time="@(174.0 - origin)" text="キック２" />
-    <a time="@(174.0 - origin)" text="塔踏み２" />
-    <a time="@(178.0 - origin)" text="扇範囲誘導２" />
-    <a time="@(181.0 - origin)" sync="ヘスペロス:食らうがよいッ！" />
-    <a time="@(187.0 - origin)" text="近思or遠見" sync="ヘスペロスの「(近思|遠見)の魔撃」" />
-    <a time="@(202.0 - origin)" text="ハートステイク(DoT)" sync="ヘスペロスの「ハートステイク」" notice="次は、タンク強攻撃。" />
-    <a time="@(205.0 - origin)" text="ハートステイク(DoT)" />
-    <a time="@(214.0 - origin)" text="茨の悲劇：第四幕" sync="ヘスペロスの「茨の悲劇：第四幕」" />
-    <a time="@(223.0 - origin)" text="シアリングストリーム" sync="ヘスペロスの「シアリングストリーム」" />
-    <a time="@(233.0 - origin)" text="ソーンヘッジ" sync="ヘスペロスの「ソーンヘッジ」" />
-    <a time="@(241.0 - origin)" text="シアリングストリーム" notice="次は、ヒールを受けたら移動。" />
-    <a time="@(246.0 - origin)" text="塔＋ウォタガ目安" />
-    <a time="@(253.0 - origin)" text="大AoE＋ダージャ1目安" />
-    <a time="@(258.0 - origin)" text="大AoE＋ダージャ2目安" />
-    <a time="@(263.0 - origin)" text="大AoE＋ダージャ3目安" />
-    <a time="@(268.0 - origin)" text="大AoE＋ダージャ4目安" />
-    <a time="@(268.0 - origin)" sync="ヘスペロス:我が最大の一撃だ…！" />
-    <a time="@(276.0 - origin)" text="アルティメットインパルス" sync="ヘスペロスの「アルティメットインパルス」" notice="次は、全体攻撃。" goto="PHASE3 後半終盤" />
-  </s>
 
-  <s name="PHASE3 後半終盤">
-    <t no="2" name="Act5-緑" sync="1B:[id8]:[mex]:0000:[id4]:EVAL(VAR['marker_origin']-1, X4):">
+  <!--4枚床の安置検知-->
+    <t sync="^14:69F5" notice="緑に移動" >
       <v-notice
-        text="緑:茨付近で小散開"
-        duration="10" />
+        text="緑/毒:安置"
+        duration="15" />
     </t>
-
-    <t no="1" name="インパルス対象カウント" sync="15:[id8]:ヘスペロス:6A1C:フリーティングインパルス:" sync-count="-8" sync-interval="0.5" >
-      <expressions>
-        <set name="impulse_target_count" value="EVAL(VAR['impulse_target_count']+1,N0)" />
-      </expressions>
-    </t>
-
-    <t no="2" name="何番目にインパルス対象になったかの判定" sync="15:[id8]:ヘスペロス:6A1C:フリーティングインパルス:[id8]:[mex]:" sync-count="1" >
+    <t sync="^14:69F6" notice="赤に移動" >
       <v-notice
-        text="VAR['impulse_target_count']個目の塔に入る"
-        duration="23" />
+        text="赤/炎:安置"
+        duration="15" />
     </t>
+    <t sync="^14:69F7" notice="白に移動" >
+      <v-notice
+        text="白/水:安置"
+        duration="15" />
+    </t>
+    <t sync="^14:69F8" notice="青に移動" >
+      <v-notice
+        text="青/雷:安置"
+        duration="15" />
+    </t>
+</s>
 
-    @* このフェーズの基点となる秒数 276 *@
-    @{ origin = 276; }
-    <a time="@(279.0 - origin)" sync="ヘスペロス:茨の悲劇も終幕だ……！ さあ、足掻け！　最後まで演じ切ってみせろ！" />
-    <a time="@(290.0 - origin)" text="シアリングストリーム" sync="ヘスペロスの「シアリングストリーム」" />
-    <a time="@(299.0 - origin)" text="茨の悲劇：終幕" sync="ヘスペロスの「茨の悲劇：終幕」" >
-      <expressions> <!-- 変数の初期化 -->
-        <set name="impulse_target_count" value="0" />
-      </expressions>
-    </a>
-    <a time="@(309.0 - origin)" text="ソーンヘッジ" sync="ヘスペロスの「ソーンヘッジ」" />
-    <a time="@(311.0 - origin)" sync="ヘスペロス:迸れ、魔力よ！" />
-    <a time="@(317.0 - origin)" text="円範囲ｘ８" />
-    <a time="@(327.0 - origin)" text="(エアロガ終)" />
-    <a time="@(336.0 - origin)" text="ソーンヘッジ" sync="ヘスペロスの「ソーンヘッジ」" />
-    <a time="@(339.0 - origin)" text="塔踏みｘ８" />
-    <a time="@(347.0 - origin)" sync="ヘスペロス:食らうがよいッ！" />
-    <a time="@(353.0 - origin)" text="近思or遠見" sync="ヘスペロスの「(近思|遠見)の魔撃」" />
-    <a time="@(366.0 - origin)" text="シアリングストリーム" sync="ヘスペロスの「シアリングストリーム」" />
-    <a time="@(375.0 - origin)" text="半神の双撃" sync="ヘスペロスの「半神の双撃」" notice="次は、タンク頭割り。" />
-    <a time="@(382.0 - origin)" sync="ヘスペロス:最低最悪の悲劇を乗り越えた者たちよ……。 残すは……カーテンコールだァッ！！" />
-    <a time="@(388.0 - origin)" text="茨の悲劇：カーテンコール" sync="ヘスペロスの「茨の悲劇：カーテンコール」" />
-    <a time="@(401.0 - origin)" text="ヘルスティング" sync="ヘスペロスの「ヘルスティング」" />
-    <a time="@(404.0 - origin)" text="(不可視:追撃)" />
-    <a time="@(421.0 - origin)" text="ヘルスティング" />
-    <a time="@(424.0 - origin)" text="(不可視:追撃)" />
-    <a time="@(441.0 - origin)" text="アルティメットインパルス" sync="ヘスペロスの「アルティメットインパルス」" notice="次は、全体攻撃。" />
-    <a time="@(450.0 - origin)" text="ヘルスティング" />
-    <a time="@(453.0 - origin)" text="(不可視:追撃)" />
-    <a time="@(471.0 - origin)" text="ヘルスティング" />
-    <a time="@(474.0 - origin)" text="(不可視:追撃)" />
-    <a time="@(490.0 - origin)" text="アルティメットインパルス" sync="ヘスペロスの「アルティメットインパルス」" notice="次は、全体攻撃。" />
-    <a time="@(494.0 - origin)" text="時間切れ詠唱開始" sync="ヘスペロスは「アルティメットインパルス」の構え。" />
-  </s>
+<!--ここから後半タイムライン-->
+<s name="後半">
+  <a time="004" text="調整中" />
+  <a time="005" text="(全体)ストリーム" notice="全体攻撃" />
+  <a time="016" text="" sync="ヘスペロスの「シアリングストリーム」" sync-s="-16" />
+  <a time="026" sync="ヘスペロス:エーテルソーン展開！ 茨の悲劇が幕を開ける……喜べ、主演はお前たちだッ！！" />
+
+  <!--P1-->
+  <a time="026" text="茨の悲劇：序幕" sync="ヘスペロスは「茨の悲劇：序幕」の構え。" notice="茨の悲劇：序幕。" />
+  <!--a time="032" text="茨の悲劇：序幕" sync="ヘスペロスの「茨の悲劇：序幕」" /-->
+  <a time="041" text="(全体)ストリーム" sync="ヘスペロスの「シアリングストリーム」" notice="全体攻撃" />
+  <a time="046" text="ソーンヘッジ" sync="ヘスペロスは「ソーンヘッジ」の構え。" notice="線を確認" />
+  <!--a time="055" text="ソーンヘッジ" sync="ヘスペロスの「ソーンヘッジ」" /-->
+  <a time="058" text="AoE" sync="ヘスペロスの「ヘーミテオス・ファイジャ」" />
+  <a time="060" text="塔踏み" sync="ヘスペロスの「ヘーミテオス・サンダガ」" />
+  <a time="064" text="AoE" sync="ヘスペロスの「ヘーミテオス・ファイジャ」" />
+  <a time="064" text="遠近魔撃" sync="ヘスペロスは「(遠見|近思)の魔撃」の構え。" notice="遠近注意" />
+  <a time="070" text="遠近魔撃" sync="ヘスペロスの「(遠見|近思)の魔撃」" />
+
+  <!--P2-->
+  <a time="078" text="茨の悲劇：第ニ幕" sync="ヘスペロスは「茨の悲劇：第ニ幕」の構え。" notice="茨の悲劇：第ニ幕。" />
+  <!--a time="083" text="茨の悲劇：第ニ幕" sync="ヘスペロスの「茨の悲劇：第ニ幕」" /-->
+  <a time="087" text="【構】タンク強攻撃" sync="ヘスペロスは「半神の双撃」の構え。" />
+  <a time="092" text="半神の双撃" sync="ヘスペロスの「半神の双撃」" notice="半神の双撃" />
+  <a time="096" text="ソーンヘッジ" sync="ヘスペロスは「ソーンヘッジ」の構え。" notice="線を確認" />
+  <a time="103" text="デバフ確認" sync="ヘスペロスの「ソーンヘッジ」" notice="デバフを確認" />
+  <!--a time="105" text="ダークデザイン" sync="ヘスペロスは「ダークデザイン」の構え。" notice="ダークデザイン。" /-->
+  <!--a time="110" text="ヘーミテオス・ダージャ" sync="ヘスペロスの「ヘーミテオス・ダージャ」" notice="ヘーミテオス・ダージャ。" /-->
+  <a time="111" text="AoE捨て" sync="ヘスペロスの「ダークデザイン」" notice="AoE捨て" />
+  <a time="115" text="ファイジャ" sync="ヘスペロスの「ヘーミテオス・ファイジャ」" notice="ファイジャ。" />
+  <a time="122" sync="ヘスペロス:我が最大の一撃だ…！" />
+  <a time="122" text="ファイジャ" sync="ヘスペロスの「ヘーミテオス・ファイジャ」" notice="ファイジャ。" />
+  <a time="130" text="(全体)インパルス" sync="ヘスペロスの「アルティメットインパルス」" notice="全体攻撃" />
+
+  <!--P3-->
+  <a time="137" text="茨の悲劇：第三幕" sync="ヘスペロスは「茨の悲劇：第三幕」の構え。" notice="茨の悲劇：第三幕。" />
+  <!--a time="143" text="茨の悲劇：第三幕" sync="ヘスペロスの「茨の悲劇：第三幕」" /-->
+  <!--a time="147" text="ソーンヘッジ" sync="ヘスペロスは「ソーンヘッジ」の構え。" notice="線を確認" /-->
+  <a time="155" text="ソーンヘッジ" sync="ヘスペロスの「ソーンヘッジ」" notice="線を確認" />
+  <a time="158" sync="ヘスペロス:吹き飛べッ！" />
+  <a time="163" text="キック2" sync="ヘスペロスの「コトルヌスキック」" notice="キック。" />
+  <a time="168" text="クエイク2" sync="ヘスペロスの「コトルヌスクエイク」" notice="スクエイク。" />
+  <a time="170" text="ウォタジャ" sync="ヘスペロスの「ヘーミテオス・ウォタジャ」" notice="ウォタジャ。" />
+  <a time="174" text="キック1" notice="キック。" />
+  <a time="178" text="クエイク1" notice="クエイク。" />
+  <a time="181" sync="ヘスペロス:食らうがよいッ！" />
+  <a time="181" text="【構え】遠近魔撃" sync="ヘスペロスは「(遠見|近思)の魔撃」の構え。" notice="遠近注意" />
+  <a time="187" text="遠近魔撃" sync="ヘスペロスの「(遠見|近思)の魔撃」" />
+  <!--a time="196" text="ハートステイク" sync="ヘスペロスは「ハートステイク」の構え。" notice="ハートステイク。" /-->
+  <a time="202" text="(DoT)ハートステイク" sync="ヘスペロスの「ハートステイク」" notice="DoTつくよ" />
+  <a time="205" text="(DoT)ハートステイク"  />
+
+  <!--P4-->
+  <a time="209" text="茨の悲劇：第四幕" sync="ヘスペロスは「茨の悲劇：第四幕」の構え。" notice="茨の悲劇：第四幕。" />
+  <!--a time="214" text="茨の悲劇：第四幕" sync="ヘスペロスの「茨の悲劇：第四幕」" /-->
+  <a time="224" text="シアリングストリーム" sync="ヘスペロスの「シアリングストリーム」" notice="全体攻撃" />
+  <a time="227" text="ソーンヘッジ" sync="ヘスペロスは「ソーンヘッジ」の構え。" notice="線を確認" />
+  <!--a time="233" text="ソーンヘッジ" sync="ヘスペロスの「ソーンヘッジ」" /-->
+  <a time="241" text="シアリングストリーム" sync="ヘスペロスの「シアリングストリーム」" notice="全体攻撃" />
+  <a time="247" text="塔を踏む" sync="ヘスペロスの「ヘーミテオス・サンダガ」" notice="塔を踏む" />
+  <a time="256" text="線を切る4" />
+  <a time="261" text="線を切る3" />
+  <a time="266" text="線を切る2" />
+  <a time="268" sync="ヘスペロス:我が最大の一撃だ…！" />
+  <a time="271" text="線を切る1" />
+  <a time="276" text="(全体)インパルス" sync="ヘスペロスの「アルティメットインパルス」" notice="全体攻撃" />
+  <a time="280" sync="ヘスペロス:茨の悲劇も終幕だ……！ さあ、足掻け！　最後まで演じ切ってみせろ！" />
+  <a time="290" text="シアリングストリーム" sync="ヘスペロスの「シアリングストリーム」" notice="全体攻撃" />
+
+  <!--P5 終幕。さよなら-->
+  <a time="294" text="茨の悲劇：終幕" sync="ヘスペロスは「茨の悲劇：終幕」の構え。" notice="茨の悲劇：終幕。" >
+    <expressions> <!-- 変数の初期化 -->
+      <set name="count" value="0" />
+    </expressions>
+  </a>
+  <!--a time="299" text="茨の悲劇：終幕" sync="ヘスペロスの「茨の悲劇：終幕」" /-->
+  <!--a time="303" text="ソーンヘッジ" sync="ヘスペロスは「ソーンヘッジ」の構え。" notice="ソーンヘッジ。" /-->
+  <a time="309" text="ソーンヘッジ" sync="ヘスペロスの「ソーンヘッジ」" notice="線を確認" />
+  <a time="311" sync="ヘスペロス:迸れ、魔力よ！" />
+  <a time="317" text="インパルス1" sync="ヘスペロスの「フリーティングインパルス」" />
+  <a time="318" text="インパルス2" />
+  <a time="320" text="インパルス3" />
+  <a time="321" text="インパルス4" />
+  <a time="322" text="インパルス5" />
+  <a time="324" text="インパルス6" />
+  <a time="325" text="インパルス7" />
+  <a time="326" text="インパルス8" />
+  <a time="329" text="線を確認" sync="ヘスペロスは「ソーンヘッジ」の構え。" notice="線を確認" />
+  <a time="336" text="ソーンヘッジ" sync="ヘスペロスの「ソーンヘッジ」" notice="塔処理開始" />
+  <a time="338" text="サンダガ1" sync="ヘスペロスの「ヘーミテオス・サンダガ」" />
+  <a time="340" text="サンダガ2" />
+  <a time="341" text="サンダガ3" />
+  <a time="342" text="サンダガ4" />
+  <a time="343" text="サンダガ5" />
+  <a time="344" text="サンダガ6" />
+  <a time="346" text="サンダガ7" />
+  <a time="346" sync="ヘスペロス:食らうがよいッ！" />
+  <a time="346" text="【構】遠近魔撃" sync="ヘスペロスは「(遠見|近思)の魔撃」の構え。" notice="遠近注意" />
+  <a time="347" text="サンダガ8" />
+  <a time="352" text="遠近の魔撃" sync="ヘスペロスの「(遠見|近思)の魔撃」" />
+  <a time="365" text="シアリングストリーム" sync="ヘスペロスの「シアリングストリーム」" notice="全体攻撃" />
+  <a time="369" text="【構】タンク強攻撃" sync="ヘスペロスは「半神の双撃」の構え。" />
+  <a time="375" text="半神の双撃" sync="ヘスペロスの「半神の双撃」" notice="半神の双撃。" />
+
+  <!--P6 カーテンコール。はやく帰れ。-->
+  <a time="382" sync="ヘスペロス:最低最悪の悲劇を乗り越えた者たちよ……。 残すは……カーテンコールだァッ！！" />
+  <a time="382" text="茨の悲劇：カーテンコール" sync="ヘスペロスは「茨の悲劇：カーテンコール」の構え。" notice="茨の悲劇：カーテンコール。" />
+  <!--a time="388" text="茨の悲劇：カーテンコール" sync="ヘスペロスの「茨の悲劇：カーテンコール」" notice="茨の悲劇：カーテンコール。" /-->
+  <!--処理タイミングは目安。検証中-->
+  <a time="397" text="【構え】" sync="ヘスペロスは「ヘルスティング」の構え。" notice="ヘルスティング。" />
+  <a time="400" text="ヘルスティング2" sync="ヘスペロスの「ヘルスティング」" />
+  <a time="403" text="ヘルスティング1"  />
+  <a time="418" text="【構え】" sync="ヘスペロスは「ヘルスティング」の構え。" notice="ヘルスティング。" />
+  <a time="421" text="ヘルスティング2" sync="ヘスペロスの「ヘルスティング」" />
+  <a time="424" text="ヘルスティング1"  />
+  <!--2回目-->
+  <a time="440" text="(全体)インパルス" sync="ヘスペロスの「アルティメットインパルス」" notice="全体攻撃" />
+  <a time="447" text="【構え】" sync="ヘスペロスは「ヘルスティング」の構え。" notice="ヘルスティング。" />
+  <a time="450" text="ヘルスティング2" sync="ヘスペロスの「ヘルスティング」" />
+  <a time="453" text="ヘルスティング1" />
+  <a time="467" text="【構え】" sync="ヘスペロスは「ヘルスティング」の構え。" notice="ヘルスティング。" />
+  <a time="470" text="ヘルスティング2" sync="ヘスペロスの「ヘルスティング」" />
+  <a time="473" text="ヘルスティング1" />
+  <a time="490" text="(全体)インパルス" sync="ヘスペロスの「アルティメットインパルス」" notice="全体攻撃" />
+  <a time="494" sync="ヘスペロス:嗚呼、悲劇は繰り返されるもの……。 哀れな愚者が抱きし、救いの幻想は打ち砕かれる……！" />
+  <a time="495" text="時間切れ詠唱" sync="ヘスペロスは「アルティメットインパルス」の構え。" notice="時間切れ開始" />
+  <a time="505" text="時間切れ" />
+
+  <!--遠近のトリガ-->
+  <t sync="^14:6A26" notice="近思の魔撃" >
+    <v-notice
+      text="近思の魔撃"
+      duration="5" />
+  </t>
+  <t sync="^14:6A27" notice="遠見の魔撃" >
+    <v-notice
+      text="遠見の魔撃"
+      duration="5" />
+  </t>
+
+  <!--頭上マーカーのトリガ。no1のグローバルトリガを基準に計算によって検知-->
+  <t no="2" sync="^1B:[id8]:[mex]:0000:[id4]:EVAL(VAR['marker_origin'] + 82, X4):" notice="青マーカー" >
+    <v-notice
+      text="青マーカー"
+      duration="15" />
+  </t>
+
+  <t no="3" sync="^1B:[id8]:[mex]:0000:[id4]:EVAL(VAR['marker_origin'] + 83, X4):" notice="紫マーカー" >
+    <v-notice
+      text="紫マーカー"
+      duration="15" />
+  </t>
+
+  <t no="4" sync="^1B:[id8]:[mex]:0000:[id4]:EVAL(VAR['marker_origin'] + 84, X4):" notice="緑マーカー" >
+    <v-notice
+      text="緑:線は切らない"
+      duration="15" />
+  </t>
+
+  <t no="5" sync="^1B:[id8]:[mex]:0000:[id4]:EVAL(VAR['marker_origin'] + 85, X4):" notice="赤マーカー" >
+    <v-notice
+      text="赤:頭割り注意"
+      duration="15" />
+  </t>
+
+  <!--塔のカウンタ保存-->
+  <t no="11" name="インパルス対象カウント" sync="^15:[id8]:ヘスペロス:6A1C:フリーティングインパルス:" sync-count="-8" sync-interval="0.5" >
+    <expressions>
+      <set name="count" value="EVAL(VAR['count']+1,N0)" />
+    </expressions>
+  </t>
+
+  <t no="12" name="何番目にインパルス対象になったかの判定" sync="^15:[id8]:ヘスペロス:6A1C:フリーティングインパルス:[id8]:[mex]:" sync-count="1" >
+    <v-notice
+      text="VAR['count']個目の塔に入る"
+      duration="23" />
+  </t>
+</s>
 </timeline>
