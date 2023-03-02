@@ -29,7 +29,7 @@ AquaCatのブログをよろしくお願いします。(https://www.aquacat.work
 </s>
 
 <s name="前半">
-<a time="005" sync="プロミス・オブ・エデンは「マレフィキウム」の構え。" />
+<a time="005" sync="プロミス・オブ・エデンは「マレフィキウム」の構え。" /> <v-notice text="これはテストです" duration="20" />
 <a time="011" text="マレフィキウム" sync="プロミス・オブ・エデンの「マレフィキウム」" notice="マレキフィウム" />
 <a time="021" text="記憶想起" sync="プロミス・オブ・エデンの「記憶想起」" notice="記憶想起。" />
 <a time="027" text="ジャンクション" notice="ジャンクション" />
